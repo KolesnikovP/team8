@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import style from './style.css';
 
 export default function Nav() {
+
   return (
     <div>
       <div className="navBar">
@@ -13,7 +14,7 @@ export default function Nav() {
         <nav>
           <ul className="nav__links">
             <li>
-              <Link to="/login">Войти</Link>
+              <Link to="/http://localhost:4000/api/auth/steam">Войти</Link>
             </li>
             <li>
               <Link to="/info"> Информация</Link>
