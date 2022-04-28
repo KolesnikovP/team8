@@ -1,12 +1,13 @@
 import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { store } from '../../store';
+import Nav from '../Nav/Nav';
 
 function App() {
   return (
     <BrowserRouter>
       <Provider store={store}>
-        <div className="App">Helsdsdssdsdlo World</div>
+        <Nav />
         <Routes>
           <Route />
         </Routes>
