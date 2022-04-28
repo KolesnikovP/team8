@@ -1,34 +1,30 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import style from './style.css';
 
 export default function Nav() {
-  const navigate = useNavigate();
 
-  function login() {
-    window.open('http://localhost:4000/api/auth/steam');
-  }
   return (
     <div>
-      <img className="logo" src="img/logo.svg" alt="" />
-      <nav>
-        <ul className="nav__links">
-          <li>
-            <button type="button" onClick={() => navigate('/fsdfds')}>
-              дом
-            </button>
-          </li>
-          <li>
-            <button type="button" onClick={login}>
-              Логин
-            </button>
-          </li>
-          <li>
-            <button type="button" onClick={() => navigate('/fsdfds')}>
-              Логаут
-            </button>
-          </li>
-        </ul>
-      </nav>
+      <div className="navBar">
+        <Link to="/">
+          <img width="100px" className="logo" src="img/pngwing.com.png" alt="" />
+        </Link>
+        <nav>
+          <ul className="nav__links">
+            <li>
+              <Link to="/http://localhost:4000/api/auth/steam">Войти</Link>
+            </li>
+            <li>
+              <Link to="/info"> Информация</Link>
+            </li>
+          </ul>
+        </nav>
+        <Link to="/profile">
+          <button type="button">Профиль твой</button>
+        </Link>
+      </div>
     </div>
   );
 }
