@@ -7,17 +7,16 @@ export default function Nav() {
   return (
     <div>
       <div className="navBar">
-        <img width="100px" className="logo" src="img/pngwing.com.png" alt="" />
+        <Link to="/">
+          <img width="100px" className="logo" src="img/pngwing.com.png" alt="" />
+        </Link>
         <nav>
           <ul className="nav__links">
             <li>
-              <Link to="/"> Домой</Link>
+              <Link to="/login">Войти</Link>
             </li>
             <li>
-              <Link to="/login"> Логин</Link>
-            </li>
-            <li>
-              <Link to="/registration"> Регистрация</Link>
+              <Link to="/info"> Информация</Link>
             </li>
           </ul>
         </nav>

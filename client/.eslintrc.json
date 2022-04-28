@@ -4,13 +4,13 @@
         "es2021": true
     },
     "extends": [
-//        "plugin:@typesctipt-eslint/recomended",
+    //    "plugin:@typesctipt-eslint/recomended",
         "plugin:react/recommended",
         "plugin:react-hooks/recommended",
         "plugin:jsx-a11y/recommended",
         "plugin:import/errors",
         "plugin:import/warnings",
-//        "plugin:import/typescript",
+    //    "plugin:import/typescript",
         "airbnb",
         "plugin:prettier/recommended",
         "prettier"
@@ -28,6 +28,7 @@
         "prettier"
     ],
     "rules": {
+
         "import/named": "off",
         "import/prefer-default-export": "off",
         "react/react-in-jsx-scope": "off",
