@@ -3,6 +3,10 @@ import { useNavigate } from 'react-router-dom';
 
 export default function Nav() {
   const navigate = useNavigate();
+
+  function login() {
+    window.open('http://localhost:4000/api/auth/steam');
+  }
   return (
     <div>
       <img className="logo" src="img/logo.svg" alt="" />
@@ -14,7 +18,7 @@ export default function Nav() {
             </button>
           </li>
           <li>
-            <button type="button" onClick={() => navigate('/fsdfds')}>
+            <button type="button" onClick={login}>
               Логин
             </button>
           </li>
