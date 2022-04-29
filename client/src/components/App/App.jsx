@@ -6,6 +6,7 @@ import { store } from '../../store';
 import Nav from '../Nav/Nav';
 import Login from '../Login/Login';
 import FindForm from '../FindForm/FindForm';
+import Profile from '../Profile/Profile';
 import style from './App.module.css';
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/addPost" element={<FindForm />} />
+            <Route path="/profile" element={<Profile />} />
           </Routes>
         </Provider>
       </BrowserRouter>
