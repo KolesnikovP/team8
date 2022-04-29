@@ -18,6 +18,8 @@
     "express-session": "^1.17.2",
     "jsonwebtoken": "^8.5.1",
     "node-steam-openid": "^1.0.1",
+    "passport": "^0.5.2",
+    "passport-steam": "^1.0.17",
     "pg": "^8.7.3",
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.19.0",
