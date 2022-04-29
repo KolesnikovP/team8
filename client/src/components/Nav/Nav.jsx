@@ -31,6 +31,9 @@ export default function Nav() {
               <li>
                 <Link to="/info"> Информация</Link>
               </li>
+              <li>
+                <Link to="/addPost">Найти тиммейта</Link>
+               </li>
             </ul>
           </nav>
         ) : (

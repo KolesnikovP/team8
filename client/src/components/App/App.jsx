@@ -5,6 +5,7 @@ import { store } from '../../store';
 import Nav from '../Nav/Nav';
 import Login from '../Login/Login';
 import style from './style.css';
+import FindForm from '../FindForm/FindForm';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Nav />
         <Routes>
           <Route path="/login" element={<Login />} />
+          <Route path="/addPost" element={<FindForm />} />
         </Routes>
       </Provider>
     </BrowserRouter>
