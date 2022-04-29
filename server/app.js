@@ -3,7 +3,7 @@ const express = require('express');
 const sequelize = require('./db');
 const cookieSession = require("cookie-session");
 const cors = require('cors');
-const passportSetup = require("./passport");
+const passportSetup = require("./services/passport");
 const passport = require("passport");
 
 const PORT = process.env.PORT || 3000;
@@ -20,7 +20,7 @@ app.use(passport.session());
 
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: process.env.CLIENT_URL,
     methods: "GET,POST,PUT,DELETE",
     credentials: true,
   })
