@@ -26,6 +26,13 @@ export default function Nav() {
                 </button>
               </Link>
             </li>
+            <li>
+              <Link to="/addPost">
+                <button className={style.mainNavButton} type="button">
+                  Найти тиммейта
+                </button>
+              </Link>
+            </li>
           </ul>
         </nav>
         <Link to="/profile">
