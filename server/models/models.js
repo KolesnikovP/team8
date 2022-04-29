@@ -4,10 +4,10 @@ const { DataTypes } = require('sequelize');
 
 const User = sequelize.define('user', {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-  steamId: { type: DataTypes.INTEGER, unique: true },
-  steamNickname: { type: DataTypes.STRING, unique: true },
-  steamProfileLink: { type: DataTypes.STRING, unique: true },
-  steamAvatar: { type: DataTypes.STRING },
+  steamId: { type: DataTypes.TEXT, unique: true },
+  steamNickname: { type: DataTypes.TEXT, unique: true },
+  steamProfileLink: { type: DataTypes.TEXT, unique: true },
+  steamAvatar: { type: DataTypes.TEXT },
   description: { type: DataTypes.STRING },
   // activationLink: { type: DataTypes.STRING },
   // isActivated: { type: DataTypes.BOOLEAN },
