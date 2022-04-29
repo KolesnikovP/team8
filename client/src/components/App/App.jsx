@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { store } from '../../store';
 import Nav from '../Nav/Nav';
 import Login from '../Login/Login';
+import FindForm from '../FindForm/FindForm';
 import style from './App.module.css';
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
           <Nav />
           <Routes>
             <Route path="/login" element={<Login />} />
+            <Route path="/addPost" element={<FindForm />} />
           </Routes>
         </Provider>
       </BrowserRouter>

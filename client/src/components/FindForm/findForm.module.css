@@ -1,0 +1,19 @@
+.div {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  width: 40rem;
+  margin: auto;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.textarea {
+  width: 100%;
+  resize: vertical;
+  padding: 15px;
+  border-radius: 15px;
+  border: 0;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.06);
+  height: 5rem;
+}
