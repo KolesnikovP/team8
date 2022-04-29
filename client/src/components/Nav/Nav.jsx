@@ -1,23 +1,30 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import { Link } from 'react-router-dom';
-import style from './style.css';
+import style from './Nav.module.css';
 
 export default function Nav() {
-
   return (
     <div>
-      <div className="navBar">
+      <div className={style.navBar}>
         <Link to="/">
-          <img width="100px" className="logo" src="img/pngwing.com.png" alt="" />
+          <img width="100px" className="logo" src="/img/pngwing.com.png" alt="" />
         </Link>
         <nav>
-          <ul className="nav__links">
+          <ul className={style.nav__links}>
             <li>
-              <Link to="/http://localhost:4000/api/auth/steam">Войти</Link>
+              <Link to="/login">
+                <button className={style.mainNavButton} type="button">
+                  Войти
+                </button>
+              </Link>
             </li>
             <li>
-              <Link to="/info"> Информация</Link>
+              <Link to="/info">
+                <button className={style.mainNavButton} type="button">
+                  Информация
+                </button>
+              </Link>
             </li>
           </ul>
         </nav>
