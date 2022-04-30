@@ -1,45 +1,28 @@
-const SteamAuth = require("node-steam-openid");
-const {User} = require('../models/models')
-const session = require("express-session");
-// const jwt = require('jsonwebtoken')
-const steam = new SteamAuth({
-  realm: "http://localhost:4000", // Site name displayed to users on logon
-  returnUrl: "http://localhost:4000/api/auth/steam/authenticate", // Your return route
-  apiKey: "DA22CF06CD504ADB087C83908040E3C6" // Steam API key
-});
-
 class UserController {
 
-  async authSteam (req, res, next) {
-    const redirectUrl = await steam.getRedirectUrl();
-    return res.redirect(redirectUrl);
+  async authSuccess (req, res, next) {
+    if (req.user) {
+      res.status(200).json({
+        success: true,
+        message: "successfull",
+        user: req.user,
+        //   cookies: req.cookies
+      });
+    }
+  }
+  async authFailed (req,res, next) {
+    res.status(401).json({
+      success: false,
+      message: "failure",
+    });
   }
 
-  async auntificate (req, res, next) {
-    try {
-      const userData = await steam.authenticate(req);
-      const serachUser = await User.findOne({where: {
-        steamId: userData.steamid,
-      }})
-      if(serachUser){
-        req.session.user = serachUser;
-        res.redirect('http://localhost:3000')
+  async authLogout (req,res, next) {
+    req.logout();
+    res.redirect(process.env.CLIENT_URL);
+  }
+  async authFailed (req,res, next) {
 
-      } else {
-        const user = await new User({
-          steamId: userData.steamid,
-          steamNickname: userData.username,
-          steamProfileLink: userData.profile,
-          steamAvatar: userData.avatar.medium,
-        })
-        user.save()
-        // const token = jwt.sign(user, 'secretOrPrivateKey', {expiresIn: '30m'})
-        req.session.user = user;
-        res.redirect('http://localhost:3000')
-      }
-    } catch (error) {
-      console.error('Message: ', error);
-    }
   }
 }
 
