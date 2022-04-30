@@ -1,11 +1,29 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+// import ListGameRadio from '../ListGameRadio/ListGameRadio';
 import style from './AccessForm.module.css';
 
 function AccessForm() {
   const [visible, setVisible] = useState(false);
+  const { user } = useSelector((state) => state.userReducer);
+  // console.log(user);
+  useEffect(() => {
+    fetch('http://localhost:4000/api/test', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        id: user?.[0]?.id,
+      }),
+    })
+      .then((data) => data.json())
+      .then((res) => console.log(res));
+  }, [user]);
   function setPublic() {
-    window.open('https://steamcommunity.com/id/shah1dss/edit/settings');
+    window.open(`${user?.[0]?._json.profileurl}edit/settings`);
   }
   return (
     <div className={style.container}>
@@ -54,7 +72,14 @@ function AccessForm() {
       ) : (
         ''
       )}
-      <h3>Ваши любимые игры:</h3>
+      <div>
+        <h3>Выберете любимые игры:</h3>
+        {/* <div className="radio-form">
+          {games.map((game) => {
+            return <ListGameRadio key={game.id} game={game} />;
+          })}
+        </div> */}
+      </div>
     </div>
   );
 }

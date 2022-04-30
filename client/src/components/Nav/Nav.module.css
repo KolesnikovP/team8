@@ -17,9 +17,9 @@ li,a {
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  padding: 30px 10%;
   background-color:rgb(31, 32, 33);
   padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 .nav__links{
@@ -28,7 +28,6 @@ li,a {
 
 .nav__links li {
   display: inline-block;
-  /* padding: 0px 20px; */
 }
 
 .nav__links li Link {
@@ -57,4 +56,15 @@ button {
 
 button:hover {
   background-color:red
+}
+.list {
+  display: flex;
+  align-items: center;
+  list-style: none;
+}
+
+.listItem {
+  margin-right: 20px;
+  font-weight: 500;
+  cursor: pointer;
 }

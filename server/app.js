@@ -5,7 +5,6 @@ const cookieSession = require("cookie-session");
 const cors = require('cors');
 const passportSetup = require("./services/passport");
 const passport = require("passport");
-
 const PORT = process.env.PORT || 3000;
 const app = express();
 const Router = require('./router/router');
@@ -17,6 +16,8 @@ app.use(
 
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 app.use(
   cors({
