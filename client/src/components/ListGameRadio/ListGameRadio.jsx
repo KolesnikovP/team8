@@ -1,18 +1,20 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
+import './style.css';
 
-function ListGameRadio(props) {
+function ListGameRadio({ game }) {
   return (
-    <div>
-      <li>
-        <label htmlFor="r-1">
-          <input type="radio" id={ } name="r" />
-          <span className="i">Icon</span>
-          <h3>Title</h3>
-          <h3 className="h3-unsure">Title unsure</h3>
-          <p>text</p>
-        </label>
-      </li>
-    </div>
+    // eslint-disable-next-line jsx-a11y/label-has-associated-control
+    <label className="radio-control">
+      <input type="radio" name="steamApp" value={game.gameSteamId} />
+      <span className="radio-input">
+        <img
+          src={`https://cdn.cloudflare.steamstatic.com/steam/apps/${game.gameSteamId}/header.jpg?t=1650992920`}
+          alt={`appIcon_${game.gameSteamId}`}
+        />
+        {/* <span>{game.gameSteamName}</span> */}
+      </span>
+    </label>
   );
 }
 

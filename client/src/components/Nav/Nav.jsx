@@ -44,7 +44,15 @@ export default function Nav() {
             <li className="listItem">
               <img src={user[0].photos[0].value} alt="" className="avatar" />
             </li>
+
             <li className="listItem">{user[0].displayName}</li>
+            <li>
+              <Link to="/addPost">
+                <button className={style.mainNavButton} type="button">
+                  Найти тиммейта
+                </button>
+              </Link>
+            </li>
             <button onClick={logout} className={style.mainNavButton} type="button">
               Выйти
             </button>
