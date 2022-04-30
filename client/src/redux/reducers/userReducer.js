@@ -6,7 +6,7 @@ const initionalState = { user: [] };
 export const userReducer = (state = initionalState, action) => {
   switch (action.type) {
     case INIT_USER:
-      return { ...state, user: action.payload };
+      return { ...state, user: [action.payload] };
     case LOGOUT_USER:
       return { ...state, user: [] };
     default:

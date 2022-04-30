@@ -20,7 +20,7 @@ export default function Nav() {
         <Link to="/">
           <img width="100px" className="logo" src="/img/logo.png" alt="" />
         </Link>
-        {user.length ? (
+        {!user.length ? (
           <nav>
             <ul className={style.nav__links}>
               <li>
@@ -42,9 +42,9 @@ export default function Nav() {
         ) : (
           <ul className="list">
             <li className="listItem">
-              {/* <img src={user.photos[1].value} alt="" className="avatar" /> */}
+              <img src={user[0].photos[0].value} alt="" className="avatar" />
             </li>
-            <li className="listItem">{user.displayName}</li>
+            <li className="listItem">{user[0].displayName}</li>
             <button onClick={logout} className={style.mainNavButton} type="button">
               Выйти
             </button>
