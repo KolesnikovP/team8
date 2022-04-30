@@ -1,4 +1,4 @@
-import { getAllGamesAC } from '../actionCreators/gamesListAC';
+import { getAllGamesAC } from '../reducers/gamesListReducer';
 
 export const getFetchGamesList = () => {
   return (dispatch) => {

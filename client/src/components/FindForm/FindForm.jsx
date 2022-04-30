@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import style from './findForm.module.css';
 // import { gamesListReducer } from '../../redux/reducers/gamesListReducer';
-import { getFetchGamesList } from '../../redux/thunk';
+import { getFetchGamesList } from '../../redux/thunk/getGame';
 import ListGameRadio from '../ListGameRadio/ListGameRadio';
 
 function FindForm() {
@@ -11,7 +11,6 @@ function FindForm() {
   useEffect(() => {
     dispatch(getFetchGamesList());
   }, [dispatch]);
-  // console.log(games);
   return (
     <div className={style.div}>
       <form action="" method="post">

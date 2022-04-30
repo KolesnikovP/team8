@@ -8,7 +8,7 @@ const passport = require("passport");
 
 const PORT = process.env.PORT || 3000;
 const app = express();
-// const Router = require('./router/router');
+const Router = require('./router/router');
 const authRoute = require("./router/auth");
 
 app.use(
@@ -26,7 +26,7 @@ app.use(
   })
 );
 
-// app.use('/api', Router);
+app.use('/api', Router);
 app.use("/auth", authRoute);
 
 const start = async () => {
