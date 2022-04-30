@@ -1,50 +1,28 @@
 /* eslint-disable no-unused-vars */
-import { Provider } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { store } from '../../store';
 import Nav from '../Nav/Nav';
 import Login from '../Login/Login';
 import FindForm from '../FindForm/FindForm';
 import style from './App.module.css';
+import AccessForm from '../AccessForm/AccessForm';
+import { fetchUser } from '../../redux/thunk/user';
 
 function App() {
-  const [user, setUser] = useState(null);
-
+  const dispatch = useDispatch();
   useEffect(() => {
-    const getUser = () => {
-      fetch('http://localhost:4000/auth/login/success', {
-        method: 'GET',
-        credentials: 'include',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Credentials': true,
-        },
-      })
-        .then((response) => {
-          if (response.status === 200) return response.json();
-          throw new Error('authentication has been failed!');
-        })
-        .then((resObject) => {
-          setUser(resObject.user);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    };
-    getUser();
-  }, []);
+    dispatch(fetchUser());
+  }, [dispatch]);
   return (
     <div className={style.mainPage}>
       <BrowserRouter>
-        <Provider store={store}>
-          <Nav user={user} />
-          <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="/addPost" element={<FindForm />} />
-          </Routes>
-        </Provider>
+        <Nav />
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/addPost" element={<FindForm />} />
+          <Route path="/accessForm" element={<AccessForm />} />
+        </Routes>
       </BrowserRouter>
     </div>
   );
