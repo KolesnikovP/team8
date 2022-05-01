@@ -8,9 +8,10 @@ import style from './AccessForm.module.css';
 function AccessForm() {
   const [visible, setVisible] = useState(false);
   const { user } = useSelector((state) => state.userReducer);
+  const [spinner, setSpinner] = useState(true);
   // console.log(user);
   useEffect(() => {
-    fetch('http://localhost:4000/api/test', {
+    fetch('http://localhost:4000/api/validateProfile', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -20,7 +21,10 @@ function AccessForm() {
       }),
     })
       .then((data) => data.json())
-      .then((res) => console.log(res));
+      .then((res) => {
+        setSpinner(false);
+        console.log(res);
+      });
   }, [user]);
   function setPublic() {
     window.open(`${user?.[0]?._json.profileurl}edit/settings`);
@@ -38,6 +42,14 @@ function AccessForm() {
           Открыть инструкцию
         </button>
       </div>
+      {spinner ? (
+        <div>
+          <img className={style.spinner} src="./pngwing.com.png" alt="hui" />
+        </div>
+      ) : (
+        ''
+      )}
+
       {visible ? (
         <div className={style.settingsBlock}>
           <ul>

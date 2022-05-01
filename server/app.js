@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 3000;
 const app = express();
 const Router = require('./router/router');
 const authRoute = require("./router/auth");
-
+const { Game, Statistic } = require('./models/models');
 app.use(
   cookieSession({ name: "session", keys: ["lama"], maxAge: 24 * 60 * 60 * 100 })
 );
