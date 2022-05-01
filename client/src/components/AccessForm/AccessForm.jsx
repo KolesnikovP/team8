@@ -1,30 +1,22 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-// import ListGameRadio from '../ListGameRadio/ListGameRadio';
+import { useDispatch, useSelector } from 'react-redux';
+import ListGameRadio from '../ListGameRadio/ListGameRadio';
 import style from './AccessForm.module.css';
+import { setUserGames } from '../../redux/thunk/userProfile';
 
 function AccessForm() {
   const [visible, setVisible] = useState(false);
   const { user } = useSelector((state) => state.userReducer);
+  const { profGames } = useSelector((state) => state.profileReducer);
   const [spinner, setSpinner] = useState(true);
-  // console.log(user);
+  const dispatch = useDispatch();
+  const stopSpin = () => {
+    setSpinner(false);
+  };
   useEffect(() => {
-    fetch('http://localhost:4000/api/validateProfile', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        id: user?.[0]?.id,
-      }),
-    })
-      .then((data) => data.json())
-      .then((res) => {
-        setSpinner(false);
-        console.log(res);
-      });
+    dispatch(setUserGames(user?.[0]?.id, stopSpin));
   }, [user]);
   function setPublic() {
     window.open(`${user?.[0]?._json.profileurl}edit/settings`);
@@ -47,7 +39,7 @@ function AccessForm() {
           <img className={style.spinner} src="./pngwing.com.png" alt="hui" />
         </div>
       ) : (
-        ''
+        profGames.map((el) => <ListGameRadio key={el.gameSteamId} game={el} />)
       )}
 
       {visible ? (

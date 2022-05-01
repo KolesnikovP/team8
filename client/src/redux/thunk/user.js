@@ -1,7 +1,7 @@
 import { initUserAction } from '../reducers/userReducer';
 
 export const fetchUser = () => {
-  return function (disptach) {
+  return function (dispatch) {
     fetch('http://localhost:4000/auth/login/success', {
       method: 'GET',
       credentials: 'include',
@@ -16,7 +16,7 @@ export const fetchUser = () => {
         throw new Error('authentication has been failed!');
       })
       .then((resObject) => {
-        disptach(initUserAction(resObject.user));
+        dispatch(initUserAction(resObject.user));
       })
       .catch((err) => {
         console.log(err);

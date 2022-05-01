@@ -34,45 +34,45 @@ class UserController {
         steamId: req.body.id,
       }})
       if(validate.length){
-        res.send('OK')
+        res.json(validate)
       }
       if(validate.length === 0) {
         const response = await fetch(
           `http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=DA22CF06CD504ADB087C83908040E3C6&steamid=${req.body.id}&format=json`
         )
-        const data = await response.json();
-        const gamesDb = await Game.findAll();
+        const userGames = await response.json();
+        const gamesFromDb = await Game.findAll();
         const resArray = []
-        let count = 0
-        gamesDb.map(el=>{
-          data.response.games.map(async(game) => {
+        const promis2 = gamesFromDb.map(async(el)=>{
+          const promis1=  userGames.response.games.map(async(game) => {
             if(el.gameSteamId === game.appid){
-              // const statUser = new Statistic({
-                //               userGameHours: Math.floor(game.playtime_forever / 60),
-                //               userRank: 0,
-                //               steamId: req.body.id,
-                //               gameSteamId: game.appid
-                //             })
-                //             statUser.save()
+              const statUser = new Statistic({
+                userGameHours: Math.floor(game.playtime_forever / 60),
+                userRank: 0,
+                steamId: req.body.id,
+                gameSteamId: game.appid
+              })
+              statUser.save()
               const curGame = await Game.findOne({raw:true, where: {
                 gameSteamId: el.gameSteamId,
               }});
               const gameObj = {
                 gameName: curGame.gameSteamName,
-                hours: Math.floor(game.playtime_forever / 60)
+                hours: Math.floor(game.playtime_forever / 60),
+                gameSteamId: game.appid
               }
               resArray.push(gameObj)
-              console.log(resArray)
-            }
-            else{
-              count++
             }
           })
+          await Promise.all(promis1)
         })
-        setTimeout(()=>{
-          console.log('Наход',resArray)
+        await Promise.all(promis2)
+        if(resArray.length === 0){
+          res.send('Games not found')
+        }
+        else {
           res.json(resArray)
-        },2000)
+        }
       }
     }
   }
