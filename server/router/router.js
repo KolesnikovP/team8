@@ -1,10 +1,11 @@
 const Router = require('express').Router();
-const addPostController = require('../controllers/addPost-controller');
+const postController = require('../controllers/post-controller');
 const SteamGamesController = require('../controllers/steamGames-controller');
 const userController = require('../controllers/user-controller');
 
-Router.get("/addPost", SteamGamesController.getListGames);
-Router.post("/validateProfile", userController.validateProfile)
-Router.post('/addPost', addPostController.addPost);
+Router.get('/initGames', SteamGamesController.getListGames);
+Router.post('/validateProfile', userController.validateProfile);
+Router.post('/initPosts', postController.getPostsList);
+Router.post('/addPost', postController.addPost);
 
 module.exports = Router;
