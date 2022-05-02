@@ -20,7 +20,9 @@ function FindForm() {
           })}
         </div>
         <textarea className={style.textarea} placeholder="Опишите себя и свой стиль игры..." />
-        <button type="submit">Опубликовать заявку</button>
+        <button className={style.btn} type="submit">
+          Опубликовать заявку
+        </button>
       </form>
     </div>
   );

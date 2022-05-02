@@ -2,13 +2,15 @@
   box-sizing: border-box;
   display: flex;
   justify-content: center;
-  width: 40rem;
+  width: 33rem;
   margin: auto;
-  border: 1px solid black;
+  border: 3px solid black;
   border-radius: 5px;
+  background-color: rgba(105, 105, 105, 0.293);
 }
 
 .textarea {
+  margin-bottom: 1rem;
   width: 100%;
   resize: vertical;
   padding: 15px;
@@ -16,4 +18,8 @@
   border: 0;
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.06);
   height: 5rem;
+}
+
+.btn {
+  margin-bottom: 1rem;
 }
