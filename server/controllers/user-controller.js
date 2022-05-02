@@ -43,8 +43,8 @@ class UserController {
         const userGames = await response.json();
         const gamesFromDb = await Game.findAll();
         const resArray = []
-        const promis2 = gamesFromDb.map(async(el)=>{
-          const promis1=  userGames.response.games.map(async(game) => {
+          gamesFromDb.map((el)=>{
+          userGames.response.games.map((game) => {
             if(el.gameSteamId === game.appid){
               const statUser = new Statistic({
                 userGameHours: Math.floor(game.playtime_forever / 60),
@@ -53,22 +53,12 @@ class UserController {
                 gameSteamId: game.appid
               })
               statUser.save()
-              const curGame = await Game.findOne({raw:true, where: {
-                gameSteamId: el.gameSteamId,
-              }});
-              const gameObj = {
-                gameName: curGame.gameSteamName,
-                hours: Math.floor(game.playtime_forever / 60),
-                gameSteamId: game.appid
-              }
-              resArray.push(gameObj)
+              resArray.push(statUser)
             }
           })
-          await Promise.all(promis1)
         })
-        await Promise.all(promis2)
         if(resArray.length === 0){
-          res.send('Games not found')
+          res.json({message:'Games not found'})
         }
         else {
           res.json(resArray)

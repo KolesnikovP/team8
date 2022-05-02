@@ -2,7 +2,7 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import ListGameRadio from '../ListGameRadio/ListGameRadio';
+import { Link } from 'react-router-dom';
 import style from './AccessForm.module.css';
 import { setUserGames } from '../../redux/thunk/userProfile';
 
@@ -11,12 +11,16 @@ function AccessForm() {
   const { user } = useSelector((state) => state.userReducer);
   const { profGames } = useSelector((state) => state.profileReducer);
   const [spinner, setSpinner] = useState(true);
+  const [hasGames, setGames] = useState(true);
   const dispatch = useDispatch();
   const stopSpin = () => {
     setSpinner(false);
   };
+  const userHasntGame = () => {
+    setGames(false);
+  };
   useEffect(() => {
-    dispatch(setUserGames(user?.[0]?.id, stopSpin));
+    dispatch(setUserGames(user?.[0]?.id, stopSpin, userHasntGame));
   }, [user]);
   function setPublic() {
     window.open(`${user?.[0]?._json.profileurl}edit/settings`);
@@ -24,8 +28,9 @@ function AccessForm() {
   return (
     <div className={style.container}>
       <h3 className={style.title}>
-        Для дальнейшей работы с <span>Team8</span> сделайте ваш аккаунт Steam публичным.
+        Добро пожаловать на <span>Team8</span>
       </h3>
+      <h4>Для дальнейшей работы желательно сделать свой аккаунт публичным.</h4>
       <div className={style.buttonGroup}>
         <button type="button" className={style.btn} onClick={setPublic}>
           Сделать пyбличным
@@ -36,10 +41,34 @@ function AccessForm() {
       </div>
       {spinner ? (
         <div>
-          <img className={style.spinner} src="./pngwing.com.png" alt="hui" />
+          <img className={style.spinner} src="./pngwing.com.png" alt="loading-png" />
         </div>
       ) : (
-        profGames.map((el) => <ListGameRadio key={el.gameSteamId} game={el} />)
+        <div style={{ marginTop: '2rem', textAlign: 'center' }}>
+          <h2 style={{ marginTop: '2rem', textAlign: 'center' }}>
+            {hasGames
+              ? 'Данные игры и их статистика будут отображаться у вас в профиле'
+              : 'К сожалению в вашем аккаунте мы не нашли подходящих игр ('}
+          </h2>
+          <div className={style.gameGroup}>
+            {profGames.map((game) => (
+              <div>
+                <img
+                  src={`https://cdn.cloudflare.steamstatic.com/steam/apps/${game.gameSteamId}/header.jpg?t=1650992920`}
+                  alt={`appIcon_${game.gameSteamId}`}
+                  width="400px"
+                  key={Date.now()}
+                />
+                <p>Количество часов: {game.userGameHours}</p>
+              </div>
+            ))}
+          </div>
+          <Link to="/">
+            <button type="button" className={style.btnStart}>
+              Старт
+            </button>
+          </Link>
+        </div>
       )}
 
       {visible ? (
@@ -76,14 +105,6 @@ function AccessForm() {
       ) : (
         ''
       )}
-      <div>
-        <h3>Выберете любимые игры:</h3>
-        {/* <div className="radio-form">
-          {games.map((game) => {
-            return <ListGameRadio key={game.id} game={game} />;
-          })}
-        </div> */}
-      </div>
     </div>
   );
 }

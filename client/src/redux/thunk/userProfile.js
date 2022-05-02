@@ -1,6 +1,6 @@
 import { setProfileGames } from '../reducers/profileReducer';
 /* eslint-disable func-names */
-export const setUserGames = (id, func) => {
+export const setUserGames = (id, func, func1) => {
   return function (dispatch) {
     fetch('http://localhost:4000/api/validateProfile', {
       method: 'POST',
@@ -11,8 +11,13 @@ export const setUserGames = (id, func) => {
     })
       .then((data) => data.json())
       .then((res) => {
-        dispatch(setProfileGames(res));
-        func();
+        if (res.message === 'Games not found') {
+          func();
+          func1();
+        } else {
+          dispatch(setProfileGames(res));
+          func();
+        }
       });
   };
 };
