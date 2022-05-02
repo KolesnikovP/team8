@@ -1,0 +1,8 @@
+.profile__wrapper{
+  display: flex;
+  background: darkgoldenrod;
+  margin-top: 2rem;
+}
+.profile__title{
+  text-align: center;
+}

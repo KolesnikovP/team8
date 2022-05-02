@@ -8,6 +8,7 @@ import FindForm from '../FindForm/FindForm';
 import style from './App.module.css';
 import AccessForm from '../AccessForm/AccessForm';
 import { fetchUser } from '../../redux/thunk/user';
+import Profile from '../Profile/Profile';
 
 function App() {
   const dispatch = useDispatch();
@@ -15,16 +16,17 @@ function App() {
     dispatch(fetchUser());
   }, [dispatch]);
   return (
-    <div className={style.mainPage}>
-      <BrowserRouter>
-        <Nav />
+    <BrowserRouter>
+      <Nav />
+      <div className={style.container}>
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/addPost" element={<FindForm />} />
           <Route path="/accessForm" element={<AccessForm />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
-      </BrowserRouter>
-    </div>
+      </div>
+    </BrowserRouter>
   );
 }
 

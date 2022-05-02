@@ -51,7 +51,9 @@ export default function Nav() {
                 <img src={user[0].photos[0].value} alt="" className="avatar" />
               </li>
 
-              <li className={style.listItem}>{user[0].displayName}</li>
+              <li className={style.listItem}>
+                <Link to="/profile">{user[0].displayName}</Link>
+              </li>
               <button onClick={logout} className={style.mainNavButton} type="button">
                 Выйти
               </button>

@@ -66,6 +66,20 @@ class UserController {
       }
     }
   }
+  async userGames (req,res, next) {
+    if(req.body.id){
+      try{
+        const games = await Statistic.findAll({
+          steamId: req.body.id
+        })
+        res.json(games)
+      }
+      catch{
+        console.log('Games for user not found')
+      }
+    }
+
+  }
 }
 
 module.exports = new UserController();
