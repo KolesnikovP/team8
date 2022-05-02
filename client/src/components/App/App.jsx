@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { useEffect } from 'react';
 import Nav from '../Nav/Nav';
@@ -15,6 +15,7 @@ function App() {
   useEffect(() => {
     dispatch(fetchUser());
   }, [dispatch]);
+  const { user } = useSelector((state) => state.userReducer);
   return (
     <BrowserRouter>
       <Nav />
@@ -23,7 +24,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/addPost" element={<FindForm />} />
           <Route path="/accessForm" element={<AccessForm />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile" element={<Profile user={user} />} />
         </Routes>
       </div>
     </BrowserRouter>
