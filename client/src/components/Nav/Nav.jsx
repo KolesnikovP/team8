@@ -40,23 +40,23 @@ export default function Nav() {
             </ul>
           </nav>
         ) : (
-          <ul className="list">
-            <li className="listItem">
-              <img src={user[0].photos[0].value} alt="" className="avatar" />
-            </li>
+          <>
+            <Link to="/addPost">
+              <button className={style.mainNavButton} type="button">
+                Найти тиммейта
+              </button>
+            </Link>
+            <ul className={style.list}>
+              <li className={style.listItem}>
+                <img src={user[0].photos[0].value} alt="" className="avatar" />
+              </li>
 
-            <li className="listItem">{user[0].displayName}</li>
-            <li>
-              <Link to="/addPost">
-                <button className={style.mainNavButton} type="button">
-                  Найти тиммейта
-                </button>
-              </Link>
-            </li>
-            <button onClick={logout} className={style.mainNavButton} type="button">
-              Выйти
-            </button>
-          </ul>
+              <li className={style.listItem}>{user[0].displayName}</li>
+              <button onClick={logout} className={style.mainNavButton} type="button">
+                Выйти
+              </button>
+            </ul>
+          </>
         )}
       </div>
     </div>

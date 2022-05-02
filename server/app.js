@@ -2,14 +2,14 @@ require('dotenv').config();
 const express = require('express');
 const cookieSession = require('cookie-session');
 const cors = require('cors');
-const passport = require('passport');
-const passportSetup = require('./services/passport');
-const sequelize = require('./db');
-
+const passportSetup = require("./services/passport");
+const passport = require("passport");
 const PORT = process.env.PORT || 3000;
 const app = express();
 const Router = require('./router/router');
-const authRoute = require('./router/auth');
+const authRoute = require("./router/auth");
+const { Game, Statistic } = require('./models/models');
+const sequelize = require('./db');
 
 app.use(
   cookieSession({ name: 'session', keys: ['lama'], maxAge: 24 * 60 * 60 * 100 }),
@@ -17,6 +17,8 @@ app.use(
 
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 app.use(
   cors({
