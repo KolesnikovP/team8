@@ -1,24 +1,51 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
+import { Link } from 'react-router-dom';
+import style from './Footer.module.css';
 
 export default function Footer() {
   return (
-    <footer>
-      <nav>
-        <div className="footer-content">
-          <h3>code opacity</h3>
-          <p>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptas recusandae expedita
-            dolorum itaque excepturi.
-          </p>
-          <ul>
-            <li>
-              <a href="/">
-                <i className="fa fa-facebook">123</i>
-              </a>
-            </li>
-          </ul>
+    <div className={style.footerContainer}>
+      <div className={style.footer}>
+        <div className={style.footerHeading}>
+          <div>
+            <h2>About Us</h2>
+            <div>
+              <Link to="/">Lexa</Link>
+            </div>
+            <div>
+              <Link to="/">dan</Link>
+            </div>
+            <div>
+              <Link to="/">Ilya</Link>
+            </div>
+          </div>
+          <div>
+            <h2>Contact Us</h2>
+            <div>
+              <Link to="/">Lexa</Link>
+            </div>
+            <div>
+              <Link to="/">Lexa</Link>
+            </div>
+            <div>
+              <Link to="/">Lexa</Link>
+            </div>
+          </div>
+          <div>
+            <h2>Contact Us</h2>
+            <div>
+              <Link to="/">Lexa</Link>
+            </div>
+            <div>
+              <Link to="/">Lexa</Link>
+            </div>
+            <div>
+              <Link to="/">Lexa</Link>
+            </div>
+          </div>
         </div>
-      </nav>
-    </footer>
+      </div>
+    </div>
   );
 }

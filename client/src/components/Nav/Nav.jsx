@@ -15,52 +15,50 @@ export default function Nav() {
     window.open('http://localhost:4000/auth/logout', '_self');
   };
   return (
-    <div>
-      <div className={style.navBar}>
-        <Link to="/">
-          <img width="100px" className="logo" src="/img/logo.png" alt="" />
-        </Link>
-        {!user.id ? (
-          <nav>
-            <ul className={style.nav__links}>
-              <li>
-                <Link to="/login">
-                  <button onClick={steam} className={style.mainNavButton} type="button">
-                    Войти
-                  </button>
-                </Link>
-              </li>
-              <li>
-                <Link to="/info">
-                  <button className={style.mainNavButton} type="button">
-                    Информация
-                  </button>
-                </Link>
-              </li>
-            </ul>
-          </nav>
-        ) : (
-          <>
-            <Link to="/addPost">
-              <button className={style.mainNavButton} type="button">
-                Найти тиммейта
-              </button>
-            </Link>
-            <ul className={style.list}>
-              <li className={style.listItem}>
-                <img src={user.steamAvatar} alt="" className={style.avatar} />
-              </li>
+    <div className={style.navBar}>
+      <Link to="/">
+        <img width="100px" className="logo" src="/img/logo.png" alt="" />
+      </Link>
+      {!user.id ? (
+        <nav>
+          <ul className={style.nav__links}>
+            <li>
+              <Link to="/login">
+                <button onClick={steam} className={style.mainNavButton} type="button">
+                  Войти
+                </button>
+              </Link>
+            </li>
+            <li>
+              <Link to="/info">
+                <button className={style.mainNavButton} type="button">
+                  Информация
+                </button>
+              </Link>
+            </li>
+          </ul>
+        </nav>
+      ) : (
+        <>
+          <Link to="/addPost">
+            <button className={style.mainNavButton} type="button">
+              Найти тиммейта
+            </button>
+          </Link>
+          <ul className={style.list}>
+            <li className={style.listItem}>
+              <img src={user.steamAvatar} alt="" className={style.avatar} />
+            </li>
 
-              <li className={style.listItem}>
-                <Link to="/profile">{user.steamNickname}</Link>
-              </li>
-              <button onClick={logout} className={style.mainNavButton} type="button">
-                Выйти
-              </button>
-            </ul>
-          </>
-        )}
-      </div>
+            <li className={style.listItem}>
+              <Link to="/profile">{user.steamNickname}</Link>
+            </li>
+            <button onClick={logout} className={style.mainNavButton} type="button">
+              Выйти
+            </button>
+          </ul>
+        </>
+      )}
     </div>
   );
 }

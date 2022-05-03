@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 * {
   background: url(../../../public/img/terror.png);
   background-blend-mode:overlay;
@@ -6,14 +5,10 @@
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
+  margin: 0;
+  padding: 0;
 }
-=======
-.container{
-  max-width: 1170px;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 16px;
-    padding-right: 16px;
-    margin-top: 3rem;
+
+body {
+  margin-bottom: 60px;
 }
->>>>>>> 0f248a24a5c13487c8befcd684fa20f03cf48224
