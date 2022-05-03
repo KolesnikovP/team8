@@ -32,6 +32,7 @@ const Statistic = sequelize.define('statistic', {
   userRank: { type: DataTypes.TEXT },
   steamId: { type: DataTypes.TEXT },
   gameSteamId: { type: DataTypes.TEXT },
+  gameName: { type: DataTypes.TEXT },
 });
 
 const Game = sequelize.define('game', {
@@ -43,7 +44,7 @@ const Game = sequelize.define('game', {
 const UserCreatePost = sequelize.define('userCreatePost', {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
   // user_id: { type: DataTypes.INTEGER },
-  description: { type: DataTypes.STRING },
+  description: { type: DataTypes.TEXT },
   userRank: { type: DataTypes.INTEGER },
   userSteamAvatar: { type: DataTypes.STRING },
   status: { type: DataTypes.BOOLEAN },

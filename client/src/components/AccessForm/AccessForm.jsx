@@ -23,7 +23,7 @@ function AccessForm() {
     dispatch(setUserGames(user?.steamId, stopSpin, userHasntGame));
   }, [user]);
   function setPublic() {
-    window.open(`${user?.[0]?._json.profileurl}edit/settings`);
+    window.open(`${user.steamProfileLink}edit/settings`);
   }
   return (
     <div className={style.container}>
