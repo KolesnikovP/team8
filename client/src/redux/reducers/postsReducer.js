@@ -14,3 +14,6 @@ export const postsReducer = (state = initialState, action) => {
       return state;
   }
 };
+
+export const getAllPostsAC = (payload) => ({ type: INIT_POSTS, payload });
+export const addNewPostAC = (payload) => ({ type: ADD_POST, payload });

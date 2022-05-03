@@ -68,3 +68,7 @@ button:hover {
   font-weight: 500;
   cursor: pointer;
 }
+.avatar{
+  border-radius: 20px;
+  height:30px;
+}
