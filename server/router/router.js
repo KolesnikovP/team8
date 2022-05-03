@@ -7,5 +7,6 @@ Router.get('/initGames', SteamGamesController.getListGames);
 Router.post('/validateProfile', userController.validateProfile);
 Router.post('/initPosts', postController.getPostsList);
 Router.post('/addPost', postController.addPost);
+Router.post('/userGames', userController.userGames);
 
 module.exports = Router;

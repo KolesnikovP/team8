@@ -1,0 +1,17 @@
+.profile__wrapper{
+  display: flex;
+  justify-content: space-around;
+  margin-top: 2rem;
+}
+.profile__title{
+  text-align: center;
+}
+.buttons__block{
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+  justify-content: space-around;
+}
+.avatar{
+  border-radius: 50%;
+}

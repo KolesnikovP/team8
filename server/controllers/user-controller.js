@@ -6,10 +6,13 @@ class UserController {
 
   async authSuccess(req, res, next) {
     if (req.user) {
+      const userDto = await User.findOne({where:{
+        steamId: req.user.id
+      }})
       res.status(200).json({
         success: true,
         message: "successfull",
-        user: req.user,
+        user: userDto,
         //   cookies: req.cookies
       });
     }
@@ -67,6 +70,20 @@ class UserController {
         }
       }
     }
+  }
+  async userGames (req,res, next) {
+    if(req.body.id){
+      try{
+        const games = await Statistic.findAll({
+          steamId: req.body.id
+        })
+        res.json(games)
+      }
+      catch{
+        console.log('Games for user not found')
+      }
+    }
+
   }
 }
 

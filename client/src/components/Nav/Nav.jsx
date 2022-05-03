@@ -20,7 +20,7 @@ export default function Nav() {
         <Link to="/">
           <img width="100px" className="logo" src="/img/logo.png" alt="" />
         </Link>
-        {!user.length ? (
+        {!user.id ? (
           <nav>
             <ul className={style.nav__links}>
               <li>
@@ -48,10 +48,12 @@ export default function Nav() {
             </Link>
             <ul className={style.list}>
               <li className={style.listItem}>
-                <img src={user[0].photos[0].value} alt="" className="avatar" />
+                <img src={user.steamAvatar} alt="" className={style.avatar} />
               </li>
 
-              <li className={style.listItem}>{user[0].displayName}</li>
+              <li className={style.listItem}>
+                <Link to="/profile">{user.steamNickname}</Link>
+              </li>
               <button onClick={logout} className={style.mainNavButton} type="button">
                 Выйти
               </button>
