@@ -3,12 +3,12 @@ const express = require('express');
 const sequelize = require('./db');
 const cookieSession = require("cookie-session");
 const cors = require('cors');
-const passportSetup = require("./passport");
+const passportSetup = require("./services/passport");
 const passport = require("passport");
 
 const PORT = process.env.PORT || 3000;
 const app = express();
-// const Router = require('./router/router');
+const Router = require('./router/router');
 const authRoute = require("./router/auth");
 
 app.use(
@@ -20,13 +20,13 @@ app.use(passport.session());
 
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: process.env.CLIENT_URL,
     methods: "GET,POST,PUT,DELETE",
     credentials: true,
   })
 );
 
-// app.use('/api', Router);
+app.use('/api', Router);
 app.use("/auth", authRoute);
 
 const start = async () => {

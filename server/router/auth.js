@@ -1,37 +1,13 @@
 const router = require("express").Router();
 const passport = require("passport");
+const UserController = require('../controllers/user-controller');
 
-const CLIENT_URL = "http://localhost:3000/";
-
-router.get("/login/success", (req, res) => {
-  if (req.user) {
-    res.status(200).json({
-      success: true,
-      message: "successfull",
-      user: req.user,
-      //   cookies: req.cookies
-    });
-  }
-});
-
-router.get("/login/failed", (req, res) => {
-  res.status(401).json({
-    success: false,
-    message: "failure",
-  });
-});
-
-router.get("/logout", (req, res) => {
-  req.logout();
-  res.redirect(CLIENT_URL);
-});
-
+router.get("/login/success", UserController.authSuccess);
+router.get("/login/failed", UserController.authFailed);
+router.get("/logout", UserController.authLogout);
 router.get("/steam", passport.authenticate("steam", { scope: ["profile"] }));
-
-router.get(
-  "/steam/callback",
-  passport.authenticate("steam", {
-    successRedirect: CLIENT_URL,
+router.get("/steam/callback",passport.authenticate("steam", {
+    successRedirect: 'http://localhost:3000/accessForm',
     failureRedirect: "/login/failed",
   })
 );
