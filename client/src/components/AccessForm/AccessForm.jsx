@@ -20,7 +20,7 @@ function AccessForm() {
     setGames(false);
   };
   useEffect(() => {
-    dispatch(setUserGames(user?.[0]?.id, stopSpin, userHasntGame));
+    dispatch(setUserGames(user?.steamId, stopSpin, userHasntGame));
   }, [user]);
   function setPublic() {
     window.open(`${user?.[0]?._json.profileurl}edit/settings`);

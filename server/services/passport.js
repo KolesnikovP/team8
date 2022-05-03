@@ -22,7 +22,7 @@ passport.use(
         steamId: profile._json.steamid,
         steamNickname: profile._json.personaname,
         steamProfileLink: profile._json.profileurl,
-        steamAvatar: profile._json.avatar,
+        steamAvatar: profile._json.avatarfull,
       });
       user.save();
       return done(null, profile);
