@@ -24,7 +24,8 @@ function FindForm() {
       const post = {
         description: description.value,
         gameSteamId: gameSteamId.value,
-        userSteamId: user[0].id,
+        userId: user.id,
+        userSteamAvatar: user.steamAvatar,
       };
       dispatch(addNewPostFetch(post));
       navigate('/');
@@ -33,7 +34,7 @@ function FindForm() {
   );
 
   return (
-    <div className={style.div}>
+    <section className={style.div}>
       <form action="" method="post" onSubmit={sendFormPost}>
         <div className="radio-form">
           {games.map((game) => {
@@ -49,7 +50,7 @@ function FindForm() {
           Опубликовать заявку
         </button>
       </form>
-    </div>
+    </section>
   );
 }
 
