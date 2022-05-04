@@ -5,47 +5,43 @@ import style from './Footer.module.css';
 
 export default function Footer() {
   return (
-    <div className={style.footerContainer}>
-      <div className={style.footer}>
-        <div className={style.footerHeading}>
-          <div>
-            <h2>About Us</h2>
-            <div>
-              <Link to="/">Lexa</Link>
-            </div>
-            <div>
-              <Link to="/">dan</Link>
-            </div>
-            <div>
-              <Link to="/">Ilya</Link>
-            </div>
+    <footer className="fixed-bottom">
+      <div className={style.mainFooter}>
+        <div className={style.row}>
+          <div className={style.col}>
+            <img className={style.footerImg} src="/img/logo.png" alt="" />
+            <p>thats big project for all of you</p>
           </div>
-          <div>
-            <h2>Contact Us</h2>
-            <div>
-              <Link to="/">Lexa</Link>
-            </div>
-            <div>
-              <Link to="/">Lexa</Link>
-            </div>
-            <div>
-              <Link to="/">Lexa</Link>
-            </div>
+          <div className="col1">
+            <h3>TeamLead JS fullstack dev</h3>
+            <p>TeamLead FullStack dev Alexey</p>
+            <p className={style.email}>alex@mail.ru</p>
+            <p className={style.gitLink}>
+              <a href="/">GitHub</a>
+            </p>
+
+            <h4>+7-989-989-98-98</h4>
           </div>
-          <div>
-            <h2>Contact Us</h2>
-            <div>
-              <Link to="/">Lexa</Link>
-            </div>
-            <div>
-              <Link to="/">Lexa</Link>
-            </div>
-            <div>
-              <Link to="/">Lexa</Link>
-            </div>
+          <div className="col1">
+            <h3>TeamLead JS fullstack dev</h3>
+            <p>FullStack dev Daniil</p>
+            <p className={style.email}>alex@mail.ru</p>
+            <p className={style.gitLink}>
+              <a href="/">GitHub</a>
+            </p>
+            <h4>+7-906-250-44-10</h4>
+          </div>
+          <div className="col1">
+            <h3>TeamLead JS fullstack dev</h3>
+            <p>FullStack dev Ilya</p>
+            <p className={style.email}>alex@mail.ru</p>
+            <p className={style.gitLink}>
+              <a href="/">GitHub</a>
+            </p>
+            <h4>+7-900-650-70-00</h4>
           </div>
         </div>
       </div>
-    </div>
+    </footer>
   );
 }
