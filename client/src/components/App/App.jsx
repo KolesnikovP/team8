@@ -25,11 +25,12 @@ function App() {
       <body>
         <div className={style.main}>
           <Routes>
-            <Route path="/" element={user.id ? <PostList /> : <MainPage />} />
+            <Route path="/" element={<MainPage />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/addPost" element={user.id ? <FindForm /> : <MainPage />} />
-            <Route path="/accessForm" element={user.id ? <AccessForm /> : <MainPage />} />
-            <Route path="/profile" element={user.id ? <Profile /> : <MainPage />} />
+            <Route path="/postList" element={user ? <PostList /> : <MainPage />} />
+            <Route path="/addPost" element={user ? <FindForm /> : <MainPage />} />
+            <Route path="/accessForm" element={user ? <AccessForm /> : <MainPage />} />
+            <Route path="/profile" element={user ? <Profile /> : <MainPage />} />
           </Routes>
         </div>
       </body>

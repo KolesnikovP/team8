@@ -5,9 +5,8 @@ import { getFetchPostsList } from '../../redux/thunk/posts';
 import PostMin from '../PostMin/PostMin';
 import style from './PostList.module.css';
 
-function PostList(store) {
+function PostList() {
   const dispatch = useDispatch();
-  console.log(store);
   useEffect(() => {
     dispatch(getFetchPostsList());
     dispatch(getFetchGamesList());

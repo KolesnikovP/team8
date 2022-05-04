@@ -19,7 +19,7 @@ export default function Nav() {
       <Link to="/">
         <img width="100px" className="logo" src="/img/logo.png" alt="" />
       </Link>
-      {!user.id ? (
+      {!user ? (
         <nav>
           <ul className={style.nav__links}>
             <li>
@@ -41,6 +41,11 @@ export default function Nav() {
       ) : (
         <>
           <Link to="/addPost">
+            <button className={style.mainNavButton} type="button">
+              Создать заявку
+            </button>
+          </Link>
+          <Link to="/postList">
             <button className={style.mainNavButton} type="button">
               Найти тиммейта
             </button>
