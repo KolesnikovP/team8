@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import Nav from '../Nav/Nav';
 import Login from '../Login/Login';
 import FindForm from '../FindForm/FindForm';
-import Profile from '../Profile/Profile';
+import Footer from '../Footer/Footer';
 import style from './App.module.css';
 import AccessForm from '../AccessForm/AccessForm';
 import { fetchUser } from '../../redux/thunk/user';
@@ -14,51 +14,7 @@ import PostList from '../PostList/PostList';
 import { store } from '../../store';
 
 function App() {
-  // function changeBg() {
-  //   const pngs = [
-  //     'url("../../../public/img/dota1.png")',
-  //     'url("../../../public/img/dota1.png")',
-  //     'url("../../../public/img/dota1.png")',
-  //     'url("../../../public/img/dota1.png")',
-  //     'url(../../../public/img/terror.png)',
-  //     'url(../../../public/img/terror2.png)',
-  //   ];
-  //   const section = document.querySelector('*');
-  //   const bg = pngs[Math.floor(Math.random() * pngs.length)];
-
-  //   section.style.backgroundImage = bg;
-  // }
-  // useEffect(() => {
-  //   setInterval(changeBg, 1500);
-  // }, []);
   const dispatch = useDispatch();
-
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    const getUser = () => {
-      fetch('http://localhost:4000/auth/login/success', {
-        method: 'GET',
-        credentials: 'include',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Credentials': true,
-        },
-      })
-        .then((response) => {
-          if (response.status === 200) return response.json();
-          throw new Error('authentication has been failed!');
-        })
-        .then((resObject) => {
-          setUser(resObject.user);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    };
-    getUser();
-  }, []);
 
   useEffect(() => {
     dispatch(fetchUser());
@@ -66,7 +22,8 @@ function App() {
   const { user } = useSelector((state) => state.userReducer);
   return (
     <BrowserRouter>
-        <Nav />
+      <Nav className={style.Nav} />
+      <body>
         <div className={style.main}>
           <Routes>
             <Route path="/" element={<PostList />} />
@@ -76,6 +33,8 @@ function App() {
             <Route path="/profile" element={<Profile user={user} />} />
           </Routes>
         </div>
+      </body>
+      <Footer className={style.Footer} />
     </BrowserRouter>
   );
 }

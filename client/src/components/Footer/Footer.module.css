@@ -1,0 +1,92 @@
+
+/* 
+
+.footerContainer {
+  padding-bottom: 4rem;
+  margin: 0;
+  box-sizing:border-box;
+  padding: 0;
+}
+
+.footer {
+  width:80% ;
+  height: 40vh;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 0 auto
+
+}
+
+.footerHeading {
+  display: flex;
+  flex-direction: row;
+}
+
+.footerHeading h2 {
+  margin-bottom: 2rem;
+}
+
+.footerHeading div {
+  margin-right: 4rem;
+}
+
+.footerHeading Link {
+  color:#fff;
+  text-decoration:none;
+  margin-bottom: 0.5rem;
+}
+
+.footerHeading a:hover {
+  color: red;
+  transition: 0.3s ease-out;
+} */
+
+.mainFooter {
+  display: flex;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  background:linear-gradient(to right, #00093c, #2d0b00);
+  color: #fff;
+  padding: 100px 0 30px;
+  font-size: 13px;
+  line-height: 20px;
+}
+
+.footerImg {
+  width: 70%;
+  margin-bottom: 30px;
+}
+
+.row {
+  width: 85%;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.col {
+  flex-basis: 25%;
+  padding: 10px;
+}
+
+.col h3 {
+  width: fit-content;
+  margin-bottom: 40px;
+  position: relative;
+}
+
+.email {
+  width: fit-content;
+  border-bottom: 1px solid #ccc;
+  margin-top: 20px;
+}
+
+.gitLink {
+  width: fit-content;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 20px;
+}
