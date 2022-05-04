@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { useDispatch, useSelector } from 'react-redux';
+import { Provider, useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { useEffect } from 'react';
 import Nav from '../Nav/Nav';
@@ -10,6 +10,8 @@ import style from './App.module.css';
 import AccessForm from '../AccessForm/AccessForm';
 import { fetchUser } from '../../redux/thunk/user';
 import Profile from '../Profile/Profile';
+import PostList from '../PostList/PostList';
+import { store } from '../../store';
 
 function App() {
   const dispatch = useDispatch();
@@ -28,9 +30,7 @@ function App() {
           <Route path="/profile" element={<Profile user={user} />} />
         </Routes>
       </body>
-      <footer>
-        <Footer className={style.Footer} />
-      </footer>
+      <Footer className={style.Footer} />
     </BrowserRouter>
   );
 }
