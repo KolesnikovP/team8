@@ -21,14 +21,12 @@ function App() {
     <BrowserRouter>
       <Nav className={style.Nav} />
       <body>
-        <div className={style.main1}>
-          <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="/addPost" element={<FindForm />} />
-            <Route path="/accessForm" element={<AccessForm />} />
-            <Route path="/profile" element={<Profile user={user} />} />
-          </Routes>
-        </div>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/addPost" element={<FindForm />} />
+          <Route path="/accessForm" element={<AccessForm />} />
+          <Route path="/profile" element={<Profile user={user} />} />
+        </Routes>
       </body>
       <footer>
         <Footer className={style.Footer} />
