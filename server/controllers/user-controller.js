@@ -55,7 +55,8 @@ class UserController {
                 userGameHours: Math.floor(game.playtime_forever / 60),
                 userRank: 0,
                 steamId: req.body.id,
-                gameSteamId: game.appid
+                gameSteamId: game.appid,
+                gameName: el.gameSteamName
               })
               statUser.save()
               resArray.push(statUser)
@@ -83,7 +84,18 @@ class UserController {
         console.log('Games for user not found')
       }
     }
-
+  }
+  async updateDescribe (req,res, next) {
+    const {steamId, description} = req.body
+    try{
+      const user = await User.findOne({where:{
+        steamId
+      }})
+      await user.update({description})
+      res.json(user)
+    } catch(e){
+      console.log(e)
+    }
   }
 }
 

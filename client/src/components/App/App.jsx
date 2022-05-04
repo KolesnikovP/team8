@@ -20,7 +20,6 @@ function App() {
   const { user } = useSelector((state) => state.userReducer);
   return (
     <BrowserRouter>
-      <Provider store={store}>
         <Nav />
         <div className={style.main}>
           <Routes>
@@ -31,7 +30,6 @@ function App() {
             <Route path="/profile" element={<Profile user={user} />} />
           </Routes>
         </div>
-      </Provider>
     </BrowserRouter>
   );
 }
