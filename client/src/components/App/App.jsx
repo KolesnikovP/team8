@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { Provider, useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Nav from '../Nav/Nav';
 import Login from '../Login/Login';
 import FindForm from '../FindForm/FindForm';
@@ -15,6 +15,7 @@ import { store } from '../../store';
 
 function App() {
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(fetchUser());
   }, [dispatch]);
@@ -33,7 +34,7 @@ function App() {
           </Routes>
         </div>
       </body>
-        <Footer className={style.Footer} />
+      <Footer className={style.Footer} />
     </BrowserRouter>
   );
 }
