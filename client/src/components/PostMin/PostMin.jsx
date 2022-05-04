@@ -19,6 +19,10 @@ function PostMin({ post }) {
         />
         <span>{post.userHours}</span>
       </div>
+      <div>
+        <button type="button"> Открыть профиль</button>
+        <button type="button">Написать хуеплету</button>
+      </div>
     </div>
   );
 }

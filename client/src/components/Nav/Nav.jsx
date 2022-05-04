@@ -19,26 +19,7 @@ export default function Nav() {
       <Link to="/">
         <img width="100px" className="logo" src="/img/logo.png" alt="" />
       </Link>
-      {!user ? (
-        <nav>
-          <ul className={style.nav__links}>
-            <li>
-              <Link to="/login">
-                <button onClick={steam} className={style.mainNavButton} type="button">
-                  Войти
-                </button>
-              </Link>
-            </li>
-            <li>
-              <Link to="/info">
-                <button className={style.mainNavButton} type="button">
-                  Информация
-                </button>
-              </Link>
-            </li>
-          </ul>
-        </nav>
-      ) : (
+      {user.id ? (
         <>
           <Link to="/addPost">
             <button className={style.mainNavButton} type="button">
@@ -63,6 +44,25 @@ export default function Nav() {
             </button>
           </ul>
         </>
+      ) : (
+        <nav>
+          <ul className={style.nav__links}>
+            <li>
+              <Link to="/login">
+                <button onClick={steam} className={style.mainNavButton} type="button">
+                  Войти
+                </button>
+              </Link>
+            </li>
+            <li>
+              <Link to="/info">
+                <button className={style.mainNavButton} type="button">
+                  Информация
+                </button>
+              </Link>
+            </li>
+          </ul>
+        </nav>
       )}
     </div>
   );
