@@ -15,14 +15,8 @@ class PostController {
   async addPost(req, res, next) {
     try {
       const {
-        description, gameSteamId, userSteamId,
+        description, gameSteamId, userId, userSteamAvatar,
       } = req.body;
-      const user = await User.findOne({
-        where: {
-          steamId: userSteamId,
-        },
-        raw: true,
-      });
       const statistic = await Statistic.findOne({
         where: {
           gameSteamId,
@@ -38,9 +32,9 @@ class PostController {
       const newUserPost = await new UserCreatePost({
         description,
         userRank: statistic.userRank,
-        userSteamAvatar: user.steamAvatar,
+        userSteamAvatar,
         status: false,
-        userId: user.id,
+        userId,
         gameId: game.id,
       });
       newUserPost.save();

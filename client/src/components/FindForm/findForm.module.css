@@ -6,7 +6,7 @@
   margin: auto;
   border: 3px solid black;
   border-radius: 5px;
-  background-color: rgba(105, 105, 105, 0.293);
+  background-color: #010101;
 }
 
 .textarea {
@@ -16,8 +16,9 @@
   padding: 15px;
   border-radius: 15px;
   border: 0;
-  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.06);
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.877);
   height: 5rem;
+  background-color: azure;
 }
 
 .btn {
