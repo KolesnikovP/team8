@@ -73,6 +73,7 @@ UserCreatePost.belongsTo(User);
 Game.hasMany(UserCreatePost);
 UserCreatePost.belongsTo(Game);
 
+
 module.exports = {
   User,
   Friend,
