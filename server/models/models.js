@@ -45,8 +45,8 @@ const UserCreatePost = sequelize.define('userCreatePost', {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
   // user_id: { type: DataTypes.INTEGER },
   description: { type: DataTypes.TEXT },
-  userRank: { type: DataTypes.INTEGER },
-  userSteamAvatar: { type: DataTypes.STRING },
+  userRank: { type: DataTypes.TEXT },
+  userSteamAvatar: { type: DataTypes.TEXT },
   status: { type: DataTypes.BOOLEAN },
 });
 
