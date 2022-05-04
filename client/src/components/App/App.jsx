@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import Nav from '../Nav/Nav';
 import Login from '../Login/Login';
 import FindForm from '../FindForm/FindForm';
+import Footer from '../Footer/Footer';
 import style from './App.module.css';
 import AccessForm from '../AccessForm/AccessForm';
 import { fetchUser } from '../../redux/thunk/user';
@@ -20,7 +21,8 @@ function App() {
   const { user } = useSelector((state) => state.userReducer);
   return (
     <BrowserRouter>
-        <Nav />
+      <Nav className={style.Nav} />
+      <body>
         <div className={style.main}>
           <Routes>
             <Route path="/" element={<PostList />} />
@@ -30,6 +32,8 @@ function App() {
             <Route path="/profile" element={<Profile user={user} />} />
           </Routes>
         </div>
+      </body>
+        <Footer className={style.Footer} />
     </BrowserRouter>
   );
 }

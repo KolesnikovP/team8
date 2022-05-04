@@ -34,7 +34,7 @@ app.use('/auth', authRoute);
 const start = async () => {
   try {
     await sequelize.authenticate();
-    // await sequelize.sync({ force: true });
+    await sequelize.sync({ force: true });
     app.listen(PORT, () => console.log(`Server start at ${PORT}`));
   } catch (e) {
     console.log(e);
