@@ -29,7 +29,10 @@ const Statistic = sequelize.define('statistic', {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
   // game_id: { type: DataTypes.INTEGER },
   userGameHours: { type: DataTypes.INTEGER },
-  userRank: { type: DataTypes.INTEGER },
+  userRank: { type: DataTypes.TEXT },
+  steamId: { type: DataTypes.TEXT },
+  gameSteamId: { type: DataTypes.TEXT },
+  gameName: { type: DataTypes.TEXT },
 });
 
 const Game = sequelize.define('game', {
@@ -41,9 +44,9 @@ const Game = sequelize.define('game', {
 const UserCreatePost = sequelize.define('userCreatePost', {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
   // user_id: { type: DataTypes.INTEGER },
-  description: { type: DataTypes.STRING },
-  userRank: { type: DataTypes.INTEGER },
-  userSteamAvatar: { type: DataTypes.STRING },
+  description: { type: DataTypes.TEXT },
+  userRank: { type: DataTypes.TEXT },
+  userSteamAvatar: { type: DataTypes.TEXT },
   status: { type: DataTypes.BOOLEAN },
 });
 
@@ -61,11 +64,11 @@ Friend.belongsToMany(User, { through: FriendsList });
 User.hasMany(UserCreatePost);
 UserCreatePost.belongsTo(User);
 
-User.hasMany(Statistic);
-Statistic.belongsTo(User);
+// User.hasMany(Statistic);
+// Statistic.belongsTo(User);
 
-Game.hasOne(Statistic);
-Statistic.belongsTo(Game);
+// Game.hasOne(Statistic);
+// Statistic.belongsTo(Game);
 
 Game.hasMany(UserCreatePost);
 UserCreatePost.belongsTo(Game);

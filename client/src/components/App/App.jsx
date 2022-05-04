@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { useDispatch } from 'react-redux';
+import { Provider, useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Nav from '../Nav/Nav';
@@ -9,6 +9,9 @@ import Profile from '../Profile/Profile';
 import style from './App.module.css';
 import AccessForm from '../AccessForm/AccessForm';
 import { fetchUser } from '../../redux/thunk/user';
+import Profile from '../Profile/Profile';
+import PostList from '../PostList/PostList';
+import { store } from '../../store';
 
 function App() {
   // function changeBg() {
@@ -60,17 +63,20 @@ function App() {
   useEffect(() => {
     dispatch(fetchUser());
   }, [dispatch]);
+  const { user } = useSelector((state) => state.userReducer);
   return (
-    <div className={style.mainPage}>
-      <BrowserRouter>
+    <BrowserRouter>
         <Nav />
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/addPost" element={<FindForm />} />
-          <Route path="/accessForm" element={<AccessForm />} />
-        </Routes>
-      </BrowserRouter>
-    </div>
+        <div className={style.main}>
+          <Routes>
+            <Route path="/" element={<PostList />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/addPost" element={<FindForm />} />
+            <Route path="/accessForm" element={<AccessForm />} />
+            <Route path="/profile" element={<Profile user={user} />} />
+          </Routes>
+        </div>
+    </BrowserRouter>
   );
 }
 

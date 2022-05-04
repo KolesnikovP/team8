@@ -1,8 +1,13 @@
 * {
-  background: url(../../../public/img/backgroundPng/cs1.png);
-  background-blend-mode:overlay;
-  background-position: center center; 
+  background: url(../../../public/img/terror.png);
+  background-blend-mode: overlay;
+  background-position: center center;
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
+}
+
+.main {
+  display: flex;
+  justify-content: center;
 }

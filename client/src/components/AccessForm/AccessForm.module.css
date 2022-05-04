@@ -4,6 +4,8 @@
     margin-right: auto;
     padding-left: 16px;
     padding-right: 16px;
+    margin-top: 3rem;
+    text-align: center;
 }
 .title{
   text-align: center;
@@ -13,8 +15,18 @@
   justify-content: center;
   margin-top: 2rem;
 }
+.gameGroup{
+  margin-top: 2rem;
+  display:flex;
+  justify-content: space-around;
+}
 .btn{
   margin-right: 2rem;
+}
+.btnStart{
+  margin-top: 2rem;
+  background-color: seagreen;
+  width: 10rem;
 }
 .settingsBlock{
   margin-top: 2rem;
@@ -23,4 +35,33 @@
   margin-top: 4rem;
   display: block; 
   text-align: center;
+}
+.spinner {
+  position: absolute;
+  top: 50vh;
+  left: 50vw;
+  width: 120px;
+  height: 120px;
+  margin: -60px 0 0 -60px;
+  -webkit-animation: spin 1s linear infinite;
+  -moz-animation: spin 1s linear infinite;
+  animation: spin 1s linear infinite;
+}
+@-moz-keyframes spin {
+  100% {
+    -moz-transform: rotate(360deg);
+  }
+}
+
+@-webkit-keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
 }

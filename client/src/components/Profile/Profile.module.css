@@ -1,0 +1,38 @@
+.profile__wrapper{
+  display: flex;
+  justify-content: space-around;
+  margin-top: 2rem;
+}
+.profile__title{
+  text-align: center;
+}
+.buttons__block{
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+  justify-content: space-around;
+}
+.avatar{
+  border-radius: 50%;
+}
+.games__block { 
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-around;
+  border: 1px solid black;
+  align-items: center;
+}
+.textarea__block{
+  display: flex;
+  flex-direction: column;
+
+}
+.describe__block{
+  max-width: 400px
+}
+.textarea{
+  height: 200px;
+  width: 350px;
+  margin-bottom: 1rem;
+  font-size: 20px;
+}

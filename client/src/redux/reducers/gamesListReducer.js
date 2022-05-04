@@ -11,4 +11,5 @@ export const gamesListReducer = (state = initialState, action) => {
       return state;
   }
 };
+
 export const getAllGamesAC = (payload) => ({ type: INIT_GAMES, payload });
