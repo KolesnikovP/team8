@@ -2,7 +2,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { useEffect } from 'react';
-import Nav from '../Nav/Nav';
+import Nav1 from '../Nav/Nav1';
 import Login from '../Login/Login';
 import FindForm from '../FindForm/FindForm';
 // import Footer from '../Footer/Footer';
@@ -21,7 +21,7 @@ function App() {
   const { user } = useSelector((state) => state.userReducer);
   return (
     <BrowserRouter>
-      <Nav className={style.Nav} />
+      <Nav1 className={style.Nav} />
       <body>
         <div className={style.main}>
           <Routes>
