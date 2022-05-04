@@ -28,6 +28,7 @@ function App() {
           <Route path="/addPost" element={<FindForm />} />
           <Route path="/accessForm" element={<AccessForm />} />
           <Route path="/profile" element={<Profile user={user} />} />
+          <Route path="/" element={<PostList />} />
         </Routes>
       </body>
       <Footer className={style.Footer} />
