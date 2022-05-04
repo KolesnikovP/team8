@@ -20,16 +20,16 @@ function App() {
   const { user } = useSelector((state) => state.userReducer);
   return (
     <BrowserRouter>
-        <Nav />
-        <div className={style.main}>
-          <Routes>
-            <Route path="/" element={<PostList />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/addPost" element={<FindForm />} />
-            <Route path="/accessForm" element={<AccessForm />} />
-            <Route path="/profile" element={<Profile user={user} />} />
-          </Routes>
-        </div>
+      <Nav />
+      <div className={style.main}>
+        <Routes>
+          <Route path="/" element={<PostList />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/addPost" element={<FindForm />} />
+          <Route path="/accessForm" element={<AccessForm />} />
+          <Route path="/profile" element={<Profile user={user} />} />
+        </Routes>
+      </div>
     </BrowserRouter>
   );
 }
