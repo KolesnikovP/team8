@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Container from '@mui/material/Container';
-import { Grid, Typography } from '@mui/material';
+import { Grid, IconButton, Typography } from '@mui/material';
+import FilterListIcon from '@mui/icons-material/FilterList';
 import { getFetchGamesList } from '../../redux/thunk/getGame';
 import { getFetchPostsList } from '../../redux/thunk/posts';
 import PostMin from '../PostMin/PostMin';
@@ -30,6 +31,9 @@ function PostList() {
         </Grid>
         <Grid item xs={2}>
           <Typography>Кол-во часов</Typography>
+          <IconButton>
+            <FilterListIcon />
+          </IconButton>
         </Grid>
         <Grid item xs={1}>
           <Typography>Взаимодействие</Typography>

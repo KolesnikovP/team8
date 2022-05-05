@@ -7,7 +7,7 @@ import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import { Box } from '@mui/system';
 import React from 'react';
 // import { useSelector } from 'react-redux';
-import style from './PostMin.module.css';
+// import style from './PostMin.module.css';
 
 function PostMin({ post }) {
   return (
@@ -19,7 +19,7 @@ function PostMin({ post }) {
       <Grid item xs={1}>
         <Box sx={{ alignItems: 'center', display: 'flex' }}>
           {post.author}
-          <Avatar src={post.userSteamAvatar} alt="userAvatar" className={style.avatar} />
+          <Avatar src={post.userSteamAvatar} alt="userAvatar" />
         </Box>
       </Grid>
       <Grid item xs={3}>
@@ -33,7 +33,8 @@ function PostMin({ post }) {
           alt={`appIcon_${post.gameName}`}
           className={style.gameImg}
         /> */}
-        <span>{post.gameName}</span>
+
+        <Typography color="#b8860b">{post.gameName}</Typography>
       </Grid>
       <Grid item xs={2}>
         <span>{post.userHours}</span>
