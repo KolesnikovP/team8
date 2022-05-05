@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Box } from '@mui/material';
 
-export default function MenuAppBar() {
+export default function Navbar() {
   const { user } = useSelector((state) => state.userReducer);
   const navigate = useNavigate();
   const steam = () => {

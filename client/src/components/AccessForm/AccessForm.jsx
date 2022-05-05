@@ -1,9 +1,10 @@
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
+import { Container, Typography } from '@mui/material';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { Box } from '@mui/system';
 import style from './AccessForm.module.css';
 import { setUserGames } from '../../redux/thunk/userProfile';
 
@@ -14,6 +15,7 @@ function AccessForm() {
   const [spinner, setSpinner] = useState(true);
   const [hasGames, setGames] = useState(true);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const stopSpin = () => {
     setSpinner(false);
   };
@@ -27,73 +29,81 @@ function AccessForm() {
     window.open(`${user.steamProfileLink}edit/settings`);
   }
   return (
-    <div className={style.container}>
-      <h3 className={style.title}>
-        Добро пожаловать на <span>Team8</span>
-      </h3>
-      <h4>Для дальнейшей работы желательно сделать свой аккаунт публичным.</h4>
-      <div className={style.buttonGroup}>
-        <Button type="Button" className={style.btn} onClick={() => setPublic}>
+    <Container>
+      <Typography variant="h4">
+        Добро пожаловать на
+        <Typography component="span" variant="h4" sx={{ marginLeft: '1rem' }}>
+          Team8
+        </Typography>
+      </Typography>
+      <Typography variant="h5" sx={{ marginTop: '1rem' }}>
+        Для дальнейшей работы желательно сделать свой аккаунт публичным.
+      </Typography>
+      <Box>
+        <Button type="Button" className={style.btn} onClick={() => setPublic()}>
           Сделать пyбличным
         </Button>
         <Button type="Button" onClick={() => setVisible((prev) => !prev)}>
           Открыть инструкцию
         </Button>
-      </div>
+      </Box>
       {spinner ? (
-        <div>
+        <Box>
           <img className={style.spinner} src="./pngwing.com.png" alt="loading-png" />
-        </div>
+        </Box>
       ) : (
-        <div style={{ marginTop: '2rem', textAlign: 'center' }}>
-          <h2 style={{ marginTop: '2rem', textAlign: 'center' }}>
+        <Box sx={{ marginTop: '2rem', textAlign: 'center' }}>
+          <Typography sx={{ marginTop: '2rem', textAlign: 'center' }} variant="h5">
             {hasGames
               ? 'Данные игры и их статистика будут отображаться у вас в профиле'
               : 'К сожалению в вашем аккаунте мы не нашли подходящих игр ('}
-          </h2>
-          <div className={style.gameGroup}>
+          </Typography>
+          <Box sx={{ display: 'flex', justifyContent: 'space-around', marginTop: '1rem' }}>
             {profGames.map((game) => (
-              <div>
+              <Box>
                 <img
                   src={`https://cdn.cloudflare.steamstatic.com/steam/apps/${game.gameSteamId}/header.jpg?t=1650992920`}
                   alt={`appIcon_${game.gameSteamId}`}
-                  width="400px"
+                  width="80%"
                   key={Date.now()}
                 />
-                <p>Количество часов: {game.userGameHours}</p>
-              </div>
+                <Typography>Количество часов: {game.userGameHours}</Typography>
+              </Box>
             ))}
-          </div>
-          <Link to="/">
-            <Button type="Button" variant="outlined">
-              Старт
-            </Button>
-          </Link>
-        </div>
+          </Box>
+          <Button
+            type="Button"
+            variant="outlined"
+            color="success"
+            size="large"
+            onClick={() => navigate('/')}
+            sx={{ marginTop: '1rem' }}
+          >
+            Старт
+          </Button>
+        </Box>
       )}
 
       {visible ? (
-        <div className={style.settingsBlock}>
-          <ul>
-            <li>Перейдите на официальный сайт steamcommunity.com.</li>
-            <li>
-              Жмите на кнопку «Войти» справа вверху и авторизуйтесь под своим логином и паролем.
-            </li>
-            <li>Кликните на ник справа вверху.</li>
-            <li>Жмите на кнопку «Открыть профиль»</li>
-          </ul>
-          <div className={style.imgCont}>
+        <Box>
+          <Typography>Перейдите на официальный сайт steamcommunity.com.</Typography>
+          <Typography>
+            Жмите на кнопку «Войти» справа вверху и авторизуйтесь под своим логином и паролем.
+          </Typography>
+          <Typography>Кликните на ник справа вверху.</Typography>
+          <Typography>Жмите на кнопку «Открыть профиль»</Typography>
+          <Box>
             <img src="/img/profileSet/1.jpeg" alt="SettingsProfile" />
-          </div>
-          <li>Кликните на кнопку «Редактировать …» с правой стороны.</li>
-          <div className={style.imgCont}>
+          </Box>
+          <Typography>Кликните на кнопку «Редактировать …» с правой стороны.</Typography>
+          <Box>
             <img src="/img/profileSet/2.jpeg" alt="SettingsProfile" />
-          </div>
-          <li>В левом меню выберите пункт «Приватность».</li>
-          <div className={style.imgCont}>
+          </Box>
+          <Typography>В левом меню выберите пункт «Приватность».</Typography>
+          <Box>
             <img src="/img/profileSet/3.jpeg" alt="SettingsProfile" />
-          </div>
-          <p>
+          </Box>
+          <Typography>
             На этом этапе можно сделать профиль Стим открытым, если до этого он был запрещен для
             входа другим пользователям. Система сразу предупреждает, что доступ к основным данным
             всегда публичен и закрыть его не получится. При этом имя и аватар профиля легко увидеть
@@ -101,12 +111,12 @@ function AccessForm() {
             После входа в указанное выше меню легко разобраться, как открыть аккаунт Стим. Для этого
             в разделе «Мой профиль» установите пункт «Открытый». В этом случае в учетной записи
             показывается описание, список друзей, значки, уровень, комментарии, витрины и группы.
-          </p>
-        </div>
+          </Typography>
+        </Box>
       ) : (
         ''
       )}
-    </div>
+    </Container>
   );
 }
 

@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { useEffect } from 'react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import Nav1 from '../Nav/Nav1';
 import Login from '../Login/Login';
 import FindForm from '../FindForm/FindForm';
 // import Footer from '../Footer/Footer';
@@ -13,6 +12,7 @@ import { fetchUser } from '../../redux/thunk/user';
 import Profile from '../Profile/Profile';
 import PostList from '../PostList/PostList';
 import MainPage from '../MainPage/MainPage';
+import Navbar from '../Nav/Navbar';
 
 function App() {
   const dispatch = useDispatch();
@@ -29,7 +29,7 @@ function App() {
   return (
     <BrowserRouter>
       <ThemeProvider theme={darkTheme}>
-        <Nav1 className={style.Nav} />
+        <Navbar className={style.Nav} />
         <body>
           <div className={style.main}>
             <Routes>

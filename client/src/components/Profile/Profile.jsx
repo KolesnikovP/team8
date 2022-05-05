@@ -37,7 +37,7 @@ function Profile() {
            :
           <div className={style.textarea__block}> 
           <textarea className={style.textarea} onChange={(e)=>settextAriaValue(e.target.value)} defaultValue={user.description || '' }/>
-          <Button type="Button" onClick={()=>changeDesc}>Изменить</Button>
+          <Button type="Button" onClick={()=>changeDesc()}>Изменить</Button>
           </div>
           }
         </div>
