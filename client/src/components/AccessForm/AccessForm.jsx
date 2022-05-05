@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import Button from '@mui/material/Button';
 import style from './AccessForm.module.css';
 import { setUserGames } from '../../redux/thunk/userProfile';
 
@@ -32,12 +33,12 @@ function AccessForm() {
       </h3>
       <h4>Для дальнейшей работы желательно сделать свой аккаунт публичным.</h4>
       <div className={style.buttonGroup}>
-        <button type="button" className={style.btn} onClick={setPublic}>
+        <Button type="Button" className={style.btn} onClick={() => setPublic}>
           Сделать пyбличным
-        </button>
-        <button type="button" onClick={() => setVisible((prev) => !prev)}>
+        </Button>
+        <Button type="Button" onClick={() => setVisible((prev) => !prev)}>
           Открыть инструкцию
-        </button>
+        </Button>
       </div>
       {spinner ? (
         <div>
@@ -64,9 +65,9 @@ function AccessForm() {
             ))}
           </div>
           <Link to="/">
-            <button type="button" className={style.btnStart}>
+            <Button type="Button" variant="outlined">
               Старт
-            </button>
+            </Button>
           </Link>
         </div>
       )}

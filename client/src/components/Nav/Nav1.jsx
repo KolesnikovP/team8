@@ -7,6 +7,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { Box } from '@mui/material';
 
 export default function MenuAppBar() {
   const { user } = useSelector((state) => state.userReducer);
@@ -30,10 +31,10 @@ export default function MenuAppBar() {
 
   return (
     <AppBar position="static" sx={{ backgroundColor: 'main' }}>
-      <Toolbar>
-        <MenuItem sx={{ mr: 2 }} onClick={() => navigate('/')}>
+      <Toolbar sx={{ justifyContent: 'space-between' }}>
+        <Box sx={{ mr: 2 }} onClick={() => navigate('/')}>
           <img width="100px" className="logo" src="/img/logo.png" alt="" />
-        </MenuItem>
+        </Box>
         {user.id ? (
           <>
             <MenuItem
@@ -47,7 +48,7 @@ export default function MenuAppBar() {
             <MenuItem
               variant="h6"
               component="div"
-              sx={{ flexGrow: 1 }}
+              sx={{ flexGrow: 0 }}
               onClick={() => navigate('/postList')}
             >
               посмотреть заявки
