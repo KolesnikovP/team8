@@ -30,6 +30,15 @@ function FindForm(props) {
   const [description, setDescription] = useState('');
   const [radioValue, setRadioValue] = useState('');
   const [helperText, setHelperText] = useState('Выберите игру');
+  const [formValid, setFormValid] = useState(false);
+
+  useEffect(() => {
+    if (description !== '' && radioValue !== '') {
+      setFormValid(true);
+    } else {
+      setFormValid(false);
+    };
+  }, [description, radioValue]);
 
   const changeDescription = useCallback((event) => {
     setDescription(event.target.value);
@@ -41,6 +50,8 @@ function FindForm(props) {
 
   const modalClose = useCallback(() => {
     setHelperText('Выберите игру');
+    setDescription('');
+    setRadioValue('');
   }, []);
 
   useEffect(() => {
@@ -85,10 +96,11 @@ function FindForm(props) {
           value={description}
           onChange={changeDescription}
         />
+        {/* {!formValid && <Typography variant="subtitle2" >Выберите игру и заполните описание.</Typography>} */}
       </DialogContent>
       <DialogActions>
-        <Button color="primary" onClick={sendFormPost}>
-          Опубликовать заявку
+        <Button disabled={!formValid} color="primary" onClick={sendFormPost}>
+          {formValid ? "Опубликовать заявку" : "Заполните все поля"}
         </Button>
         <Button onClick={() => { handleClose(); modalClose() }} color="warning">
           Закрыть
