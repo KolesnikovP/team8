@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import Login from '../Login/Login';
 import FindForm from '../FindForm/FindForm';
-// import Footer from '../Footer/Footer';
+import Footer from '../Footer/Footer';
 import style from './App.module.css';
 import AccessForm from '../AccessForm/AccessForm';
 import { fetchUser } from '../../redux/thunk/user';
@@ -55,7 +55,7 @@ function App() {
             </Routes>
           </div>
         </body>
-        {/* <Footer className={style.Footer} /> */}
+        <Footer />
       </ThemeProvider>
     </BrowserRouter>
   );

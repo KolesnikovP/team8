@@ -9,7 +9,10 @@ import React from 'react';
 // import { useSelector } from 'react-redux';
 // import style from './PostMin.module.css';
 
-function PostMin({ post }) {
+function PostMin({ post, games }) {
+  const game = games.find((findGame) => findGame.id === post.gameId);
+  // console.log(games);
+
   return (
     <Grid
       container

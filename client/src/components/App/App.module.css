@@ -1,13 +1,18 @@
-* {
-  /* background: url(../../../public/img/terror.png); */
-  /* background-blend-mode:overlay;
+/* * {
+  background: url(../../../../../team8/client/public/img/backgroundPng/cs1.png);
+  background-blend-mode:overlay;
   background-position: center center; 
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
   margin: 0;
-  padding: 0; */
+  padding: 0;
+} */
+
+body {
+  min-height: 100vh;
 }
+
 
 .main {
   max-width: 1170px;
