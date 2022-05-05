@@ -18,11 +18,11 @@ function PostList() {
 
   return (
     <Container>
-      <Grid container spacing={2}>
-        <Grid item xs={3}>
-          <Typography>Никнейм</Typography>
+      <Grid container spacing={3}>
+        <Grid item xs={1}>
+          <Typography>Игрок</Typography>
         </Grid>
-        <Grid item xs={2}>
+        <Grid item xs={3}>
           <Typography>Описание</Typography>
         </Grid>
         <Grid item xs={2}>
@@ -31,10 +31,13 @@ function PostList() {
         <Grid item xs={2}>
           <Typography>Кол-во часов</Typography>
         </Grid>
-        {posts.map((post) => (
-          <PostMin key={post.id} post={post} games={games} />
-        ))}
+        <Grid item xs={1}>
+          <Typography>Взаимодействие</Typography>
+        </Grid>
       </Grid>
+      {posts.map((post) => (
+        <PostMin key={post.id} post={post} games={games} />
+      ))}
     </Container>
   );
 }
