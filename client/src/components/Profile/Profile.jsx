@@ -3,9 +3,9 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Button from '@mui/material/Button';
+import { Avatar, Box, TextareaAutosize, Typography } from '@mui/material';
 import { fetchUserGames } from '../../redux/thunk/user';
 import { setUserDescribe } from '../../redux/thunk/userProfile';
-import style from './Profile.module.css';
 
 function Profile() {
   const { user } = useSelector((state) => state.userReducer);
@@ -24,50 +24,69 @@ function Profile() {
     setHidden(!hidden)
   }
   return (
-    <div>
-      <h1 className={style.profile__title}>{user.steamNickname}</h1>
-      <div className={style.profile__wrapper}>
-        <img src={user.steamAvatar} alt="avatarUser" className={style.avatar} />
-        <div>
+    <Box>
+      <Typography variant="h3" color="primary">{user.steamNickname}</Typography>
+      <Box sx={{display:'flex', justifyContent: 'space-around', marginTop:'2rem', border: '1px solid #90caf9', padding: '2rem', borderRadius: '1rem'}}>
+        <Avatar 
+        src={user.steamAvatar} 
+        sx={{ width: 220, height: 220, border: '1px solid #90caf9' }}
+        />
+        <Box>
           {hidden ? 
-          <div className={style.describe__block}>
-          <h4>Описание:</h4>
-          <p>{user.description}</p>
-          </div>
+          <Typography
+          sx={{maxWidth: '400px'}}
+          >{user.description}</Typography>
            :
-          <div className={style.textarea__block}> 
-          <textarea className={style.textarea} onChange={(e)=>settextAriaValue(e.target.value)} defaultValue={user.description || '' }/>
-          <Button type="Button" onClick={()=>changeDesc()}>Изменить</Button>
-          </div>
+          <Box sx={{display:'flex', flexDirection: 'column', justifyContent: 'center'}}> 
+          <TextareaAutosize 
+          onChange={(e)=>settextAriaValue(e.target.value)} 
+          defaultValue={user.description || '' }
+          style={{ width: 400 ,fontSize: '20px'}}
+          minRows={10}
+          />
+          <Button sx={{marginTop:'1rem'}} type="Button" onClick={()=>changeDesc()} variant="outlined">Изменить</Button>
+          </Box>
           }
-        </div>
-        <div className={style.buttons__block}>
-          <Button type="Button" onClick={()=>openSteam}>Открыть профиль в стиме</Button>
+        </Box>
+        <Box sx={{display: 'flex', flexDirection: 'column', justifyContent: 'space-around'}}>
+          <Button 
+          type="Button" 
+          onClick={()=>openSteam}
+          variant="outlined"
+          >
+            Открыть профиль в стиме
+            </Button>
           {hidden ? 
-          <Button type="Button" onClick={()=>setHidden(!hidden)}>Редактировать описание профиля</Button>
+          <Button 
+          type="Button" 
+          onClick={()=>setHidden(!hidden)}
+          variant="outlined"
+          >
+            Редактировать описание профиля
+          </Button>
            :
           ''
           }
           
-        </div>
-      </div>
+        </Box>
+      </Box>
       {profGames.map((game, i) => (
-        <div className={style.games__block} key={game.gameSteamId}>
-          <p>{i+1}</p>
-          <h4>{game.gameName}</h4>
+        <Box sx={{display: 'flex', justifyContent: 'space-around', alignItems: 'center', marginTop: '2rem'}} key={game.gameSteamId}>
+          <Typography>{i+1}</Typography>
+          <Typography variant="h4">{game.gameName}</Typography>
           <img
             src={`https://cdn.cloudflare.steamstatic.com/steam/apps/${game.gameSteamId}/header.jpg?t=1650992920`}
             alt={`appIcon_${game.gameSteamId}`}
             width="200px"
             key={Date.now()}
           />
-          <p>Количество часов: {game.userGameHours}</p>
-        </div>
+          <Typography>Количество часов: {game.userGameHours}</Typography>
+        </Box>
       ))}
-    <div>
-      <h1>Comments block soon...</h1>
-    </div>
-    </div>
+    <Box>
+      <Typography variant="h3">Comments block soon...</Typography>
+    </Box>
+    </Box>
   );
 }
 
