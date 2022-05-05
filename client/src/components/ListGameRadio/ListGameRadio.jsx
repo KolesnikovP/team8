@@ -1,6 +1,7 @@
 /* eslint-disable import/no-unresolved */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable react/prop-types */
+import { FormControlLabel, Radio, Box } from '@mui/material';
 import React, { useCallback } from 'react';
 import './style.css';
 
@@ -11,8 +12,13 @@ function ListGameRadio({ game, setHelperText }) {
 
   return (
     // eslint-disable-next-line jsx-a11y/label-has-associated-control
-    <label className="radio-control">
-      <input type="radio" name="gameSteamId" value={game.gameSteamId} onClick={radioChecked} />
+    <Box component="label" className="radio-control">
+      <FormControlLabel
+        control={<Radio />}
+        name="gameSteamId"
+        value={game.gameSteamId}
+        onClick={radioChecked}
+      />
       <span className="radio-input">
         <img
           src={`https://cdn.cloudflare.steamstatic.com/steam/apps/${game.gameSteamId}/header.jpg?t=1650992920`}
@@ -20,7 +26,7 @@ function ListGameRadio({ game, setHelperText }) {
         />
         {/* <span>{game.gameSteamName}</span> */}
       </span>
-    </label>
+    </Box>
   );
 }
 

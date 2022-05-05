@@ -27,35 +27,46 @@ function FindForm(props) {
   const { games } = useSelector((state) => state.gamesListReducer);
   const { user } = useSelector((state) => state.userReducer);
 
-  // const [isEmpty, setIsEmpty] = useState(true);
+  const [description, setDescription] = useState('');
+  const [radioValue, setRadioValue] = useState('');
   const [helperText, setHelperText] = useState('Выберите игру');
+
+  const changeDescription = useCallback((event) => {
+    setDescription(event.target.value);
+  }, []);
+
+  const changeRadioValue = useCallback((event) => {
+    setRadioValue(event.target.value);
+  }, []);
+
+  const modalClose = useCallback(() => {
+    setHelperText('Выберите игру');
+  }, []);
 
   useEffect(() => {
     dispatch(getFetchGamesList());
   }, [dispatch]);
 
   const sendFormPost = useCallback(
-    (event) => {
-      event.preventDefault();
-      const { gameSteamId, description } = event.target;
+    () => {
       const post = {
-        description: description.value,
-        gameSteamId: gameSteamId.value,
+        description,
+        gameSteamId: radioValue,
         userId: user.id,
         userSteamAvatar: user.steamAvatar,
       };
       dispatch(addNewPostFetch(post));
     },
-    [dispatch, navigate, user]
+    [description, radioValue]
   );
 
   return (
-    <Dialog open={open} onClose={handleClose} aria-labelledby="find-teammate-dialog">
+    <Dialog open={open} onClose={() => { handleClose(); modalClose() }} aria-labelledby="find-teammate-dialog" >
       <DialogTitle id="form-dialog-title">Поиск напарников</DialogTitle>
       <DialogContent>
         <Typography>{helperText}</Typography>
         <Box className="radio-form" component="div">
-          <RadioGroup row>
+          <RadioGroup row value={radioValue} onChange={changeRadioValue}>
             {games.map((game) => {
               return <ListGameRadio key={game.id} game={game} setHelperText={setHelperText} />;
             })}
@@ -65,23 +76,25 @@ function FindForm(props) {
           autoFocus
           margin="dense"
           id="description"
-          label="Ваши ожидания"
+          label="Описание заявки"
           type="text"
           fullWidth
           multiline
           maxRows={4}
           minRows={4}
+          value={description}
+          onChange={changeDescription}
         />
       </DialogContent>
       <DialogActions>
-        <Button onClick={sendFormPost} color="primary">
+        <Button color="primary" onClick={sendFormPost}>
           Опубликовать заявку
         </Button>
-        <Button onClick={handleClose} color="warning">
+        <Button onClick={() => { handleClose(); modalClose() }} color="warning">
           Закрыть
         </Button>
       </DialogActions>
-    </Dialog>
+    </Dialog >
   );
 }
 
