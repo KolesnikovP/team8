@@ -20,15 +20,22 @@ function App() {
     dispatch(fetchUser());
   }, [dispatch]);
   const { user } = useSelector((state) => state.userReducer);
+  const [open, setOpen] = useState(false);
+  const handelClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
   return (
     <BrowserRouter>
-      <Nav className={style.Nav} />
+      <Nav className={style.Nav} handelClickOpen={handelClickOpen} />
       <body>
         <div className={style.main}>
           <Routes>
             <Route path="/" element={<PostList />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/addPost" element={<FindForm />} />
+            <Route path="/addPost" element={<FindForm handleClose={handleClose} open={open} />} />
             <Route path="/accessForm" element={<AccessForm />} />
             <Route path="/profile" element={<Profile user={user} />} />
           </Routes>

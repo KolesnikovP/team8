@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import style from './Nav.module.css';
 
-export default function Nav() {
+export default function Nav({ handelClickOpen }) {
   const { user } = useSelector((state) => state.userReducer);
   const steam = () => {
     window.open('http://localhost:4000/auth/steam', '_self');
@@ -40,11 +40,9 @@ export default function Nav() {
         </nav>
       ) : (
         <>
-          <Link to="/addPost">
-            <button className={style.mainNavButton} type="button">
-              Найти тиммейта
-            </button>
-          </Link>
+          <button className={style.mainNavButton} onClick={handelClickOpen} type="button">
+            Найти тиммейта
+          </button>
           <ul className={style.list}>
             <li className={style.listItem}>
               <img src={user.steamAvatar} alt="" className={style.avatar} />
