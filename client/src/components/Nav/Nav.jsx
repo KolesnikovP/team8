@@ -19,7 +19,7 @@ export default function Nav({ handelClickOpen }) {
       <Link to="/">
         <img width="100px" className="logo" src="/img/logo.png" alt="" />
       </Link>
-      {!user.id ? (
+      {!user ? (
         <nav>
           <ul className={style.nav__links}>
             <li>
