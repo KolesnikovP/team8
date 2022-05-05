@@ -30,7 +30,7 @@
 
 
 .radio-form .radio-control input:checked+.radio-input {
-  transform: scale(1.18);
+  transform: scale(1.25);
   animation-name: animation;
   animation-duration: 300ms;
 }
@@ -47,19 +47,19 @@
   }
 
   25% {
-    transform: scale(1.12);
+    transform: scale(1.1);
   }
 
   50% {
-    transform: scale(1.14);
+    transform: scale(1.15);
   }
 
   75% {
-    transform: scale(1.16);
+    transform: scale(1.2);
   }
 
   100% {
-    transform: scale(1.18);
+    transform: scale(1.25);
   }
 }
 
