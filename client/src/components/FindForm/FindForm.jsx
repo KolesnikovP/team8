@@ -1,16 +1,26 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-underscore-dangle */
 import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import style from './findForm.module.css';
+import {
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  TextField,
+  DialogActions,
+  Button,
+} from '@mui/material';
+// import style from './findForm.module.css';
 import { getFetchGamesList } from '../../redux/thunk/getGame';
-import ListGameRadio from '../ListGameRadio/ListGameRadio';
+// import ListGameRadio from '../ListGameRadio/ListGameRadio';
 import { addNewPostFetch } from '../../redux/thunk/posts';
 
-function FindForm() {
+function FindForm(props) {
+  const { handleClose, open } = props;
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { games } = useSelector((state) => state.gamesListReducer);
+  // const { games } = useSelector((state) => state.gamesListReducer);
   const { user } = useSelector((state) => state.userReducer);
 
   useEffect(() => {
@@ -34,23 +44,27 @@ function FindForm() {
   );
 
   return (
-    <section className={style.div}>
-      <form action="" method="post" onSubmit={sendFormPost}>
-        <div className="radio-form">
-          {games.map((game) => {
-            return <ListGameRadio key={game.id} game={game} />;
-          })}
-        </div>
-        <textarea
-          className={style.textarea}
-          name="description"
-          placeholder="Опишите себя и свой стиль игры..."
+    <Dialog open={open} onClose={handleClose} aria-labelledby="find-teammate-dialog">
+      <DialogTitle id="form-dialog-title">Поиск напарников</DialogTitle>
+      <DialogContent>
+        <TextField
+          autoFocus
+          margin="dense"
+          id="description"
+          label="Ваши ожидания"
+          type="text"
+          fullWidth
         />
-        <button className={style.btn} type="submit">
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={sendFormPost} color="primary">
           Опубликовать заявку
-        </button>
-      </form>
-    </section>
+        </Button>
+        <Button onClick={handleClose} color="warning">
+          Закрыть
+        </Button>
+      </DialogActions>
+    </Dialog>
   );
 }
 
