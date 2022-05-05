@@ -28,7 +28,9 @@
 
 }
 .describe__block{
-  max-width: 400px
+  max-width: 500px;
+  min-width: 400px;
+  text-align: center;
 }
 .textarea{
   height: 200px;
