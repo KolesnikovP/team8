@@ -1,7 +1,9 @@
+/* eslint-disable import/no-named-as-default-member */
+/* eslint-disable import/no-named-as-default */
 /* eslint-disable no-unused-vars */
 import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import Login from '../Login/Login';
 import FindForm from '../FindForm/FindForm';
@@ -16,6 +18,7 @@ import Navbar from '../Nav/Navbar';
 
 function App() {
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(fetchUser());
   }, [dispatch]);
@@ -26,6 +29,13 @@ function App() {
       mode: 'dark',
     },
   });
+  const [open, setOpen] = useState(false);
+  const handelClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
   return (
     <BrowserRouter>
       <ThemeProvider theme={darkTheme}>
@@ -36,7 +46,10 @@ function App() {
               <Route path="/" element={<MainPage />} />
               <Route path="/login" element={<Login />} />
               <Route path="/postList" element={user ? <PostList /> : <MainPage />} />
-              <Route path="/addPost" element={user ? <FindForm /> : <MainPage />} />
+              <Route
+                path="/addPost"
+                element={user ? <FindForm handleClose={handleClose} open={open} /> : <MainPage />}
+              />
               <Route path="/accessForm" element={user ? <AccessForm /> : <MainPage />} />
               <Route path="/profile" element={user ? <Profile /> : <MainPage />} />
             </Routes>
