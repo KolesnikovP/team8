@@ -7,10 +7,6 @@ import style from './PostList.module.css';
 
 function PostList() {
   const dispatch = useDispatch();
-<<<<<<< HEAD
-=======
-  // console.log(store);
->>>>>>> dev
   useEffect(() => {
     dispatch(getFetchPostsList());
     dispatch(getFetchGamesList());
