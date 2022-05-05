@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -9,7 +10,7 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Box } from '@mui/material';
 
-export default function Navbar() {
+export default function Navbar({ handelClickOpen }) {
   const { user } = useSelector((state) => state.userReducer);
   const navigate = useNavigate();
   const steam = () => {
@@ -41,7 +42,7 @@ export default function Navbar() {
               variant="h6"
               component="div"
               sx={{ flexGrow: 0, marginRight: '1rem' }}
-              onClick={() => navigate('/addPost')}
+              onClick={handelClickOpen}
             >
               создать заявку
             </MenuItem>

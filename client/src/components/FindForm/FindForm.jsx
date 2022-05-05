@@ -1,3 +1,6 @@
+/* eslint-disable react/jsx-boolean-value */
+/* eslint-disable prettier/prettier */
+/* eslint-disable import/no-unresolved */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-underscore-dangle */
 import React, { useCallback, useEffect } from 'react';
@@ -13,14 +16,14 @@ import {
 } from '@mui/material';
 // import style from './findForm.module.css';
 import { getFetchGamesList } from '../../redux/thunk/getGame';
-// import ListGameRadio from '../ListGameRadio/ListGameRadio';
+import ListGameRadio from '../ListGameRadio/ListGameRadio';
 import { addNewPostFetch } from '../../redux/thunk/posts';
 
 function FindForm(props) {
   const { handleClose, open } = props;
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // const { games } = useSelector((state) => state.gamesListReducer);
+  const { games } = useSelector((state) => state.gamesListReducer);
   const { user } = useSelector((state) => state.userReducer);
 
   useEffect(() => {
@@ -55,6 +58,9 @@ function FindForm(props) {
           type="text"
           fullWidth
         />
+        {games.map((game) => {
+          return <ListGameRadio key={game.id} game={game} />;
+        })}
       </DialogContent>
       <DialogActions>
         <Button onClick={sendFormPost} color="primary">
