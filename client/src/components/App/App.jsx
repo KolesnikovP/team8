@@ -1,8 +1,10 @@
+/* eslint-disable import/no-named-as-default-member */
+/* eslint-disable import/no-named-as-default */
 /* eslint-disable no-unused-vars */
-import { Provider, useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { useEffect } from 'react';
-import Nav from '../Nav/Nav';
+import { useEffect, useState } from 'react';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 import Login from '../Login/Login';
 import FindForm from '../FindForm/FindForm';
 import Footer from '../Footer/Footer';
@@ -11,27 +13,50 @@ import AccessForm from '../AccessForm/AccessForm';
 import { fetchUser } from '../../redux/thunk/user';
 import Profile from '../Profile/Profile';
 import PostList from '../PostList/PostList';
-import { store } from '../../store';
+import MainPage from '../MainPage/MainPage';
+import Navbar from '../Nav/Navbar';
 
 function App() {
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(fetchUser());
   }, [dispatch]);
   const { user } = useSelector((state) => state.userReducer);
+
+  const darkTheme = createTheme({
+    palette: {
+      mode: 'dark',
+    },
+  });
+  const [open, setOpen] = useState(false);
+  const handelClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
   return (
     <BrowserRouter>
-      <Nav className={style.Nav} />
-      <body>
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/addPost" element={<FindForm />} />
-          <Route path="/accessForm" element={<AccessForm />} />
-          <Route path="/profile" element={<Profile user={user} />} />
-          <Route path="/" element={<PostList />} />
-        </Routes>
-      </body>
-      <Footer className={style.Footer} />
+      <ThemeProvider theme={darkTheme}>
+        <Navbar className={style.Nav} />
+        <body>
+          <div className={style.main}>
+            <Routes>
+              <Route path="/" element={<MainPage />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/postList" element={user ? <PostList /> : <MainPage />} />
+              <Route
+                path="/addPost"
+                element={user ? <FindForm handleClose={handleClose} open={open} /> : <MainPage />}
+              />
+              <Route path="/accessForm" element={user ? <AccessForm /> : <MainPage />} />
+              <Route path="/profile" element={user ? <Profile /> : <MainPage />} />
+            </Routes>
+          </div>
+        </body>
+        <Footer />
+      </ThemeProvider>
     </BrowserRouter>
   );
 }

@@ -46,6 +46,7 @@ const UserCreatePost = sequelize.define('userCreatePost', {
   // user_id: { type: DataTypes.INTEGER },
   description: { type: DataTypes.TEXT },
   userRank: { type: DataTypes.TEXT },
+  userHours: { type: DataTypes.TEXT },
   userSteamAvatar: { type: DataTypes.TEXT },
   status: { type: DataTypes.BOOLEAN },
 });
@@ -72,6 +73,7 @@ UserCreatePost.belongsTo(User);
 
 Game.hasMany(UserCreatePost);
 UserCreatePost.belongsTo(Game);
+
 
 module.exports = {
   User,

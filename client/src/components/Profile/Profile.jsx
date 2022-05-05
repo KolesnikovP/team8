@@ -2,6 +2,7 @@
 /* eslint-disable prettier/prettier */
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import Button from '@mui/material/Button';
 import { fetchUserGames } from '../../redux/thunk/user';
 import { setUserDescribe } from '../../redux/thunk/userProfile';
 import style from './Profile.module.css';
@@ -36,14 +37,14 @@ function Profile() {
            :
           <div className={style.textarea__block}> 
           <textarea className={style.textarea} onChange={(e)=>settextAriaValue(e.target.value)} defaultValue={user.description || '' }/>
-          <button type="button" onClick={changeDesc}>Изменить</button>
+          <Button type="Button" onClick={()=>changeDesc()}>Изменить</Button>
           </div>
           }
         </div>
         <div className={style.buttons__block}>
-          <button type="button" onClick={openSteam}>Открыть профиль в стиме</button>
+          <Button type="Button" onClick={()=>openSteam}>Открыть профиль в стиме</Button>
           {hidden ? 
-          <button type="button" onClick={()=>setHidden(!hidden)}>Редактировать описание профиля</button>
+          <Button type="Button" onClick={()=>setHidden(!hidden)}>Редактировать описание профиля</Button>
            :
           ''
           }

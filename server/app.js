@@ -8,7 +8,6 @@ const PORT = process.env.PORT || 3000;
 const app = express();
 const Router = require('./router/router');
 const authRoute = require("./router/auth");
-const { Game, Statistic } = require('./models/models');
 const sequelize = require('./db');
 
 app.use(
