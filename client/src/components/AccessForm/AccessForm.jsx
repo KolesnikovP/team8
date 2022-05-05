@@ -92,15 +92,15 @@ function AccessForm() {
           </Typography>
           <Typography>Кликните на ник справа вверху.</Typography>
           <Typography>Жмите на кнопку «Открыть профиль»</Typography>
-          <Box>
+          <Box sx={{ marginTop: '2rem' }}>
             <img src="/img/profileSet/1.jpeg" alt="SettingsProfile" />
           </Box>
           <Typography>Кликните на кнопку «Редактировать …» с правой стороны.</Typography>
-          <Box>
+          <Box sx={{ marginTop: '2rem' }}>
             <img src="/img/profileSet/2.jpeg" alt="SettingsProfile" />
           </Box>
           <Typography>В левом меню выберите пункт «Приватность».</Typography>
-          <Box>
+          <Box sx={{ marginTop: '2rem' }}>
             <img src="/img/profileSet/3.jpeg" alt="SettingsProfile" />
           </Box>
           <Typography>
