@@ -16,8 +16,10 @@ export default function Footer() {
         <Container maxWidth="lg">
           <Grid container spacing={5}>
             <Grid item xs={12} sm={4}>
-              <Box borderBottom={1}>Fullstack js developer Alexey (TeamLead)</Box>
-              <Box>
+              <Box textAlign="center" borderBottom={1}>
+                Fullstack js developer Alexey (TeamLead)
+              </Box>
+              <Box textAlign="center">
                 <LinkMui href="/" color="inherit">
                   <GitHubIcon />
                 </LinkMui>
@@ -30,8 +32,10 @@ export default function Footer() {
               </Box>
             </Grid>
             <Grid item xs={12} sm={4}>
-              <Box borderBottom={1}>Fullstack js developer Daniil</Box>
-              <Box>
+              <Box textAlign="center" borderBottom={1}>
+                Fullstack js developer Daniil
+              </Box>
+              <Box textAlign="center">
                 <LinkMui href="/" color="inherit">
                   <GitHubIcon />
                 </LinkMui>
@@ -44,8 +48,10 @@ export default function Footer() {
               </Box>
             </Grid>
             <Grid item xs={12} sm={4}>
-              <Box borderBottom={1}>Fullstack js developer Ilya</Box>
-              <Box>
+              <Box textAlign="center" borderBottom={1}>
+                Fullstack js developer Ilya
+              </Box>
+              <Box textAlign="center">
                 <LinkMui href="/" color="inherit">
                   <GitHubIcon />
                 </LinkMui>
