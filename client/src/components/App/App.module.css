@@ -1,5 +1,5 @@
-* {
-  /* background: url(../../../../../team8/client/public/img/backgroundPng/cs1.png); */
+/* * {
+  background: url(../../../../../team8/client/public/img/backgroundPng/cs1.png);
   background-blend-mode:overlay;
   background-position: center center; 
   background-repeat: no-repeat;
@@ -7,8 +7,11 @@
   background-size: cover;
   margin: 0;
   padding: 0;
-}
+} */
 
+body {
+  min-height: 100vh;
+}
 
 
 .main {
