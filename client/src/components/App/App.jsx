@@ -15,6 +15,7 @@ import Profile from '../Profile/Profile';
 import PostList from '../PostList/PostList';
 import MainPage from '../MainPage/MainPage';
 import Navbar from '../Nav/Navbar';
+import MainAuth from '../MainAuth/MainAuth';
 
 function App() {
   const dispatch = useDispatch();
@@ -44,6 +45,7 @@ function App() {
           <div className={style.main}>
             <Routes>
               <Route path="/" element={<MainPage />} />
+              <Route path="/main" element={<MainAuth />} />
               <Route path="/login" element={<Login />} />
               <Route path="/postList" element={user ? <PostList /> : <MainPage />} />
               {/* <Route
