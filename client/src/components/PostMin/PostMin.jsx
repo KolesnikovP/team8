@@ -18,8 +18,8 @@ function PostMin({ post }) {
     >
       <Grid item xs={1}>
         <Box sx={{ alignItems: 'center', display: 'flex' }}>
+          <Avatar src={post.userSteamAvatar} alt="userAvatar" sx={{ marginRight: '1rem' }} />
           {post.author}
-          <Avatar src={post.userSteamAvatar} alt="userAvatar" />
         </Box>
       </Grid>
       <Grid item xs={3}>
@@ -28,18 +28,19 @@ function PostMin({ post }) {
         </Typography>
       </Grid>
       <Grid item xs={2}>
-        {/* <img
+        <img
           src={`https://cdn.cloudflare.steamstatic.com/steam/apps/${post.gameAppId}/header.jpg?t=1650992920`}
           alt={`appIcon_${post.gameName}`}
-          className={style.gameImg}
-        /> */}
-
-        <Typography color="#b8860b">{post.gameName}</Typography>
+          width="100px"
+        />
+        {/* <Typography color="#b8860b" sx={{ textAlign: 'center' }}> */}
+        {/* {post.gameName}
+        </Typography> */}
       </Grid>
       <Grid item xs={2}>
-        <span>{post.userHours}</span>
+        <Typography>{post.userHours}</Typography>
       </Grid>
-      <Grid item xs={3}>
+      <Grid item xs={2}>
         <Box sx={{ alignItems: 'center', display: 'flex' }}>
           <IconButton>
             <MailOutlineIcon color="primary" />
@@ -51,6 +52,9 @@ function PostMin({ post }) {
             <PersonAddIcon color="primary" />
           </IconButton>
         </Box>
+      </Grid>
+      <Grid item xs={1}>
+        <Typography>{post.createdAt.slice(0, post.createdAt.length - 14)}</Typography>
       </Grid>
     </Grid>
   );

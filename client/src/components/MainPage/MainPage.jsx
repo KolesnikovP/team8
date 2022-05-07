@@ -77,7 +77,7 @@ function MainPage() {
                 sx={{ marginLeft: '1rem' }}
                 onClick={() => navigate('/login')}
               >
-                Давайте же начнем
+                Давайте начнем
               </Button>
             </Box>
           </>
