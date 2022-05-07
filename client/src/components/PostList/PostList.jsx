@@ -16,23 +16,29 @@ function PostList() {
     dispatch(getFetchGamesList());
   }, [dispatch]);
 
+  const [sortedPosts, setSortedPosts] = useState('');
   const { posts } = useSelector((state) => state.postsReducer);
+  useEffect(() => {
+    setSortedPosts(posts);
+  }, [posts]);
+  // console.log(sortedPosts);
+
   const { games } = useSelector((state) => state.gamesListReducer);
   const options = [];
   games.map((game) => options.push(game.gameSteamName));
   const [value, setValue] = useState(null);
   const [inputValue, setInputValue] = useState('');
 
-  let postsDouble = [...posts];
-  function sortPost(method) {
-    if (method === '' || method === null) {
-      console.log(postsDouble);
+  useEffect(() => {
+    if (value === '' || value === null) {
+      setSortedPosts(posts);
       // postsDouble = [...posts];
     } else {
-      console.log(postsDouble.filter((a) => a.gameName === method));
+      setSortedPosts(posts.filter((a) => a.gameName === value));
       // postsDouble = postsDouble.filter((a) => a.gameName === method);
     }
-  }
+  }, [value]);
+
   return (
     <Container sx={{ marginTop: '2rem' }}>
       <Autocomplete
@@ -43,7 +49,6 @@ function PostList() {
         inputValue={inputValue}
         onInputChange={(event, newInputValue) => {
           setInputValue(newInputValue);
-          sortPost(newInputValue);
         }}
         options={options}
         sx={{ width: 300 }}
@@ -70,9 +75,7 @@ function PostList() {
           <Typography>Взаимодействие</Typography>
         </Grid>
       </Grid>
-      {postsDouble.map((post) => (
-        <PostMin key={post.id} post={post} />
-      ))}
+      {sortedPosts?.length && sortedPosts?.map((post) => <PostMin key={post.id} post={post} />)}
     </Container>
   );
 }
