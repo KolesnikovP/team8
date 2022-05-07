@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Button from '@mui/material/Button';
-import { Avatar, Box, TextareaAutosize, Typography } from '@mui/material';
+import { Avatar, Box, Container, TextareaAutosize, Typography } from '@mui/material';
 import { fetchUserGames } from '../../redux/thunk/user';
 import { setUserDescribe } from '../../redux/thunk/userProfile';
 
@@ -24,8 +24,9 @@ function Profile() {
     setHidden(!hidden)
   }
   return (
-    <Box>
-      <Typography variant="h3" color="primary">{user.steamNickname}</Typography>
+    <Container>
+    <Box sx={{marginTop: '2rem'}}>
+      <Typography variant="h3" color="primary" sx={{textAlign: 'center'}}>{user.steamNickname}</Typography>
       <Box sx={{display:'flex', justifyContent: 'space-around', marginTop:'2rem', border: '1px solid #90caf9', padding: '2rem', borderRadius: '1rem'}}>
         <Avatar 
         src={user.steamAvatar} 
@@ -87,6 +88,7 @@ function Profile() {
       <Typography variant="h3">Comments block soon...</Typography>
     </Box>
     </Box>
+    </Container>
   );
 }
 

@@ -39,23 +39,19 @@ function App() {
   return (
     <BrowserRouter>
       <ThemeProvider theme={darkTheme}>
-        <Navbar className={style.Nav} handelClickOpen={handelClickOpen} />
-        <body>
-          <div className={style.main}>
-            <Routes>
-              <Route path="/" element={<MainPage />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/postList" element={user ? <PostList /> : <MainPage />} />
-              {/* <Route
+        <Navbar handelClickOpen={handelClickOpen} />
+        <Routes>
+          <Route path="/" element={<MainPage />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/postList" element={user ? <PostList /> : <MainPage />} />
+          {/* <Route
                 path="/addPost"
                 element={user ? <FindForm handleClose={handleClose} open={open} /> : <MainPage />}
               /> */}
-              <Route path="/accessForm" element={user ? <AccessForm /> : <MainPage />} />
-              <Route path="/profile" element={user ? <Profile /> : <MainPage />} />
-            </Routes>
-            <FindForm handleClose={handleClose} open={open} />
-          </div>
-        </body>
+          <Route path="/accessForm" element={user ? <AccessForm /> : <MainPage />} />
+          <Route path="/profile" element={user ? <Profile /> : <MainPage />} />
+        </Routes>
+        <FindForm handleClose={handleClose} open={open} />
         <Footer />
       </ThemeProvider>
     </BrowserRouter>
