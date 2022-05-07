@@ -43,7 +43,7 @@ function App() {
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/postList" element={user ? <PostList /> : <MainPage />} />
+          <Route path="/postList" element={user.id ? <PostList /> : <MainPage />} />
           {/* <Route
                 path="/addPost"
                 element={user ? <FindForm handleClose={handleClose} open={open} /> : <MainPage />}
