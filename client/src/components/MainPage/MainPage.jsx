@@ -40,7 +40,7 @@ function MainPage() {
         interval={5000}
       >
         {images.map((step, index) => (
-          <div key={step.label}>
+          <div key={Math.random()}>
             {Math.abs(activeStep - index) <= 2 ? (
               <Box
                 component="img"
