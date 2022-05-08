@@ -67,17 +67,20 @@ function FindForm(props) {
         userSteamAvatar: user.steamAvatar,
       };
       dispatch(addNewPostFetch(post));
+      modalClose();
+      setHelperText('Заявка успешно создана!');
+      setTimeout(() => handleClose(modalClose()), 1000)
     },
     [description, radioValue]
   );
 
   return (
-    <Dialog open={open} onClose={() => { handleClose(); modalClose() }} aria-labelledby="find-teammate-dialog" >
+    <Dialog open={open} onClose={() => { handleClose(); modalClose() }} aria-labelledby="find-teammate-dialog" fullWidth>
       <DialogTitle id="form-dialog-title">Поиск напарников</DialogTitle>
       <DialogContent>
         <Typography>{helperText}</Typography>
         <Box className="radio-form" component="div">
-          <RadioGroup row value={radioValue} onChange={changeRadioValue}>
+          <RadioGroup row value={radioValue} onClick={changeRadioValue}>
             {games.map((game) => {
               return <ListGameRadio key={game.id} game={game} setHelperText={setHelperText} />;
             })}

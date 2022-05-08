@@ -1,5 +1,6 @@
 import { initUserAction } from '../reducers/userReducer';
 import { setProfileGames } from '../reducers/profileReducer';
+import { getUsersListAC } from '../reducers/usersListReducer';
 
 export const fetchUser = () => {
   return function (dispatch) {
@@ -38,5 +39,14 @@ export const fetchUserGames = (id) => {
       .then((res) => {
         dispatch(setProfileGames(res));
       });
+  };
+};
+
+export const getfetchUsersList = () => {
+  return (dispatch) => {
+    fetch('http://localhost:4000/api/initUsers')
+      .then((response) => response.json())
+      .then((data) => dispatch(getUsersListAC(data)))
+      .catch((err) => console.log(err));
   };
 };
