@@ -42,24 +42,16 @@ function App() {
     <BrowserRouter>
       <ThemeProvider theme={darkTheme}>
         <Navbar className={style.Nav} handelClickOpen={handelClickOpen} />
-        <body>
-          <div className={style.main}>
-            <Routes>
-              <Route path="/" element={<MainPage />} />
-              <Route path="/main" element={<MainAuth />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/postList" element={user ? <PostList /> : <MainPage />} />
-              <Route path="/accessForm" element={user?.id ? <AccessForm /> : <MainPage />} />
-              <Route exact path="/profile" element={user?.id ? <Profile /> : <MainPage />} />
-              <Route
-                exact
-                path="/profile/:id"
-                element={user?.id ? <LocalProfile /> : <MainPage />}
-              />
-            </Routes>
-            <FindForm handleClose={handleClose} open={open} />
-          </div>
-        </body>
+        <Routes>
+          <Route path="/" element={user?.id ? <MainAuth /> : <MainPage />} />
+          {/* <Route path="/main" element={<MainAuth />} /> */}
+          <Route path="/login" element={<Login />} />
+          <Route path="/postList" element={user?.id ? <PostList /> : <MainPage />} />
+          <Route path="/accessForm" element={user?.id ? <AccessForm /> : <MainPage />} />
+          <Route exact path="/profile" element={user?.id ? <Profile /> : <MainPage />} />
+          <Route exact path="/profile/:id" element={user?.id ? <LocalProfile /> : <MainPage />} />
+        </Routes>
+        <FindForm handleClose={handleClose} open={open} />
         <Footer />
       </ThemeProvider>
     </BrowserRouter>
