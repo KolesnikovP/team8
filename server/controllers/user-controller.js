@@ -1,6 +1,6 @@
 const fetch = require('cross-fetch');
 const e = require('express');
-const { Game, Statistic, User } = require('../models/models');
+const { Game, Statistic, User,UserCreatePost } = require('../models/models');
 
 class UserController {
 
@@ -30,8 +30,24 @@ class UserController {
     req.logout();
     res.redirect(process.env.CLIENT_URL);
   }
-  async authFailed(req, res, next) {
-
+  async getInfo(req, res, next) {
+    const {id} = req.body
+    try{
+      const response = []
+      const userInfo = await User.findOne({where:{
+        steamId: id
+      }})
+      const userStats = await Statistic.findAll({where:{
+        steamId: id
+      }}) 
+      const userPosts = await UserCreatePost.findAll({where:{
+        userId: userInfo.id
+      }}) 
+      response.push(userInfo,userStats,userPosts)
+      res.status(200).json({response})
+    }catch(e){
+      console.log(e)
+    }
   }
   async validateProfile(req, res, next) {
     if (req.body.id) {

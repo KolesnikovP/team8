@@ -16,6 +16,7 @@ import PostList from '../PostList/PostList';
 import MainPage from '../MainPage/MainPage';
 import Navbar from '../Nav/Navbar';
 import MainAuth from '../MainAuth/MainAuth';
+import LocalProfile from '../LocalProfile/LocalProfile';
 
 function App() {
   const dispatch = useDispatch();
@@ -48,16 +49,11 @@ function App() {
               <Route path="/main" element={<MainAuth />} />
               <Route path="/login" element={<Login />} />
               <Route path="/postList" element={user ? <PostList /> : <MainPage />} />
-              {/* <Route
-                path="/addPost"
-                element={user ? <FindForm handleClose={handleClose} open={open} /> : <MainPage />}
-              /> */}
-              <Route path="/accessForm" element={user ? <AccessForm /> : <MainPage />} />
-              <Route path="/profile" element={user ? <Profile /> : <MainPage />} />
-            </Routes>
-            <FindForm handleClose={handleClose} open={open} />
-          </div>
-        </body>
+          <Route path="/accessForm" element={user?.id ? <AccessForm /> : <MainPage />} />
+          <Route exact path="/profile" element={user?.id ? <Profile /> : <MainPage />} />
+          <Route exact path="/profile/:id" element={user?.id ? <LocalProfile /> : <MainPage />} />
+        </Routes>
+        <FindForm handleClose={handleClose} open={open} />
         <Footer />
       </ThemeProvider>
     </BrowserRouter>
