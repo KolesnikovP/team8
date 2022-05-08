@@ -49,11 +49,17 @@ function App() {
               <Route path="/main" element={<MainAuth />} />
               <Route path="/login" element={<Login />} />
               <Route path="/postList" element={user ? <PostList /> : <MainPage />} />
-          <Route path="/accessForm" element={user?.id ? <AccessForm /> : <MainPage />} />
-          <Route exact path="/profile" element={user?.id ? <Profile /> : <MainPage />} />
-          <Route exact path="/profile/:id" element={user?.id ? <LocalProfile /> : <MainPage />} />
-        </Routes>
-        <FindForm handleClose={handleClose} open={open} />
+              <Route path="/accessForm" element={user?.id ? <AccessForm /> : <MainPage />} />
+              <Route exact path="/profile" element={user?.id ? <Profile /> : <MainPage />} />
+              <Route
+                exact
+                path="/profile/:id"
+                element={user?.id ? <LocalProfile /> : <MainPage />}
+              />
+            </Routes>
+            <FindForm handleClose={handleClose} open={open} />
+          </div>
+        </body>
         <Footer />
       </ThemeProvider>
     </BrowserRouter>
