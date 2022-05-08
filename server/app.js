@@ -29,7 +29,6 @@ app.use(
 
 app.use('/api', Router);
 app.use('/auth', authRoute);
-
 const start = async () => {
   try {
     await sequelize.authenticate();

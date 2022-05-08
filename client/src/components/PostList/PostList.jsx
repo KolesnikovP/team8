@@ -60,22 +60,9 @@ function PostList() {
 
   return (
     <Container sx={{ marginTop: '2rem' }}>
-      <Box sx={{ marginBottom: '2rem' }}>
-        <Autocomplete
-          value={value}
-          onChange={(event, newValue) => {
-            setValue(newValue);
-          }}
-          inputValue={inputValue}
-          onInputChange={(event, newInputValue) => {
-            setInputValue(newInputValue);
-          }}
-          options={options}
-          sx={{ width: 300 }}
-          // eslint-disable-next-line react/jsx-props-no-spreading
-          renderInput={(params) => <TextField {...params} label="Все игры" />}
-        />
-      </Box>
+      {/* <Box sx={{ marginBottom: '2rem' }}>
+        
+      </Box> */}
       <Grid container spacing={2}>
         <Grid item xs={2}>
           <Typography sx={{ textAlign: 'left' }}>Игрок</Typography>
@@ -84,11 +71,32 @@ function PostList() {
           <Typography sx={{ textAlign: 'left' }}>Описание</Typography>
         </Grid>
         <Grid item xs={2}>
-          <Typography sx={{ textAlign: 'left' }}>Игра</Typography>
+          {
+            /* <Typography sx={{ textAlign: 'left' }}>Игра</Typography> */
+            <Autocomplete
+              value={value}
+              onChange={(event, newValue) => {
+                setValue(newValue);
+              }}
+              inputValue={inputValue}
+              onInputChange={(event, newInputValue) => {
+                setInputValue(newInputValue);
+              }}
+              options={options}
+              sx={{ width: 150 }}
+              // eslint-disable-next-line react/jsx-props-no-spreading
+              renderInput={(params) => <TextField {...params} label="Все игры" />}
+            />
+          }
         </Grid>
         <Grid item xs={2}>
           <Typography sx={{ textAlign: 'left' }}>Кол-во часов</Typography>
-          <ToggleButtonGroup value={alignment} exclusive onChange={handleAlignment}>
+          <ToggleButtonGroup
+            value={alignment}
+            exclusive
+            onChange={handleAlignment}
+            sx={{ height: '20px' }}
+          >
             <ToggleButton value="asc">
               <KeyboardArrowUpIcon />
             </ToggleButton>
