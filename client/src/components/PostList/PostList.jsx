@@ -46,15 +46,27 @@ function PostList() {
     }
   }, [value]);
 
-  const [alignment, setAlignment] = React.useState('');
+  const [hoursValue, setHoursValue] = React.useState('');
 
-  const handleAlignment = (event, newAlignment) => {
-    if (newAlignment === 'asc') {
+  const handleSortHours = (event, methodSort) => {
+    if (methodSort === 'asc') {
       setSortedPosts([...sortedPosts].sort((a, b) => b.userHours - a.userHours));
-      setAlignment(newAlignment);
+      setHoursValue(methodSort);
     } else {
       setSortedPosts([...sortedPosts].sort((a, b) => a.userHours - b.userHours));
-      setAlignment(newAlignment);
+      setHoursValue(methodSort);
+    }
+  };
+
+  const [createdValue, setCreatedValue] = React.useState('');
+
+  const handleSortCreated = (event, methodSort) => {
+    if (methodSort === 'asc') {
+      setSortedPosts([...sortedPosts].sort((a, b) => b.createdAt.localeCompare(a.createdAt)));
+      setCreatedValue(methodSort);
+    } else {
+      setSortedPosts([...sortedPosts].sort((a, b) => a.createdAt.localeCompare(b.createdAt)));
+      setCreatedValue(methodSort);
     }
   };
 
@@ -92,9 +104,9 @@ function PostList() {
         <Grid item xs={2}>
           <Typography sx={{ textAlign: 'left' }}>Кол-во часов</Typography>
           <ToggleButtonGroup
-            value={alignment}
+            value={hoursValue}
             exclusive
-            onChange={handleAlignment}
+            onChange={handleSortHours}
             sx={{ height: '20px' }}
           >
             <ToggleButton value="asc">
@@ -110,6 +122,19 @@ function PostList() {
         </Grid>
         <Grid item xs={2}>
           <Typography sx={{ textAlign: 'left' }}>Дата создания</Typography>
+          <ToggleButtonGroup
+            value={createdValue}
+            exclusive
+            onChange={handleSortCreated}
+            sx={{ height: '20px' }}
+          >
+            <ToggleButton value="asc">
+              <KeyboardArrowUpIcon />
+            </ToggleButton>
+            <ToggleButton value="down">
+              <KeyboardArrowDownIcon />
+            </ToggleButton>
+          </ToggleButtonGroup>
         </Grid>
       </Grid>
       <Box sx={{ marginBottom: '2rem' }}>
