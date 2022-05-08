@@ -24,6 +24,7 @@ class PostController {
           id: post.id,
           gameName,
           author,
+          authorId: user.steamId,
           gameAppId: game.gameSteamId,
           userHours: post.userHours,
           description: post.description,
