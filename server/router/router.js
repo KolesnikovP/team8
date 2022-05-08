@@ -5,6 +5,7 @@ const userController = require('../controllers/user-controller');
 
 Router.get('/initGames', SteamGamesController.getListGames);
 Router.post('/validateProfile', userController.validateProfile);
+Router.post('/getInfo', userController.getInfo);
 Router.get('/initPosts', postController.getPostsList);
 Router.post('/addPost', postController.addPost);
 Router.post('/userGames', userController.userGames);

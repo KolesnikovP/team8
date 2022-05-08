@@ -6,10 +6,12 @@ import PersonAddIcon from '@mui/icons-material/PersonAdd';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Box } from '@mui/system';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 // import { useSelector } from 'react-redux';
 // import style from './PostMin.module.css';
 
 function PostMin({ post }) {
+  const navigate = useNavigate();
   return (
     <Grid
       container
@@ -45,7 +47,7 @@ function PostMin({ post }) {
           <IconButton>
             <MailOutlineIcon color="primary" />
           </IconButton>
-          <IconButton>
+          <IconButton onClick={() => navigate(`/profile/${post.authorId}`)}>
             <AssignmentIndIcon color="primary" />
           </IconButton>
           <IconButton>

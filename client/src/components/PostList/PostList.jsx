@@ -46,36 +46,35 @@ function PostList() {
     }
   }, [value]);
 
-  const [alignment, setAlignment] = React.useState('');
+  const [hoursValue, setHoursValue] = React.useState('');
 
-  const handleAlignment = (event, newAlignment) => {
-    if (newAlignment === 'asc') {
+  const handleSortHours = (event, methodSort) => {
+    if (methodSort === 'asc') {
       setSortedPosts([...sortedPosts].sort((a, b) => b.userHours - a.userHours));
-      setAlignment(newAlignment);
+      setHoursValue(methodSort);
     } else {
       setSortedPosts([...sortedPosts].sort((a, b) => a.userHours - b.userHours));
-      setAlignment(newAlignment);
+      setHoursValue(methodSort);
+    }
+  };
+
+  const [createdValue, setCreatedValue] = React.useState('');
+
+  const handleSortCreated = (event, methodSort) => {
+    if (methodSort === 'asc') {
+      setSortedPosts([...sortedPosts].sort((a, b) => b.createdAt.localeCompare(a.createdAt)));
+      setCreatedValue(methodSort);
+    } else {
+      setSortedPosts([...sortedPosts].sort((a, b) => a.createdAt.localeCompare(b.createdAt)));
+      setCreatedValue(methodSort);
     }
   };
 
   return (
     <Container sx={{ marginTop: '2rem' }}>
-      <Box sx={{ marginBottom: '2rem' }}>
-        <Autocomplete
-          value={value}
-          onChange={(event, newValue) => {
-            setValue(newValue);
-          }}
-          inputValue={inputValue}
-          onInputChange={(event, newInputValue) => {
-            setInputValue(newInputValue);
-          }}
-          options={options}
-          sx={{ width: 300 }}
-          // eslint-disable-next-line react/jsx-props-no-spreading
-          renderInput={(params) => <TextField {...params} label="Все игры" />}
-        />
-      </Box>
+      {/* <Box sx={{ marginBottom: '2rem' }}>
+        
+      </Box> */}
       <Grid container spacing={2}>
         <Grid item xs={2}>
           <Typography sx={{ textAlign: 'left' }}>Игрок</Typography>
@@ -84,11 +83,32 @@ function PostList() {
           <Typography sx={{ textAlign: 'left' }}>Описание</Typography>
         </Grid>
         <Grid item xs={2}>
-          <Typography sx={{ textAlign: 'left' }}>Игра</Typography>
+          {
+            /* <Typography sx={{ textAlign: 'left' }}>Игра</Typography> */
+            <Autocomplete
+              value={value}
+              onChange={(event, newValue) => {
+                setValue(newValue);
+              }}
+              inputValue={inputValue}
+              onInputChange={(event, newInputValue) => {
+                setInputValue(newInputValue);
+              }}
+              options={options}
+              sx={{ width: 150 }}
+              // eslint-disable-next-line react/jsx-props-no-spreading
+              renderInput={(params) => <TextField {...params} label="Все игры" />}
+            />
+          }
         </Grid>
         <Grid item xs={2}>
           <Typography sx={{ textAlign: 'left' }}>Кол-во часов</Typography>
-          <ToggleButtonGroup value={alignment} exclusive onChange={handleAlignment}>
+          <ToggleButtonGroup
+            value={hoursValue}
+            exclusive
+            onChange={handleSortHours}
+            sx={{ height: '20px' }}
+          >
             <ToggleButton value="asc">
               <KeyboardArrowUpIcon />
             </ToggleButton>
@@ -102,6 +122,19 @@ function PostList() {
         </Grid>
         <Grid item xs={2}>
           <Typography sx={{ textAlign: 'left' }}>Дата создания</Typography>
+          <ToggleButtonGroup
+            value={createdValue}
+            exclusive
+            onChange={handleSortCreated}
+            sx={{ height: '20px' }}
+          >
+            <ToggleButton value="asc">
+              <KeyboardArrowUpIcon />
+            </ToggleButton>
+            <ToggleButton value="down">
+              <KeyboardArrowDownIcon />
+            </ToggleButton>
+          </ToggleButtonGroup>
         </Grid>
       </Grid>
       <Box sx={{ marginBottom: '2rem' }}>
