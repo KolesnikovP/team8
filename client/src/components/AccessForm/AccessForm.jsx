@@ -59,17 +59,18 @@ function AccessForm() {
               : 'К сожалению в вашем аккаунте мы не нашли подходящих игр ('}
           </Typography>
           <Box sx={{ display: 'flex', justifyContent: 'space-around', marginTop: '1rem' }}>
-            {profGames.map((game) => (
-              <Box>
-                <img
-                  src={`https://cdn.cloudflare.steamstatic.com/steam/apps/${game.gameSteamId}/header.jpg?t=1650992920`}
-                  alt={`appIcon_${game.gameSteamId}`}
-                  width="80%"
-                  key={Date.now()}
-                />
-                <Typography>Количество часов: {game.userGameHours}</Typography>
-              </Box>
-            ))}
+            {profGames?.length &&
+              profGames?.map((game) => (
+                <Box>
+                  <img
+                    src={`https://cdn.cloudflare.steamstatic.com/steam/apps/${game.gameSteamId}/header.jpg?t=1650992920`}
+                    alt={`appIcon_${game.gameSteamId}`}
+                    width="80%"
+                    key={Date.now()}
+                  />
+                  <Typography>Количество часов: {game.userGameHours}</Typography>
+                </Box>
+              ))}
           </Box>
           <Button
             type="Button"

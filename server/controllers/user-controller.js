@@ -57,7 +57,7 @@ class UserController {
         }
       })
       if (validate.length) {
-        res.json(validate)
+        res.status(201).json(validate)
       }
       if (validate.length === 0) {
         const response = await fetch(
@@ -82,10 +82,10 @@ class UserController {
           })
         })
         if (resArray.length === 0) {
-          res.json({ message: 'Games not found' })
+          res.status(404).json({ message: 'Games not found' })
         }
         else {
-          res.json(resArray)
+          res.status(200).json(resArray)
         }
       }
     }
