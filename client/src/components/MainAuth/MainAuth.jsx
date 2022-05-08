@@ -24,7 +24,14 @@ function MainAuth() {
   const { usersList } = useSelector((state) => state.usersListReducer);
 
   const [openModal, setOpenModal] = useState(false);
-  const [userId, setUserId] = useState(0);
+  const [userState, setUserState] = useState({
+    id: 0,
+    description: '',
+    steamId: '',
+    steamNickname: '',
+    steamProfileLink: '',
+    steamAvatar: '',
+  });
 
   const handleOpen = useCallback(() => {
     setOpenModal(true);
@@ -49,19 +56,14 @@ function MainAuth() {
                   key={user.id}
                   user={user}
                   handleOpen={handleOpen}
-                  setUserId={setUserId}
+                  setUserState={setUserState}
                 />
               ))}
             </List>
           </Grid>
         </Grid>
       </Container>
-      <UserCardModal
-        usersList={usersList}
-        openModal={openModal}
-        setOpenModal={setOpenModal}
-        userId={userId}
-      />
+      <UserCardModal openModal={openModal} setOpenModal={setOpenModal} user={userState} />
     </>
   );
 }

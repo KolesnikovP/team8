@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import {
   ListItem,
   ListItemText,
@@ -14,7 +14,7 @@ import {
 import GroupAddOutlinedIcon from '@mui/icons-material/GroupAddOutlined';
 
 export default function UsersListItem(props) {
-  const { user, handleOpen, setUserId } = props;
+  const { user, handleOpen, setUserState } = props;
   const [randomRank, setRandomRank] = useState(1);
   const [rankColor, setRankColor] = useState('default');
 
@@ -28,6 +28,11 @@ export default function UsersListItem(props) {
       setRankColor('error');
     }
   }, [randomRank]);
+
+  const updateUserState = useCallback(() => {
+    setUserState(user);
+  });
+
   return (
     <ListItem
       alignItems="flex-start"
@@ -54,7 +59,7 @@ export default function UsersListItem(props) {
         divider
         onClick={() => {
           handleOpen();
-          setUserId(user.id);
+          updateUserState();
         }}
       >
         <ListItemAvatar>
