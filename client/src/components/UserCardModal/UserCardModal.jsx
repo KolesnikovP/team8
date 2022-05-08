@@ -1,6 +1,13 @@
 /* eslint-disable no-shadow */
 /* eslint-disable react/prop-types */
-import { Dialog, DialogContent, Button, DialogActions, DialogContentText } from '@mui/material';
+import {
+  Dialog,
+  DialogContent,
+  Button,
+  DialogActions,
+  DialogContentText,
+  Avatar,
+} from '@mui/material';
 import React, { useCallback } from 'react';
 
 function UserCardModal(props) {
@@ -14,6 +21,12 @@ function UserCardModal(props) {
   return (
     <Dialog open={openModal} onClose={handleClose} fullWidth>
       <DialogContent>
+        <Avatar
+          alt={`${user.steamNickname}'s avatar`}
+          src={user.steamAvatar}
+          sx={{ height: '7rem', width: '7rem' }}
+          variant="rounded"
+        />
         <DialogContentText>{user.description}</DialogContentText>
       </DialogContent>
       <DialogActions>
