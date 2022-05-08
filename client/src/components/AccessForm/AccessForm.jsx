@@ -29,7 +29,7 @@ function AccessForm() {
     window.open(`${user.steamProfileLink}edit/settings`);
   }
   return (
-    <Container>
+    <Container sx={{ marginTop: '2rem', textAlign: 'center', height: '100vh' }}>
       <Typography variant="h4">
         Добро пожаловать на
         <Typography component="span" variant="h4" sx={{ marginLeft: '1rem' }}>

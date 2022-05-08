@@ -15,7 +15,6 @@ export default function Navbar({ handelClickOpen }) {
   const navigate = useNavigate();
   const steam = () => {
     navigate('/login');
-    window.open('http://localhost:4000/auth/steam', '_self');
   };
   const logout = () => {
     window.open('http://localhost:4000/auth/logout', '_self');
@@ -58,6 +57,12 @@ export default function Navbar({ handelClickOpen }) {
         ) : (
           <MenuItem variant="h6" component="div" onClick={steam}>
             Войти
+            <img
+              src="./img/steamlogo.png"
+              alt="logoSteam"
+              height="30px"
+              style={{ marginLeft: '1rem' }}
+            />
           </MenuItem>
         )}
         {user.id && (

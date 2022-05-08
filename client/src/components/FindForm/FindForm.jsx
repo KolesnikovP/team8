@@ -67,6 +67,8 @@ function FindForm(props) {
         userSteamAvatar: user.steamAvatar,
       };
       dispatch(addNewPostFetch(post));
+      modalClose()
+      handleClose()
     },
     [description, radioValue]
   );
