@@ -8,7 +8,7 @@ const User = sequelize.define('user', {
   steamNickname: { type: DataTypes.TEXT, unique: true },
   steamProfileLink: { type: DataTypes.TEXT, unique: true },
   steamAvatar: { type: DataTypes.TEXT },
-  description: { type: DataTypes.STRING },
+  description: { type: DataTypes.TEXT },
   // activationLink: { type: DataTypes.STRING },
   // isActivated: { type: DataTypes.BOOLEAN },
   // friend_id: { type: DataTypes.INTEGER },

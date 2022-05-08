@@ -6,9 +6,11 @@ class UserController {
 
   async authSuccess(req, res, next) {
     if (req.user) {
-      const userDto = await User.findOne({where:{
-        steamId: req.user.id
-      }})
+      const userDto = await User.findOne({
+        where: {
+          steamId: req.user.id
+        }
+      })
       res.status(200).json({
         success: true,
         message: "successfull",
@@ -88,32 +90,42 @@ class UserController {
       }
     }
   }
-  async userGames (req,res, next) {
-    if(req.body.id){
-      try{
+  async userGames(req, res, next) {
+    if (req.body.id) {
+      try {
         const games = await Statistic.findAll({
           steamId: req.body.id
         })
         res.json(games)
       }
-      catch{
+      catch {
         console.log('Games for user not found')
       }
     }
   }
-  async updateDescribe (req,res, next) {
-    const {steamId, description} = req.body
-    try{
-      const user = await User.findOne({where:{
-        steamId
-      }})
-      await user.update({description})
+  async updateDescribe(req, res, next) {
+    const { steamId, description } = req.body
+    try {
+      const user = await User.findOne({
+        where: {
+          steamId
+        }
+      })
+      await user.update({ description })
       res.json(user)
-    } catch(e){
+    } catch (e) {
       console.log(e)
     }
   }
 
+  async getUsersList(req, res, next) {
+    try {
+      const users = await User.findAll({ raw: true });
+      res.json(users);
+    } catch (error) {
+      console.error('Message: ', error);
+    }
+  }
 }
 
 module.exports = new UserController();

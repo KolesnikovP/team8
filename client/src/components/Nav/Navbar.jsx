@@ -32,7 +32,7 @@ export default function Navbar({ handelClickOpen }) {
   return (
     <AppBar position="static" sx={{ backgroundColor: 'main' }}>
       <Toolbar sx={{ justifyContent: 'space-between' }}>
-        <Box sx={{ mr: 2 }} onClick={() => navigate('/')}>
+        <Box sx={{ mr: 2 }} onClick={user.id ? () => navigate('/main') : () => navigate('/')}>
           <img width="100px" className="logo" src="/img/logo.png" alt="" />
         </Box>
         {user.id ? (

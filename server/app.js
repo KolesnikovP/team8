@@ -11,7 +11,7 @@ const authRoute = require("./router/auth");
 const sequelize = require('./db');
 
 app.use(
-  cookieSession({ name: 'session', keys: ['lama'], maxAge: 24 * 60 * 60 * 100 }),
+  cookieSession({ name: 'session', keys: ['lama'], maxAge: 24 * 60 * 60 * 1000 }),
 );
 
 app.use(passport.initialize());
