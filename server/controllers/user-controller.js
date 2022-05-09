@@ -175,7 +175,6 @@ class UserController {
         await Promise.all(promis)
       })
       await Promise.all(promis1)
-      // console.log(resArray)
       res.json(resArray)
     }
   }

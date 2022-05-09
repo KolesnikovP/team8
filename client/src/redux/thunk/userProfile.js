@@ -10,17 +10,6 @@ export const setUserGames = (id, func, func1) => {
       },
       body: JSON.stringify({ id }),
     });
-    // .then((data) => data.json())
-    // .then((res) => {
-    //   if (res.message === 'Games not found') {
-    //     func();
-    //     func1();
-    //   } else {
-    //     dispatch(setProfileGames(res));
-    //     func();
-    //   }
-    // }
-    // );
     const data = await response.json();
     if (response.status === 201) {
       dispatch(setProfileGames(data));
@@ -52,5 +41,19 @@ export const setUserDescribe = (steamId, description) => {
       .then((res) => {
         dispatch(initUserAction(res));
       });
+  };
+};
+
+export const updateUserStats = (steamId) => {
+  return function (dispatch) {
+    fetch('http://localhost:4000/api/updateUserStats', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ id: steamId }),
+    })
+      .then((response) => response.json())
+      .then((data) => dispatch(setProfileGames(data)));
   };
 };

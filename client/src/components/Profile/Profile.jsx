@@ -5,8 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Button from '@mui/material/Button';
 import { Avatar, Box, Container, TextareaAutosize, Typography } from '@mui/material';
 import { fetchUserGames } from '../../redux/thunk/user';
-import { setUserDescribe } from '../../redux/thunk/userProfile';
-import { setProfileGames } from '../../redux/reducers/profileReducer';
+import { setUserDescribe, updateUserStats } from '../../redux/thunk/userProfile';
 
 function Profile() {
   const { user } = useSelector((state) => state.userReducer);
@@ -20,13 +19,7 @@ function Profile() {
     window.open(`${user.steamProfileLink}`);
   }
   function updateStats(){
-    fetch('http://localhost:4000/api/updateUserStats',{
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ id:user.steamId }),
-    }).then((response) => response.json()).then((data) => dispatch(setProfileGames(data)))
+   dispatch(updateUserStats(user.steamId))
   }
   const [textAriaValue, settextAriaValue] = useState(`${user.description}`)
   function changeDesc(){
