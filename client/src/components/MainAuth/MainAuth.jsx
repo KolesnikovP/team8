@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 // import styled from '@emotion/styled';
-import { Container, List, Box, Typography } from '@mui/material';
+import { Container, List, Box } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import Parser from 'html-react-parser';
 import { getfetchUsersList } from '../../redux/thunk/user';
@@ -8,6 +8,7 @@ import UsersListItem from '../UsersList/UsersListItem';
 import UserCardModal from '../UserCardModal/UserCardModal';
 import Loader from '../Loader/Loader';
 import './Main.module.css';
+import { getNews } from '../../redux/thunk/getNews';
 
 function MainAuth() {
   const dispatch = useDispatch();
@@ -22,15 +23,7 @@ function MainAuth() {
   useEffect(() => {
     const rnd = Math.floor(Math.random() * profGames.length);
     if (profGames[rnd]?.gameSteamId) {
-      fetch(`http://localhost:4000/api/getNewsGames`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ id: profGames[rnd].gameSteamId }),
-      })
-        .then((response) => response.json())
-        .then((data) => setNews(data));
+      getNews(profGames[rnd].gameSteamId, setNews);
     }
   }, [profGames]);
   const [openModal, setOpenModal] = useState(false);
@@ -50,8 +43,18 @@ function MainAuth() {
   return (
     <>
       <Container>
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', marginTop: '2rem' }}>
-          {news ? <Typography>{Parser(`${news}`)}</Typography> : <Loader />}
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            marginTop: '2rem',
+          }}
+        >
+          {news ? (
+            <Box sx={{ width: '65%', textAlign: 'center' }}>{Parser(`${news}`)}</Box>
+          ) : (
+            <Loader />
+          )}
           <Box>
             <List sx={{ width: '100%' }}>
               {usersList.map((user) => (
