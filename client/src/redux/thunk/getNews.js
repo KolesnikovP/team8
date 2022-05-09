@@ -22,7 +22,7 @@ export const getNews = (id, func) => {
       }
 
       newData = data.replace(re2, '$1 width="800"');
-      console.log(newData);
+      // console.log(newData);
       return func(newData);
     });
 };
