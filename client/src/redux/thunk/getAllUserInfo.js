@@ -1,4 +1,4 @@
-export const getNews = (id, func) => {
+export const getAllUserInfo = (id, func) => {
   fetch('http://localhost:4000/api/getInfo', {
     method: 'POST',
     headers: {
