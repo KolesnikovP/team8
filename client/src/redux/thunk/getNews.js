@@ -1,3 +1,5 @@
+import bbCodeParser from 'js-bbcode-parser';
+
 export const getNews = (id, func) => {
   fetch(`http://localhost:4000/api/getNewsGames`, {
     method: 'POST',
@@ -10,14 +12,17 @@ export const getNews = (id, func) => {
     .then((data) => {
       const bbCode = /\[\/img]/gm;
       const test = data.match(bbCode);
-      if (test) {
-        console.log('bbcoe');
-        return func(data);
-      }
       let newData = '';
       const re2 = /(<img)/gm;
+      if (test) {
+        const bbToHtml = bbCodeParser.parse(data);
+        newData = bbToHtml.replace(re2, '$1 width="800"');
+        console.log(newData);
+        return func(newData);
+      }
+
       newData = data.replace(re2, '$1 width="800"');
-      // console.log(newData);
+      console.log(newData);
       return func(newData);
     });
 };
