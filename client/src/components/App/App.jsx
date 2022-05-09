@@ -17,6 +17,7 @@ import MainPage from '../MainPage/MainPage';
 import Navbar from '../Nav/Navbar';
 import MainAuth from '../MainAuth/MainAuth';
 import LocalProfile from '../LocalProfile/LocalProfile';
+import Loader from '../Loader/Loader';
 
 function App() {
   const dispatch = useDispatch();
@@ -46,10 +47,10 @@ function App() {
           <Route path="/" element={user?.id ? <MainAuth /> : <MainPage />} />
           {/* <Route path="/main" element={<MainAuth />} /> */}
           <Route path="/login" element={<Login />} />
-          <Route path="/postList" element={user?.id ? <PostList /> : <MainPage />} />
-          <Route path="/accessForm" element={user?.id ? <AccessForm /> : <MainPage />} />
-          <Route exact path="/profile" element={user?.id ? <Profile /> : <MainPage />} />
-          <Route exact path="/profile/:id" element={user?.id ? <LocalProfile /> : <MainPage />} />
+          <Route path="/postList" element={user?.id ? <PostList /> : <Loader />} />
+          <Route path="/accessForm" element={user?.id ? <AccessForm /> : <Loader />} />
+          <Route exact path="/profile" element={user?.id ? <Profile /> : <Loader />} />
+          <Route exact path="/profile/:id" element={user?.id ? <LocalProfile /> : <Loader />} />
         </Routes>
         <FindForm handleClose={handleClose} open={open} />
         <Footer />

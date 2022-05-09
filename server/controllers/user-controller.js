@@ -93,8 +93,9 @@ class UserController {
   async userGames(req, res, next) {
     if (req.body.id) {
       try {
-        const games = await Statistic.findAll({
+        const games = await Statistic.findAll({where: {
           steamId: req.body.id
+        }
         })
         res.json(games)
       }
