@@ -7,7 +7,7 @@ import './style.css';
 
 function ListGameRadio({ game, setHelperText }) {
   const radioChecked = useCallback(() => {
-    setHelperText(`${game.gameSteamName}`);
+    setHelperText(`${game.gameName}`);
   }, []);
 
   return (
