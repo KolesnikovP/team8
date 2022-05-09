@@ -6,6 +6,7 @@ import Button from '@mui/material/Button';
 import { Avatar, Box, Container, TextareaAutosize, Typography } from '@mui/material';
 import { fetchUserGames } from '../../redux/thunk/user';
 import { setUserDescribe } from '../../redux/thunk/userProfile';
+import { setProfileGames } from '../../redux/reducers/profileReducer';
 
 function Profile() {
   const { user } = useSelector((state) => state.userReducer);
@@ -17,6 +18,15 @@ function Profile() {
   }, [user]);
   function openSteam (){
     window.open(`${user.steamProfileLink}`);
+  }
+  function updateStats(){
+    fetch('http://localhost:4000/api/updateUserStats',{
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ id:user.steamId }),
+    }).then((response) => response.json()).then((data) => dispatch(setProfileGames(data)))
   }
   const [textAriaValue, settextAriaValue] = useState(`${user.description}`)
   function changeDesc(){
@@ -52,10 +62,18 @@ function Profile() {
         <Box sx={{display: 'flex', flexDirection: 'column', justifyContent: 'space-around'}}>
           <Button 
           type="Button" 
-          onClick={()=>openSteam}
+          onClick={()=>openSteam()}
           variant="outlined"
           >
             Открыть профиль в стиме
+            </Button>
+            <Button 
+          type="Button" 
+          onClick={()=>updateStats()}
+          variant="outlined"
+          color="success"
+          >
+            Обновить профиль
             </Button>
           {hidden ? 
           <Button 

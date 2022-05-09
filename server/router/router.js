@@ -11,6 +11,7 @@ Router.get('/initPosts', postController.getPostsList);
 Router.post('/validateProfile', userController.validateProfile);
 Router.post('/addPost', postController.addPost);
 Router.post('/userGames', userController.userGames);
+Router.post('/updateUserStats', userController.updateUserStats);
 Router.put('/updateDescribe', userController.updateDescribe);
 
 module.exports = Router;

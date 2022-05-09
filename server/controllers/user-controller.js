@@ -127,6 +127,58 @@ class UserController {
       console.error('Message: ', error);
     }
   }
+  async updateUserStats (req,res,next) {
+    if(req.body.id){
+      const response = await fetch(
+        `http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=DA22CF06CD504ADB087C83908040E3C6&steamid=${req.body.id}&format=json`
+      )
+      const userGames = await response.json();
+      const gamesFromDb = await Game.findAll({raw: true});
+      const resArray = []
+      const promis1 = await gamesFromDb.map(async(el) => {
+        const promis = await userGames.response.games.map(async(game) => {
+          if (el.gameSteamId === game.appid) {
+            try{
+              let userGamesFromStatDb = await Statistic.findOne({where:{
+                gameSteamId: game.appid.toString(),
+                steamId: req.body.id,
+              }, raw: true})
+              if(userGamesFromStatDb){
+                await Statistic.update(
+                  {userGameHours: Math.floor(game.playtime_forever / 60)},
+                  {where: {
+                    gameSteamId: game.appid.toString(),
+                    steamId: req.body.id,
+                  }}
+                )
+                userGamesFromStatDb = await Statistic.findOne({where:{
+                  gameSteamId: game.appid.toString(),
+                  steamId: req.body.id,
+                }, raw: true})
+                resArray.push(userGamesFromStatDb)
+              }else{
+                const statUser = new Statistic({
+                  userGameHours: Math.floor(game.playtime_forever / 60),
+                  userRank: 0,
+                  steamId: req.body.id,
+                  gameSteamId: game.appid,
+                  gameName: el.gameSteamName
+                })
+                statUser.save()
+                resArray.push(statUser)
+              }
+            } catch(e){
+              console.log(e)  
+            }
+          }
+        })
+        await Promise.all(promis)
+      })
+      await Promise.all(promis1)
+      // console.log(resArray)
+      res.json(resArray)
+    }
+  }
 }
 
 module.exports = new UserController();
