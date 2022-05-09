@@ -16,8 +16,14 @@ export const getNews = (id, func) => {
       const re2 = /(<img)/gm;
       if (test) {
         const bbToHtml = bbCodeParser.parse(data);
-        newData = bbToHtml.replace(re2, '$1 width="800"');
-        console.log(newData);
+        let clearData = '';
+        const re3 = /{STEAM_CLAN_IMAGE}/gm;
+        clearData = bbToHtml.replace(
+          re3,
+          'https://cdn.akamai.steamstatic.com/steamcommunity/public/images/clans/'
+        );
+        newData = clearData.replace(re2, '$1 width="800"');
+        // console.log(newData);
         return func(newData);
       }
 
