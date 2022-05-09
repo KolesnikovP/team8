@@ -17,14 +17,16 @@ import {
   Typography,
 } from '@mui/material';
 // import style from './findForm.module.css';
-import { getFetchGamesList } from '../../redux/thunk/getGame';
+// import { getFetchGamesList } from '../../redux/thunk/getGame';
 import ListGameRadio from '../ListGameRadio/ListGameRadio';
 import { addNewPostFetch } from '../../redux/thunk/posts';
+import { fetchUserGames } from '../../redux/thunk/user';
 
 function FindForm(props) {
   const { handleClose, open } = props;
   const dispatch = useDispatch();
-  const { games } = useSelector((state) => state.gamesListReducer);
+  // const { games } = useSelector((state) => state.gamesListReducer);
+  const { profGames } = useSelector((state) => state.profileReducer)
   const { user } = useSelector((state) => state.userReducer);
 
   const [description, setDescription] = useState('');
@@ -55,8 +57,8 @@ function FindForm(props) {
   }, []);
 
   useEffect(() => {
-    dispatch(getFetchGamesList());
-  }, [dispatch]);
+    dispatch(fetchUserGames(user?.steamId));
+  }, [user]);
 
   const sendFormPost = useCallback(
     () => {
@@ -82,8 +84,8 @@ function FindForm(props) {
         <Typography>{helperText}</Typography>
         <Box className="radio-form" component="div">
           <RadioGroup row value={radioValue} onClick={changeRadioValue}>
-            {games.map((game) => {
-              return <ListGameRadio key={game.id} game={game} setHelperText={setHelperText} />;
+            {profGames.map((profGame) => {
+              return <ListGameRadio key={profGame.id} game={profGame} setHelperText={setHelperText} />;
             })}
           </RadioGroup>
         </Box>
