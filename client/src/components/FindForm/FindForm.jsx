@@ -63,6 +63,7 @@ function FindForm(props) {
       const post = {
         description,
         gameSteamId: radioValue,
+        steamId: user.steamId,
         userId: user.id,
         userSteamAvatar: user.steamAvatar,
       };

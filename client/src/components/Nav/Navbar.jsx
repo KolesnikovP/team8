@@ -35,7 +35,7 @@ export default function Navbar({ handelClickOpen }) {
         <Box sx={{ mr: 2 }} onClick={() => navigate('/')}>
           <img width="100px" className="logo" src="/img/logo.png" alt="" />
         </Box>
-        {user.id ? (
+        {user?.id ? (
           <>
             <MenuItem
               variant="h6"
@@ -65,7 +65,7 @@ export default function Navbar({ handelClickOpen }) {
             />
           </MenuItem>
         )}
-        {user.id && (
+        {user?.id && (
           <div>
             <IconButton
               size="large"
