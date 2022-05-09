@@ -8,12 +8,16 @@ export const getNews = (id, func) => {
   })
     .then((response) => response.json())
     .then((data) => {
+      const bbCode = /\[\/img]/gm;
+      const test = data.match(bbCode);
+      if (test) {
+        console.log('bbcoe');
+        return func(data);
+      }
       let newData = '';
-      const re1 = /(height="507")/gm;
-      const re2 = /"(900)"/gm;
-      newData = data.replace(re1, '');
-      newData = data.replace(re2, '750');
-      console.log(newData);
+      const re2 = /(<img)/gm;
+      newData = data.replace(re2, '$1 width="800"');
+      // console.log(newData);
       return func(newData);
     });
 };
