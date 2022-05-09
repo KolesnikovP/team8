@@ -27,8 +27,6 @@ function UserCardModal(props) {
     setOpenModal(false);
   }, [setOpenModal]);
 
-  console.log(props);
-
   return (
     <Dialog open={openModal} onClose={handleClose} fullWidth>
       <DialogContent>

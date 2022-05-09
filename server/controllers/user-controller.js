@@ -70,7 +70,7 @@ class UserController {
           userGames.response.games.map((game) => {
             if (el.gameSteamId === game.appid) {
               const statUser = new Statistic({
-                userGameHours: Math.floor(game.playtime_forever / 60),
+                userGameHours: Math.ceil(game.playtime_forever / 60),
                 userRank: 0,
                 steamId: req.body.id,
                 gameSteamId: game.appid,
@@ -145,7 +145,7 @@ class UserController {
               }, raw: true})
               if(userGamesFromStatDb){
                 await Statistic.update(
-                  {userGameHours: Math.floor(game.playtime_forever / 60)},
+                  {userGameHours: Math.ceil(game.playtime_forever / 60)},
                   {where: {
                     gameSteamId: game.appid.toString(),
                     steamId: req.body.id,
@@ -158,7 +158,7 @@ class UserController {
                 resArray.push(userGamesFromStatDb)
               }else{
                 const statUser = new Statistic({
-                  userGameHours: Math.floor(game.playtime_forever / 60),
+                  userGameHours: Math.ceil(game.playtime_forever / 60),
                   userRank: 0,
                   steamId: req.body.id,
                   gameSteamId: game.appid,
