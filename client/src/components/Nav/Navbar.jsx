@@ -91,6 +91,8 @@ export default function Navbar({ handelClickOpen }) {
               }}
               open={Boolean(anchorEl)}
               onClose={handleClose}
+              disableScrollLock
+              // onScroll={handleClose}
             >
               <MenuItem onClick={() => navigate('/profile')}>Профиль</MenuItem>
               <MenuItem onClick={logout}>Выйти</MenuItem>
