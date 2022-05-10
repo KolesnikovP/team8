@@ -58,6 +58,8 @@ const Chat = sequelize.define('chat', {
 
 const UserChat = sequelize.define('userChat', {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  chat_id: {type: DataTypes.TEXT},
+  user_id: {type: DataTypes.TEXT}
 })
 
 const ChatMessage = sequelize.define('chatMessage', {
@@ -83,14 +85,17 @@ Friend.belongsToMany(User, { through: FriendsList });
 User.hasMany(UserCreatePost);
 UserCreatePost.belongsTo(User);
 
-User.hasMany(UserChat)
-UserChat.belongsTo(User)
+// User.hasMany(UserChat)
+// UserChat.belongsTo(User)
 
-UserChat.hasMany(ChatMessage)
-ChatMessage.belongsTo(UserChat)
+// UserChat.hasMany(ChatMessage)
+// ChatMessage.belongsTo(UserChat)
 
-User.hasMany(ChatMessage)
-ChatMessage.belongsTo(User)
+// UserChat.hasMany(Chat)
+// Chat.belongsTo(UserChat)
+
+// User.hasMany(ChatMessage)
+// ChatMessage.belongsTo(User)
 
 // User.hasMany(Statistic);
 // Statistic.belongsTo(User);
@@ -108,4 +113,7 @@ module.exports = {
   UserCreatePost,
   Game,
   Statistic,
+  Chat,
+  ChatMessage,
+  UserChat,
 };

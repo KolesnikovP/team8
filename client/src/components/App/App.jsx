@@ -53,7 +53,7 @@ function App() {
           <Route path="/accessForm" element={user?.id ? <AccessForm /> : <Loader />} />
           <Route exact path="/profile" element={user?.id ? <Profile /> : <Loader />} />
           <Route exact path="/profile/:id" element={user?.id ? <LocalProfile /> : <Loader />} />
-          <Route exact path="/chat" element={<Dialog />} />
+          <Route exact path="/chat/:id" element={<Dialog user={user} />} />
         </Routes>
         <FindForm handleClose={handleClose} open={open} />
         <Footer />

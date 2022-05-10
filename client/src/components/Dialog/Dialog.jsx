@@ -1,27 +1,30 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
-function Dialog() {
-  const { user } = useSelector((state) => state.userReducer);
+function WebSock({ user }) {
+  const params = useParams();
   const [messages, setMessages] = useState([]);
   const [value, setValue] = useState('');
   const socket = useRef();
-  const [connected, setConnected] = useState(false);
   const [username, setUsername] = useState('');
+  console.log(user);
 
   useEffect(() => {
-    setUsername(user?.steamNickname);
-  }, [user]);
+    socket.current = new WebSocket('ws://localhost:4000');
+    const arrOfUsers = [];
 
-  function connect() {
-    socket.current = new WebSocket('ws://localhost:9999');
+    const splittedParams = params.id.split('-')[1];
 
     socket.current.onopen = () => {
-      setConnected(true);
       const message = {
         event: 'connection',
-        username,
-        id: 1,
+        username: user.steamNickname,
+        chatId: params.id,
+        userSend: params.id.split('-')[0],
+        userRecieved: splittedParams,
       };
       socket.current.send(JSON.stringify(message));
     };
@@ -35,32 +38,26 @@ function Dialog() {
     socket.current.onerror = () => {
       console.log('Socket произошла ошибка');
     };
-  }
+  }, [user?.length]);
 
+  // useEffect
+
+  const closeChat = async () => {
+    socket.current.close();
+    console.log(messages);
+  };
   const sendMessage = async () => {
-    console.log(user);
     const message = {
-      username,
+      username: user.steamNickname,
       message: value,
-      id: Date.now(),
-      idUser: { idUser: user.steamId },
+      chatId: params.id,
       event: 'message',
+      created: Date.now(),
     };
+    // console.log(message)
     socket.current.send(JSON.stringify(message));
     setValue('');
   };
-
-  if (!connected) {
-    return (
-      <div className="center">
-        <div className="form">
-          <button type="button" onClick={connect}>
-            Войти
-          </button>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="center">
@@ -70,14 +67,18 @@ function Dialog() {
           <button type="button" onClick={sendMessage}>
             Отправить
           </button>
+          <button type="button" onClick={closeChat}>
+            Закрыть чат
+          </button>
         </div>
         <div className="messages">
           {messages.map((mess) => (
-            <div key={mess.id}>
+            <div key={Math.random()}>
               {mess.event === 'connection' ? (
-                <div>Пользователь {mess.username} подключился</div> /// //// !!!!!!!!!!!!!!!!!!! бэйджик с materialui
+                []
               ) : (
-                <div>
+                // <div className="connection_message">Пользователь {mess.username} подключился</div>
+                <div className="message">
                   {mess.username}. {mess.message}
                 </div>
               )}
@@ -89,4 +90,4 @@ function Dialog() {
   );
 }
 
-export default Dialog;
+export default WebSock;
