@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+
+import { Box } from '@mui/material';
 import Login from '../Login/Login';
 import FindForm from '../FindForm/FindForm';
 import Footer from '../Footer/Footer';
@@ -42,6 +44,7 @@ function App() {
   return (
     <BrowserRouter>
       <ThemeProvider theme={darkTheme}>
+        {/* <Box sx={{ height: '100%', position: 'relative' }}> */}
         <Navbar className={style.Nav} handelClickOpen={handelClickOpen} />
         <Routes>
           <Route path="/" element={user?.id ? <MainAuth /> : <MainPage />} />
@@ -54,6 +57,7 @@ function App() {
         </Routes>
         <FindForm handleClose={handleClose} open={open} />
         <Footer />
+        {/* </Box> */}
       </ThemeProvider>
     </BrowserRouter>
   );
