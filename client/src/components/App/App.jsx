@@ -18,6 +18,7 @@ import Navbar from '../Nav/Navbar';
 import MainAuth from '../MainAuth/MainAuth';
 import LocalProfile from '../LocalProfile/LocalProfile';
 import Loader from '../Loader/Loader';
+import DialogsButton from '../DialogsButton/DialogsButton';
 
 function App() {
   const dispatch = useDispatch();
@@ -54,6 +55,7 @@ function App() {
         </Routes>
         <FindForm handleClose={handleClose} open={open} />
         <Footer />
+        <DialogsButton />
       </ThemeProvider>
     </BrowserRouter>
   );
