@@ -18,6 +18,7 @@ import Navbar from '../Nav/Navbar';
 import MainAuth from '../MainAuth/MainAuth';
 import LocalProfile from '../LocalProfile/LocalProfile';
 import Loader from '../Loader/Loader';
+import Dialog from '../Dialog/Dialog';
 import DialogsButton from '../DialogsButton/DialogsButton';
 
 function App() {
@@ -52,6 +53,7 @@ function App() {
           <Route path="/accessForm" element={user?.id ? <AccessForm /> : <Loader />} />
           <Route exact path="/profile" element={user?.id ? <Profile /> : <Loader />} />
           <Route exact path="/profile/:id" element={user?.id ? <LocalProfile /> : <Loader />} />
+          <Route exact path="/chat" element={<Dialog />} />
         </Routes>
         <FindForm handleClose={handleClose} open={open} />
         <Footer />

@@ -45,7 +45,7 @@ function PostMin({ post }) {
       <Grid item xs={2}>
         <Box sx={{ alignItems: 'center', display: 'flex' }}>
           <IconButton>
-            <MailOutlineIcon color="primary" />
+            <MailOutlineIcon color="primary" onClick={() => navigate(`/chat`)} />
           </IconButton>
           <IconButton onClick={() => navigate(`/profile/${post.authorId}`)}>
             <AssignmentIndIcon color="primary" />

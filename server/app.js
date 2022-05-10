@@ -9,6 +9,9 @@ const app = express();
 const Router = require('./router/router');
 const authRoute = require("./router/auth");
 const sequelize = require('./db');
+const ws = require('ws')
+const { v4: uuidv4 } = require('uuid');
+
 
 app.use(
   cookieSession({ name: 'session', keys: ['lama'], maxAge: 24 * 60 * 60 * 1000 }),
@@ -29,6 +32,34 @@ app.use(
 
 app.use('/api', Router);
 app.use('/auth', authRoute);
+
+const wss = new ws.Server({
+    port: 9999,
+}, () => console.log(`Server started on 5000`))
+
+
+wss.on('connection', function connection(ws) {
+  // ws.id = 12
+    ws.on('message', function (message) {
+        message = JSON.parse(message)
+        switch (message.event) {
+            case 'message':
+                broadcastMessage(message)
+                break;
+            case 'connection':
+                broadcastMessage(message, message.id)
+                break;
+        }
+    })
+})
+
+function broadcastMessage(message, id) {
+  console.log(message.idUser);
+    wss.clients.forEach(client => {
+      // if(id === client.id)
+        client.send(JSON.stringify(message))
+    })
+}
 
 const start = async () => {
   try {
