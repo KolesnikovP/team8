@@ -9,6 +9,7 @@ const User = sequelize.define('user', {
   steamProfileLink: { type: DataTypes.TEXT, unique: true },
   steamAvatar: { type: DataTypes.TEXT },
   description: { type: DataTypes.TEXT },
+  bgVideoId: { type: DataTypes.INTEGER },
   // activationLink: { type: DataTypes.STRING },
   // isActivated: { type: DataTypes.BOOLEAN },
   // friend_id: { type: DataTypes.INTEGER },
@@ -51,6 +52,11 @@ const UserCreatePost = sequelize.define('userCreatePost', {
   status: { type: DataTypes.BOOLEAN },
 });
 
+const BgVideo = sequelize.define('bgVideo', {
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  link: { type: DataTypes.TEXT },
+});
+
 User.belongsToMany(Friend, { through: FriendsList });
 Friend.belongsToMany(User, { through: FriendsList });
 // Friend.hasMany(User);
@@ -74,7 +80,6 @@ UserCreatePost.belongsTo(User);
 Game.hasMany(UserCreatePost);
 UserCreatePost.belongsTo(Game);
 
-
 module.exports = {
   User,
   Friend,
@@ -82,4 +87,5 @@ module.exports = {
   UserCreatePost,
   Game,
   Statistic,
+  BgVideo,
 };

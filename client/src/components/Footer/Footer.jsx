@@ -12,7 +12,13 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 export default function Footer() {
   return (
     <footer>
-      <Box px={{ xs: 1, sm: 2 }} py={{ xs: 3, sm: 6 }} bgcolor="black" color="white">
+      <Box
+        // sx={{ position: 'absolute', bottom: '0', left: '0', width: '100%', mt: '2rem' }}
+        px={{ xs: 1, sm: 2 }}
+        py={{ xs: 3, sm: 6 }}
+        bgcolor="black"
+        color="white"
+      >
         <Container maxWidth="lg">
           <Grid container spacing={5}>
             <Grid item xs={12} sm={4}>
