@@ -3,6 +3,7 @@
 /* eslint-disable react/prop-types */
 import { Avatar, Grid, IconButton, Typography } from '@mui/material';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
+import ClearIcon from '@mui/icons-material/Clear';
 import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 // eslint-disable-next-line import/no-extraneous-dependencies
@@ -35,6 +36,9 @@ function PostMin({ post }) {
   function connect() {
     navigate(`/chat/${user.steamId}-${post.authorId}`);
   }
+  function del() {
+    console.log(post.id);
+  }
   return (
     <Grid
       container
@@ -58,9 +62,6 @@ function PostMin({ post }) {
           alt={`appIcon_${post.gameName}`}
           width="100px"
         />
-        {/* <Typography color="#b8860b" sx={{ textAlign: 'center' }}> */}
-        {/* {post.gameName}
-        </Typography> */}
       </Grid>
       <Grid item xs={2}>
         <Typography>{post.userHours}</Typography>
@@ -68,7 +69,9 @@ function PostMin({ post }) {
       <Grid item xs={2}>
         <Box sx={{ alignItems: 'center', display: 'flex' }}>
           {user?.steamId === post.authorId ? (
-            ''
+            <IconButton onClick={del}>
+              <ClearIcon color="primary" />
+            </IconButton>
           ) : (
             <IconButton onClick={connect}>
               <MailOutlineIcon color="primary" />
