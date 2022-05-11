@@ -1,7 +1,7 @@
 const fetch = require('cross-fetch');
 const e = require('express');
 const {
-  Game, Statistic, User, UserCreatePost, BgVideo
+  Game, Statistic, User, UserCreatePost, BgVideo,
 } = require('../models/models');
 
 class UserController {
@@ -52,8 +52,8 @@ class UserController {
       const bg = await BgVideo.findOne({
         where: {
           id: userInfo.bgVideoId,
-        }
-      })
+        },
+      });
       userInfo.bgVideoId = bg.link;
       const userStats = await Statistic.findAll({
         where: {

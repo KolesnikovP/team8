@@ -32,10 +32,10 @@ function Profile() {
     setHidden(!hidden)
   }
   return (
-    <>
+    <Box>
       {bg && <VideoBg bg={bg} />}
       <Container>
-        <Box sx={{ marginTop: '2rem' }}>
+        <Box>
           <Typography variant="h3" color="primary" sx={{ textAlign: 'center' }}>{user.steamNickname}</Typography>
           <Box sx={{ display: 'flex', justifyContent: 'space-around', marginTop: '2rem', border: '1px solid #90caf9', padding: '2rem', borderRadius: '1rem' }}>
             <Avatar
@@ -115,7 +115,7 @@ function Profile() {
         </Box>
       </Container>
       <ProfileModalBg open={open} setOpen={setOpen} userId={user.id} />
-    </>
+    </Box>
   );
 }
 

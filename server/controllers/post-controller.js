@@ -42,14 +42,14 @@ class PostController {
   async addPost(req, res, next) {
     try {
       const {
-        description, gameSteamId, steamId,userId, userSteamAvatar,
+        description, gameSteamId, steamId, userId, userSteamAvatar,
       } = req.body;
       // console.log(req.body)
       // console.log(req.body);
       const statistic = await Statistic.findOne({
         where: {
           gameSteamId,
-          steamId
+          steamId,
           // steamId: userId,
         },
         raw: true,
