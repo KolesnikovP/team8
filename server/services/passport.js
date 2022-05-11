@@ -26,12 +26,12 @@ passport.use(
         bgVideoId: 1,
       });
       user.save();
-      const bg = await BgVideo.findOne({
-        where: {
-          id: user.bgVideoId,
-        },
-      });
-      user.bgVideoId = bg.link;
+      // const bg = await BgVideo.findOne({
+      //   where: {
+      //     id: user.bgVideoId,
+      //   },
+      // });
+      // user.bgVideoId = bg.link;
       return done(null, profile);
     }),
   ),

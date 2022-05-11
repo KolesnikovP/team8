@@ -22,6 +22,7 @@ import LocalProfile from '../LocalProfile/LocalProfile';
 import Loader from '../Loader/Loader';
 import DialogsButton from '../DialogsButton/DialogsButton';
 import ChatFormModal from '../ChatFormModal/ChatFormModal';
+import WebSock from '../WebSock/WebSock';
 
 function App() {
   const dispatch = useDispatch();
@@ -67,13 +68,13 @@ function App() {
           <Route path="/accessForm" element={user?.id ? <AccessForm /> : <Loader />} />
           <Route exact path="/profile" element={user?.id ? <Profile /> : <Loader />} />
           <Route exact path="/profile/:id" element={user?.id ? <LocalProfile /> : <Loader />} />
-          <Route exact path="/chat/:id" element={<Dialog user={user} />} />
+          <Route exact path="/chat/:id" element={<WebSock user={user} />} />
         </Routes>
         <FindForm handleClose={handleClose} open={open} />
         <Footer />
         <DialogsButton handleClickOpenChat={handleClickOpenChat} />
         <Dialog open={openChat} onClose={handleCloseChat} fullWidth maxWidth="lg">
-          {/* <ChatFormModal /> */}
+          <ChatFormModal />
         </Dialog>
       </ThemeProvider>
     </BrowserRouter>
