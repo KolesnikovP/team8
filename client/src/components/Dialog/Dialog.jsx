@@ -3,19 +3,21 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { v4 as uuidv4 } from 'uuid';
+import { getNews } from '../../redux/thunk/chat';
 
 function WebSock({ user }) {
   const params = useParams();
+  const chatId = `http://localhost:3000/chat/${params.id}`;
   const [messages, setMessages] = useState([]);
   const [value, setValue] = useState('');
   const socket = useRef();
   const [username, setUsername] = useState('');
-  console.log(user);
+  const [history, setHistory] = useState('');
 
   useEffect(() => {
+    getNews(chatId, setHistory);
     socket.current = new WebSocket('ws://localhost:4000');
-    const arrOfUsers = [];
-
     const splittedParams = params.id.split('-')[1];
 
     socket.current.onopen = () => {
@@ -40,15 +42,20 @@ function WebSock({ user }) {
     };
   }, [user?.length]);
 
-  // useEffect
-
   const closeChat = async () => {
+    const msgData = {
+      event: 'close',
+      data: messages,
+    };
+    socket.current.send(JSON.stringify(msgData));
     socket.current.close();
-    console.log(messages);
   };
   const sendMessage = async () => {
+    const uniqId = uuidv4().split('-');
     const message = {
+      id: uniqId[1],
       username: user.steamNickname,
+      userId: user.steamId,
       message: value,
       chatId: params.id,
       event: 'message',
@@ -70,6 +77,16 @@ function WebSock({ user }) {
           <button type="button" onClick={closeChat}>
             Закрыть чат
           </button>
+        </div>
+        <div>
+          {history?.length &&
+            history?.map((msg) => {
+              return (
+                <div className="message" key={msg.idSms}>
+                  {msg.userName}. {msg.messageText}
+                </div>
+              );
+            })}
         </div>
         <div className="messages">
           {messages.map((mess) => (

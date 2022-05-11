@@ -3,6 +3,7 @@ const postController = require('../controllers/post-controller');
 const SteamGamesController = require('../controllers/steamGames-controller');
 const userController = require('../controllers/user-controller');
 const bgVideoController = require('../controllers/bg-controller');
+const chatController = require('../controllers/chat-controller');
 
 Router.get('/initPosts', postController.getPostsList);
 Router.post('/addPost', postController.addPost);
@@ -20,5 +21,6 @@ Router.get('/initGames', SteamGamesController.getListGames);
 Router.post('/getNewsGames', SteamGamesController.getNewsGames);
 
 Router.get('/initBgs', bgVideoController.getListBg);
+Router.post('/getHistory', chatController.getChatHistory)
 
 module.exports = Router;

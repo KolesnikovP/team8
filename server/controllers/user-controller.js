@@ -12,6 +12,7 @@ class UserController {
           steamId: req.user.id,
         },
       });
+      // console.log(userDto);
       const bg = await BgVideo.findOne({
         where: {
           id: userDto.bgVideoId,

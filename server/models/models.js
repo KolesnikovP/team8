@@ -70,6 +70,11 @@ const UserChat = sequelize.define('userChat', {
 
 const ChatMessage = sequelize.define('chatMessage', {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  idUser: { type: DataTypes.TEXT},
+  idSms: { type: DataTypes.TEXT},
+  userName: { type: DataTypes.TEXT},
+  idChat: { type: DataTypes.INTEGER},
+  // status: { type: DataTypes.TEXT},
   messageText: {type: DataTypes.TEXT}
 })
 
