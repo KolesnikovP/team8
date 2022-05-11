@@ -1,10 +1,11 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import { SpeedDialAction, SpeedDialIcon, SpeedDial } from '@mui/material';
+import { SpeedDialAction, SpeedDial } from '@mui/material';
 import FileCopyIcon from '@mui/icons-material/FileCopyOutlined';
 import SaveIcon from '@mui/icons-material/Save';
 import PrintIcon from '@mui/icons-material/Print';
 import ShareIcon from '@mui/icons-material/Share';
+import MailOutlineIcon from '@mui/icons-material/MailOutline';
 
 export default function DialogsButton({ handleClickOpenChat }) {
   const actions = [
@@ -18,7 +19,7 @@ export default function DialogsButton({ handleClickOpenChat }) {
     <SpeedDial
       ariaLabel="SpeedDial basic example"
       sx={{ position: 'fixed', bottom: 16, right: 16 }}
-      icon={<SpeedDialIcon />}
+      icon={<MailOutlineIcon />}
     >
       {actions.map((action) => (
         <SpeedDialAction
