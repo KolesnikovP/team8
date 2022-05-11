@@ -20,7 +20,6 @@ import Navbar from '../Nav/Navbar';
 import MainAuth from '../MainAuth/MainAuth';
 import LocalProfile from '../LocalProfile/LocalProfile';
 import Loader from '../Loader/Loader';
-import Dialog from '../Dialog/Dialog';
 import DialogsButton from '../DialogsButton/DialogsButton';
 import ChatFormModal from '../ChatFormModal/ChatFormModal';
 
@@ -74,7 +73,7 @@ function App() {
         <Footer />
         <DialogsButton handleClickOpenChat={handleClickOpenChat} />
         <Dialog open={openChat} onClose={handleCloseChat} fullWidth maxWidth="lg">
-          <ChatFormModal />
+          {/* <ChatFormModal /> */}
         </Dialog>
       </ThemeProvider>
     </BrowserRouter>
