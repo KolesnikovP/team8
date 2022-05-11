@@ -1,6 +1,6 @@
 const SteamStrategy = require('passport-steam').Strategy;
 const passport = require('passport');
-const { User } = require('../models/models');
+const { User, BgVideo } = require('../models/models');
 
 passport.use(
   new SteamStrategy(
@@ -23,8 +23,15 @@ passport.use(
         steamNickname: profile._json.personaname,
         steamProfileLink: profile._json.profileurl,
         steamAvatar: profile._json.avatarfull,
+        bgVideoId: 1,
       });
       user.save();
+      // const bg = await BgVideo.findOne({
+      //   where: {
+      //     id: user.bgVideoId,
+      //   },
+      // });
+      // user.bgVideoId = bg.link;
       return done(null, profile);
     }),
   ),

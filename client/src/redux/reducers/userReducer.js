@@ -1,12 +1,15 @@
 /* eslint-disable default-param-last */
 const INIT_USER = 'INIT_USER';
 const LOGOUT_USER = 'LOGOUT_USER';
+// const UPDATE_USER = 'UPDATE_USER';
 
 const initionalState = { user: {} };
 export const userReducer = (state = initionalState, action) => {
   switch (action.type) {
     case INIT_USER:
       return { ...state, user: action.payload };
+    // case UPDATE_USER:
+    //   return { ...state, user: {} }
     case LOGOUT_USER:
       return { ...state, user: {} };
     default:

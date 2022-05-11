@@ -1,14 +1,13 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React, { useEffect } from 'react';
-import { SpeedDialAction, SpeedDialIcon, SpeedDial, IconButton, Avatar } from '@mui/material';
-import SaveIcon from '@mui/icons-material/Save';
-import PrintIcon from '@mui/icons-material/Print';
-import ShareIcon from '@mui/icons-material/Share';
+import { SpeedDial, IconButton, Avatar } from '@mui/material';
+import MailOutline from '@mui/icons-material/MailOutline';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getFecthUserChats } from '../../redux/thunk/user';
 
-export default function DialogsButton() {
+export default function DialogsButton({ handleClickOpenChat }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.userReducer);
@@ -43,11 +42,8 @@ export default function DialogsButton() {
     <SpeedDial
       ariaLabel="SpeedDial basic example"
       sx={{ position: 'fixed', bottom: 16, right: 16 }}
-      icon={<SpeedDialIcon />}
-    >
-      {actions.map((action) => (
-        <SpeedDialAction key={action.name} icon={action.icon} tooltipTitle={action.name} />
-      ))}
-    </SpeedDial>
+      icon={<MailOutline />}
+      onClick={handleClickOpenChat}
+    />
   );
 }

@@ -112,7 +112,7 @@ function FindForm(props) {
           Закрыть
         </Button>
       </DialogActions>
-    </Dialog >
+    </Dialog>
   );
 }
 

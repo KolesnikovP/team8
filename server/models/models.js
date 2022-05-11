@@ -9,6 +9,7 @@ const User = sequelize.define('user', {
   steamProfileLink: { type: DataTypes.TEXT, unique: true },
   steamAvatar: { type: DataTypes.TEXT },
   description: { type: DataTypes.TEXT },
+  bgVideoId: { type: DataTypes.INTEGER },
   // activationLink: { type: DataTypes.STRING },
   // isActivated: { type: DataTypes.BOOLEAN },
   // friend_id: { type: DataTypes.INTEGER },
@@ -51,9 +52,14 @@ const UserCreatePost = sequelize.define('userCreatePost', {
   status: { type: DataTypes.BOOLEAN },
 });
 
+const BgVideo = sequelize.define('bgVideo', {
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  link: { type: DataTypes.TEXT },
+});
+
 const Chat = sequelize.define('chat', {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-  chatLink: { type: DataTypes.TEXT, unique:true },
+  chatLink: { type: DataTypes.TEXT, unique: true },
 });
 
 const UserChat = sequelize.define('userChat', {
@@ -64,13 +70,17 @@ const UserChat = sequelize.define('userChat', {
 
 const ChatMessage = sequelize.define('chatMessage', {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  idUser: { type: DataTypes.TEXT},
+  idSms: { type: DataTypes.TEXT},
+  userName: { type: DataTypes.TEXT},
+  idChat: { type: DataTypes.INTEGER},
+  // status: { type: DataTypes.TEXT},
   messageText: {type: DataTypes.TEXT}
 })
 
 // const UserChat = sequelize.define('userChat', {
 //   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
 // })
-
 User.belongsToMany(Friend, { through: FriendsList });
 Friend.belongsToMany(User, { through: FriendsList });
 // Friend.hasMany(User);
@@ -113,6 +123,7 @@ module.exports = {
   UserCreatePost,
   Game,
   Statistic,
+  BgVideo,
   Chat,
   ChatMessage,
   UserChat,

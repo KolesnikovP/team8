@@ -50,13 +50,9 @@ function MainAuth() {
             marginTop: '2rem',
           }}
         >
-          {news ? (
-            <Box sx={{ width: '65%', textAlign: 'center' }}>{Parser(`${news}`)}</Box>
-          ) : (
-            <Loader />
-          )}
-          <Box>
-            <List sx={{ width: '100%' }}>
+          {news ? <Box sx={{ textAlign: 'center' }}>{Parser(`${news}`)}</Box> : <Loader />}
+          <Box sx={{ width: '30%', marginLeft: '1rem' }}>
+            <List>
               {usersList.map((user) => (
                 <UsersListItem
                   key={user.id}
