@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
+import { Box } from '@mui/material';
 import Login from '../Login/Login';
 import FindForm from '../FindForm/FindForm';
 import Footer from '../Footer/Footer';
@@ -54,26 +55,26 @@ function App() {
   };
 
   return (
-//     <BrowserRouter>
-//       <ThemeProvider theme={darkTheme}>
-//         {/* <Box sx={{ height: '100%', position: 'relative' }}> */}
-//         <Navbar className={style.Nav} handelClickOpen={handelClickOpen} />
-//         <Routes>
-//           <Route path="/" element={user?.id ? <MainAuth /> : <MainPage />} />
-//           {/* <Route path="/main" element={<MainAuth />} /> */}
-//           <Route path="/login" element={<Login />} />
-//           <Route path="/postList" element={user?.id ? <PostList /> : <Loader />} />
-//           <Route path="/accessForm" element={user?.id ? <AccessForm /> : <Loader />} />
-//           <Route exact path="/profile" element={user?.id ? <Profile /> : <Loader />} />
-//           <Route exact path="/profile/:id" element={user?.id ? <LocalProfile /> : <Loader />} />
-//           <Route exact path="/chat/:id" element={<WebSock user={user} />} />
-//         </Routes>
-//         <FindForm handleClose={handleClose} open={open} />
-//         <Footer />
-//         <DialogsButton handleClickOpenChat={handleClickOpenChat} />
-//         <ChatFormModal handleCloseChat={handleCloseChat} openChat={openChat} user={user} />
-//       </ThemeProvider>
-//     </BrowserRouter>
+    //     <BrowserRouter>
+    //       <ThemeProvider theme={darkTheme}>
+    //         {/* <Box sx={{ height: '100%', position: 'relative' }}> */}
+    //         <Navbar className={style.Nav} handelClickOpen={handelClickOpen} />
+    //         <Routes>
+    //           <Route path="/" element={user?.id ? <MainAuth /> : <MainPage />} />
+    //           {/* <Route path="/main" element={<MainAuth />} /> */}
+    //           <Route path="/login" element={<Login />} />
+    //           <Route path="/postList" element={user?.id ? <PostList /> : <Loader />} />
+    //           <Route path="/accessForm" element={user?.id ? <AccessForm /> : <Loader />} />
+    //           <Route exact path="/profile" element={user?.id ? <Profile /> : <Loader />} />
+    //           <Route exact path="/profile/:id" element={user?.id ? <LocalProfile /> : <Loader />} />
+    //           <Route exact path="/chat/:id" element={<WebSock user={user} />} />
+    //         </Routes>
+    //         <FindForm handleClose={handleClose} open={open} />
+    //         <Footer />
+    //         <DialogsButton handleClickOpenChat={handleClickOpenChat} />
+    //         <ChatFormModal handleCloseChat={handleCloseChat} openChat={openChat} user={user} />
+    //       </ThemeProvider>
+    //     </BrowserRouter>
 
     <Box sx={{ height: '100vh' }}>
       <BrowserRouter>

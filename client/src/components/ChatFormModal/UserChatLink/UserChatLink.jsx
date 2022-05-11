@@ -1,9 +1,10 @@
+/* eslint-disable react/prop-types */
 import { Avatar, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getFecthUserChats } from '../../../redux/thunk/user';
 
-export default function UserChatLink() {
+export default function UserChatLink({ getId }) {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.userReducer);
 
@@ -13,10 +14,6 @@ export default function UserChatLink() {
 
   const { chats } = useSelector((state) => state.userChatReducer);
   console.log('===>', chats.allUsers);
-
-  function getId(id) {
-    console.log('~~~~~>', id);
-  }
 
   return (
     <List>

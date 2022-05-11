@@ -1,15 +1,15 @@
+/* eslint-disable react/jsx-no-bind */
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import {
-import {
   Fab,
   ListItemText,
-  // ListItemIcon,
   ListItem,
   List,
   Grid,
   Paper,
-  Divider
+  Divider,
   Dialog,
   ListItemButton,
   Box,
@@ -45,7 +45,7 @@ function ChatFormModal({ user, handleCloseChat, openChat }) {
           <Grid item xs={3} className={classes.borderRight500}>
             <Divider />
             <Divider />
-            <UserChatLink />
+            <UserChatLink getId={getId} />
           </Grid>
           <Grid item xs={9}>
             {isParams ? <MessageArea user={user} chatLink={chatLink} /> : <FakeMessageArea />}
