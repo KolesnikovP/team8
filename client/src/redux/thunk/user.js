@@ -1,6 +1,7 @@
 import { initUserAction } from '../reducers/userReducer';
 import { setProfileGames } from '../reducers/profileReducer';
 import { getUsersListAC } from '../reducers/usersListReducer';
+import { initUserChatAction } from '../reducers/userChatReducer';
 
 export const fetchUser = () => {
   return function (dispatch) {
@@ -48,5 +49,21 @@ export const getfetchUsersList = () => {
       .then((response) => response.json())
       .then((data) => dispatch(getUsersListAC(data)))
       .catch((err) => console.log(err));
+  };
+};
+
+export const getFecthUserChats = (user) => {
+  return function (dispatch) {
+    fetch('http://localhost:4000/api/allUserChats', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ user }),
+    })
+      .then((data) => data.json())
+      .then((res) => {
+        dispatch(initUserChatAction(res));
+      });
   };
 };

@@ -10,7 +10,6 @@ function WebSock({ user }) {
   const [value, setValue] = useState('');
   const socket = useRef();
   const [username, setUsername] = useState('');
-  console.log(user);
 
   useEffect(() => {
     socket.current = new WebSocket('ws://localhost:4000');
