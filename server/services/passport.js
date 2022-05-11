@@ -23,6 +23,7 @@ passport.use(
         steamNickname: profile._json.personaname,
         steamProfileLink: profile._json.profileurl,
         steamAvatar: profile._json.avatarfull,
+        bgVideoId: 1,
       });
       user.save();
       return done(null, profile);
