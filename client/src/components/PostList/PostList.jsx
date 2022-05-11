@@ -30,7 +30,6 @@ function PostList() {
   useEffect(() => {
     setSortedPosts(posts);
   }, [posts]);
-  // console.log(sortedPosts);
 
   const { games } = useSelector((state) => state.gamesListReducer);
   const options = [];

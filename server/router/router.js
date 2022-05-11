@@ -13,6 +13,7 @@ Router.post('/validateProfile', userController.validateProfile);
 Router.post('/userGames', userController.userGames);
 Router.post('/updateUserStats', userController.updateUserStats);
 Router.put('/updateDescribe', userController.updateDescribe);
+Router.post('/allUserChats', userController.getUserChats)
 
 Router.get('/initGames', SteamGamesController.getListGames);
 Router.post('/getNewsGames', SteamGamesController.getNewsGames);
