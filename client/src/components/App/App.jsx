@@ -6,7 +6,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
-import { Box } from '@mui/material';
+import { Box, Dialog } from '@mui/material';
 import Login from '../Login/Login';
 import FindForm from '../FindForm/FindForm';
 import Footer from '../Footer/Footer';
@@ -22,6 +22,7 @@ import LocalProfile from '../LocalProfile/LocalProfile';
 import Loader from '../Loader/Loader';
 import Dialog from '../Dialog/Dialog';
 import DialogsButton from '../DialogsButton/DialogsButton';
+import ChatFormModal from '../ChatFormModal/ChatFormModal';
 
 function App() {
   const dispatch = useDispatch();
@@ -43,6 +44,17 @@ function App() {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const [openChat, setOpenChat] = useState(false);
+
+  const handleClickOpenChat = () => {
+    setOpenChat(true);
+  };
+
+  const handleCloseChat = () => {
+    setOpenChat(false);
+  };
+
   return (
     <BrowserRouter>
       <ThemeProvider theme={darkTheme}>
@@ -60,7 +72,10 @@ function App() {
         </Routes>
         <FindForm handleClose={handleClose} open={open} />
         <Footer />
-        <DialogsButton />
+        <DialogsButton handleClickOpenChat={handleClickOpenChat} />
+        <Dialog open={openChat} onClose={handleCloseChat} fullWidth maxWidth="lg">
+          <ChatFormModal />
+        </Dialog>
       </ThemeProvider>
     </BrowserRouter>
   );

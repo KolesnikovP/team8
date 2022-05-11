@@ -12,7 +12,7 @@ const sequelize = require('./db');
 const WSServer = require('express-ws')(app)
 const aWss = WSServer.getWss()
 const ws = require('ws')
-const {Chat,User, UserChat, ChatMessage} = require('./models/models')
+const { Chat, User, UserChat } = require('./models/models')
 
 app.use(
   cookieSession({ name: 'session', keys: ['lama'], maxAge: 24 * 60 * 60 * 1000 }),
@@ -48,6 +48,17 @@ app.ws('/', (ws, req) => {
               closeHandler(ws, message)
               break;
       }
+    message = JSON.parse(message)
+    switch (message.event) {
+      case 'message':
+
+        console.log(message);
+        broadcastConnection(ws, message)
+        break;
+      case 'connection':
+        connectionHandler(ws, message)
+        break;
+    }
   })
 })
 

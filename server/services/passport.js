@@ -1,6 +1,6 @@
 const SteamStrategy = require('passport-steam').Strategy;
 const passport = require('passport');
-const { User } = require('../models/models');
+const { User, BgVideo } = require('../models/models');
 
 passport.use(
   new SteamStrategy(
@@ -26,6 +26,12 @@ passport.use(
         bgVideoId: 1,
       });
       user.save();
+      const bg = await BgVideo.findOne({
+        where: {
+          id: user.bgVideoId,
+        },
+      });
+      user.bgVideoId = bg.link;
       return done(null, profile);
     }),
   ),

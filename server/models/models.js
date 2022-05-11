@@ -59,7 +59,7 @@ const BgVideo = sequelize.define('bgVideo', {
 
 const Chat = sequelize.define('chat', {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-  chatLink: { type: DataTypes.TEXT, unique:true },
+  chatLink: { type: DataTypes.TEXT, unique: true },
 });
 
 const UserChat = sequelize.define('userChat', {
