@@ -60,6 +60,9 @@ function MessageArea({ user, chatLink }) {
       chatId: chatLink,
       event: 'message',
       created: Date.now(),
+      idUser: user.id,
+      createdAt: Date.now(),
+      messageText: value,
     };
     // console.log(message)
     socket.current.send(JSON.stringify(message));
@@ -68,10 +71,10 @@ function MessageArea({ user, chatLink }) {
 
   return (
     <>
-      <List className={classes.messageArea}>
-        <Fab color="primary" aria-label="add" onClick={closeChat}>
-          <CloseOutlinedIcon />
-        </Fab>
+      <Fab color="primary" aria-label="add" onClick={closeChat}>
+        <CloseOutlinedIcon />
+      </Fab>
+      <List className={classes.messageArea} sx={{ flexDirection: 'column-reverse' }}>
         {history?.length &&
           history?.map((msg) => {
             return <Message mess={msg} user={user} />;
