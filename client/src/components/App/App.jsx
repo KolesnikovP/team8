@@ -6,7 +6,6 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
-import { Box, Dialog } from '@mui/material';
 import Login from '../Login/Login';
 import FindForm from '../FindForm/FindForm';
 import Footer from '../Footer/Footer';
@@ -73,9 +72,7 @@ function App() {
         <FindForm handleClose={handleClose} open={open} />
         <Footer />
         <DialogsButton handleClickOpenChat={handleClickOpenChat} />
-        <Dialog open={openChat} onClose={handleCloseChat} fullWidth maxWidth="lg">
-          <ChatFormModal />
-        </Dialog>
+        <ChatFormModal handleCloseChat={handleCloseChat} openChat={openChat} user={user} />
       </ThemeProvider>
     </BrowserRouter>
   );
