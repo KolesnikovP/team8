@@ -1,11 +1,13 @@
+/* eslint-disable class-methods-use-this */
 const fetch = require('cross-fetch');
 const e = require('express');
 const {
-  Game, Statistic, User, UserCreatePost, BgVideo
+  Game, Statistic, User, UserCreatePost, UserChat, Chat, BgVideo,
 } = require('../models/models');
+const sequelize = require('../db');
 
 class UserController {
-  async authSuccess(req, res, next) {
+  async authSuccess(req, res) {
     if (req.user) {
       const userDto = await User.findOne({
         where: {
@@ -52,8 +54,8 @@ class UserController {
       const bg = await BgVideo.findOne({
         where: {
           id: userInfo.bgVideoId,
-        }
-      })
+        },
+      });
       userInfo.bgVideoId = bg.link;
       const userStats = await Statistic.findAll({
         where: {
@@ -224,6 +226,35 @@ class UserController {
       });
       await Promise.all(promis1);
       res.json(resArray);
+    }
+  }
+
+  async getUserChats(req, res) {
+    const { user } = await (req.body);
+    // console.log(user.id, user);
+    const userIdToCompare = String(user.id);
+    const allChatsWithLinks = await Chat.findAll();
+    const usersFromBD = await User.findAll({ raw: true });
+    // console.log(usersFromBD);
+    if (user !== {} && user.id !== undefined) {
+      const usersChats = await UserChat.findAll({ raw: true });
+
+      const chats = usersChats.filter((el) => el.user_id === userIdToCompare);
+
+      const allUsers = usersFromBD.filter((el) => el.id !== Number(userIdToCompare));
+
+      const chatLinks = [];
+      const prom = await chats.map(async (el) => {
+        const link = await Chat.findOne({
+          where: {
+            id: el.chat_id,
+          },
+        });
+        // Promise.all(link)
+        chatLinks.push(link.chatLink);
+      });
+
+      Promise.all(prom).then(() => res.status(200).json({ allUsers, chatLinks }));
     }
   }
 }

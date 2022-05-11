@@ -29,11 +29,11 @@ function LocalProfile() {
   }
   console.log(bg);
   return (
-    <>
+    <Box>
       {bg && <VideoBg bg={bg} />}
-      <Container sx={{ height: '100vh' }}>
-        <Box sx={{ marginTop: '2rem' }}>
-          <Typography variant="h3" color="primary" sx={{ textAlign: 'center' }}>
+      <Container>
+        <Box>
+          <Typography variant="h3" color="primary" sx={{ textAlign: 'center', paddingTop: '2rem' }}>
             {user?.steamNickname}
           </Typography>
           <Box
@@ -88,7 +88,7 @@ function LocalProfile() {
           </Box>
         </Box>
       </Container>
-    </>
+    </Box>
   );
 }
 

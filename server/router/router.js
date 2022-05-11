@@ -15,6 +15,7 @@ Router.post('/validateProfile', userController.validateProfile);
 Router.post('/userGames', userController.userGames);
 Router.post('/updateUserStats', userController.updateUserStats);
 Router.put('/updateDescribe', userController.updateDescribe);
+Router.post('/allUserChats', userController.getUserChats)
 Router.put('/updateBg', userController.updateBg);
 
 Router.get('/initGames', SteamGamesController.getListGames);

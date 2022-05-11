@@ -22,7 +22,7 @@ export const getNews = (id, func) => {
           re3,
           'https://cdn.akamai.steamstatic.com/steamcommunity/public/images/clans/'
         );
-        newData = clearData.replace(re2, '$1 width="800"');
+        newData = clearData.replace(re2, '$1 width="100%"');
         // console.log(newData);
         return func(newData);
       }
