@@ -20,6 +20,7 @@ import Navbar from '../Nav/Navbar';
 import MainAuth from '../MainAuth/MainAuth';
 import LocalProfile from '../LocalProfile/LocalProfile';
 import Loader from '../Loader/Loader';
+import Dialog from '../Dialog/Dialog';
 import DialogsButton from '../DialogsButton/DialogsButton';
 import ChatFormModal from '../ChatFormModal/ChatFormModal';
 
