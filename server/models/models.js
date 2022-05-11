@@ -57,6 +57,26 @@ const BgVideo = sequelize.define('bgVideo', {
   link: { type: DataTypes.TEXT },
 });
 
+const Chat = sequelize.define('chat', {
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  chatLink: { type: DataTypes.TEXT, unique: true },
+});
+
+const UserChat = sequelize.define('userChat', {
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  chat_id: { type: DataTypes.TEXT },
+  user_id: { type: DataTypes.TEXT },
+});
+
+const ChatMessage = sequelize.define('chatMessage', {
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  messageText: { type: DataTypes.TEXT },
+});
+
+// const UserChat = sequelize.define('userChat', {
+//   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+// })
+
 User.belongsToMany(Friend, { through: FriendsList });
 Friend.belongsToMany(User, { through: FriendsList });
 // Friend.hasMany(User);
@@ -70,6 +90,18 @@ Friend.belongsToMany(User, { through: FriendsList });
 
 User.hasMany(UserCreatePost);
 UserCreatePost.belongsTo(User);
+
+// User.hasMany(UserChat)
+// UserChat.belongsTo(User)
+
+// UserChat.hasMany(ChatMessage)
+// ChatMessage.belongsTo(UserChat)
+
+// UserChat.hasMany(Chat)
+// Chat.belongsTo(UserChat)
+
+// User.hasMany(ChatMessage)
+// ChatMessage.belongsTo(User)
 
 // User.hasMany(Statistic);
 // Statistic.belongsTo(User);
@@ -88,4 +120,7 @@ module.exports = {
   Game,
   Statistic,
   BgVideo,
+  Chat,
+  ChatMessage,
+  UserChat,
 };
