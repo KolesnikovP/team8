@@ -1,14 +1,13 @@
+/* eslint-disable class-methods-use-this */
 const fetch = require('cross-fetch');
 const e = require('express');
-const { DataTypes } = require('sequelize');
-const { Op } = require('sequelize');
 const {
   Game, Statistic, User, UserCreatePost, UserChat, Chat, BgVideo,
 } = require('../models/models');
 const sequelize = require('../db');
 
 class UserController {
-  async authSuccess(req, res, next) {
+  async authSuccess(req, res) {
     if (req.user) {
       const userDto = await User.findOne({
         where: {

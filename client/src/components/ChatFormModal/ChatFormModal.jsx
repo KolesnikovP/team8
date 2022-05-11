@@ -1,9 +1,8 @@
-import React, { useCallback, useState } from 'react';
 import {
   Fab,
-  Avatar,
+  // Avatar,
   ListItemText,
-  ListItemIcon,
+  // ListItemIcon,
   ListItem,
   List,
   TextField,
@@ -14,51 +13,16 @@ import {
 } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 import classes from './ChatFormModal.module.css';
+import UserChatLink from './UserChatLink/UserChatLink';
 
 function ChatFormModal() {
-  const [searchChat, setSearchChat] = useState('');
-
-  const serachInput = useCallback(
-    (event) => {
-      setSearchChat(event.target.value);
-      console.log(searchChat);
-    },
-    [searchChat]
-  );
-
   return (
     <Box component="div">
       <Grid container component={Paper} className={classes.chatSection}>
         <Grid item xs={3} className={classes.borderRight500}>
-          <List>
-            <ListItem button key="RemySharp">
-              <ListItemIcon>
-                <Avatar alt="Remy Sharp" src="https://material-ui.com/static/images/avatar/1.jpg" />
-              </ListItemIcon>
-              <ListItemText primary="John Wick" />
-            </ListItem>
-          </List>
           <Divider />
-          <Grid item xs={12} style={{ padding: '10px' }}>
-            <TextField
-              id="outlined-basic-email"
-              label="Search"
-              variant="outlined"
-              value={searchChat}
-              onChange={serachInput}
-              fullWidth
-            />
-          </Grid>
           <Divider />
-          <List>
-            <ListItem button key="RemySharp">
-              <ListItemIcon>
-                <Avatar alt="Remy Sharp" src="https://material-ui.com/static/images/avatar/1.jpg" />
-              </ListItemIcon>
-              <ListItemText primary="Remy Sharp">Remy Sharp</ListItemText>
-              <ListItemText secondary="online" align="right" />
-            </ListItem>
-          </List>
+          <UserChatLink />
         </Grid>
         <Grid item xs={9}>
           <List className={classes.messageArea}>

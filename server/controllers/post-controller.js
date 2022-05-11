@@ -1,9 +1,10 @@
+/* eslint-disable class-methods-use-this */
 const {
   Game, UserCreatePost, Statistic, User,
 } = require('../models/models');
 
 class PostController {
-  async getPostsList(req, res, next) {
+  async getPostsList(req, res) {
     try {
       const postsList = await UserCreatePost.findAll({ raw: true });
       const response = [];
@@ -13,6 +14,7 @@ class PostController {
             id: post.userId,
           },
         });
+        console.log(user);
         const author = user.steamNickname;
         const game = await Game.findOne({
           where: {

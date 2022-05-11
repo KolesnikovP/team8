@@ -11,15 +11,14 @@ export default function DialogsButton({ handleClickOpenChat }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.userReducer);
-  const id = user.steamId;
+  // const id = user.steamId;
 
   useEffect(() => {
     dispatch(getFecthUserChats(user));
   }, [user]);
 
   const { chats } = useSelector((state) => state.userChatReducer);
-  console.log(chats.allUsers);
-
+  console.log(chats);
   const actions = [
     {
       icon: (
@@ -39,11 +38,17 @@ export default function DialogsButton({ handleClickOpenChat }) {
   ];
 
   return (
-    <SpeedDial
-      ariaLabel="SpeedDial basic example"
-      sx={{ position: 'fixed', bottom: 16, right: 16 }}
-      icon={<MailOutline />}
-      onClick={handleClickOpenChat}
-    />
+    <div>
+      {chats?.chatLinks !== undefined ? (
+        <SpeedDial
+          ariaLabel="SpeedDial basic example"
+          sx={{ position: 'fixed', bottom: 16, right: 16 }}
+          icon={<MailOutline />}
+          onClick={handleClickOpenChat}
+        />
+      ) : (
+        <div />
+      )}
+    </div>
   );
 }
