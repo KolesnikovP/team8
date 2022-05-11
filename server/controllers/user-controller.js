@@ -48,7 +48,6 @@ class UserController {
           steamId: id,
         },
       });
-      // console.log(userInfo)
       const bg = await BgVideo.findOne({
         where: {
           id: userInfo.bgVideoId,
@@ -64,6 +63,14 @@ class UserController {
         where: {
           userId: userInfo.id,
         },
+      });
+      userPosts.map(async (post) => {
+        const gameName = await Game.findOne({
+          where: {
+            id: post.gameId,
+          },
+        });
+        post.gameName = gameName.gameSteamName;
       });
       response.push(userInfo, userStats, userPosts);
       res.status(200).json({ response });

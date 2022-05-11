@@ -7,11 +7,11 @@ require('./services/passport');
 
 const PORT = process.env.PORT || 3000;
 const app = express();
+const WSServer = require('express-ws')(app);
+const ws = require('ws');
 const Router = require('./router/router');
 const authRoute = require('./router/auth');
-const WSServer = require('express-ws')(app);
 const sequelize = require('./db');
-const ws = require('ws');
 
 const aWss = WSServer.getWss();
 const {

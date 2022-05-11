@@ -75,6 +75,12 @@ class PostController {
       console.error('Message: ', error);
     }
   }
+
+  async delPost(req, res, next) {
+    if (req.body.id) {
+      console.log(req.body.id);
+    }
+  }
 }
 
 module.exports = new PostController();

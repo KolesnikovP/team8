@@ -7,6 +7,7 @@ const chatController = require('../controllers/chat-controller');
 
 Router.get('/initPosts', postController.getPostsList);
 Router.post('/addPost', postController.addPost);
+Router.post('/delPost', postController.addPost);
 
 Router.get('/initUsers', userController.getUsersList);
 Router.post('/validateProfile', userController.validateProfile);

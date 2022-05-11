@@ -24,19 +24,19 @@ export const addNewPostFetch = (post) => {
       .catch((err) => console.log(err));
   };
 };
-
-export const delPost = (id) => {
-  return (dispatch) => {
-    console.log(post);
-    fetch('http://localhost:4000/api/delPost', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(id),
-    })
-      .then((response) => response.json())
-      .then((data) => dispatch(addNewPostAC(data)))
-      .catch((err) => console.log(err));
-  };
-};
+// export const delPost = (id) => {
+//   console.log(id);
+//   return (dispatch) => {
+//     // console.log(id);
+//     fetch('http://localhost:4000/api/delPost', {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json',
+//       },
+//       body: JSON.stringify(id),
+//     })
+//       .then((response) => response.json())
+//       .then((data) => dispatch(getAllPostsAC(data)))
+//       .catch((err) => console.log(err));
+//   };
+// };

@@ -9,12 +9,11 @@ import PersonAddIcon from '@mui/icons-material/PersonAdd';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Box } from '@mui/system';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import React, { useEffect, useRef, useState } from 'react';
+import { delPost } from '../../redux/thunk/posts';
 
 const { v1: uuidv1 } = require('uuid');
-// import { useSelector } from 'react-redux';
-// import style from './PostMin.module.css';
 
 function PostMin({ post }) {
   const params = useParams();
@@ -23,6 +22,7 @@ function PostMin({ post }) {
   const socket = useRef();
   const [connected, setConnected] = useState(false);
   const [username, setUsername] = useState('');
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setUsername(user?.steamNickname);
@@ -36,9 +36,9 @@ function PostMin({ post }) {
   function connect() {
     navigate(`/chat/${user.steamId}-${post.authorId}`);
   }
-  function del() {
-    console.log(post.id);
-  }
+  // const del = () => {
+  //   dispatch(delPost(post.id));
+  // };
   return (
     <Grid
       container
@@ -69,9 +69,10 @@ function PostMin({ post }) {
       <Grid item xs={2}>
         <Box sx={{ alignItems: 'center', display: 'flex' }}>
           {user?.steamId === post.authorId ? (
-            <IconButton onClick={del}>
-              <ClearIcon color="primary" />
-            </IconButton>
+            // <IconButton onClick={del}>
+            //   <ClearIcon color="primary" />
+            // </IconButton>
+            ''
           ) : (
             <IconButton onClick={connect}>
               <MailOutlineIcon color="primary" />
