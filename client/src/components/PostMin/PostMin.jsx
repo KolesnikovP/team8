@@ -36,9 +36,9 @@ function PostMin({ post }) {
   function connect() {
     navigate(`/chat/${user.steamId}-${post.authorId}`);
   }
-  // const del = () => {
-  //   dispatch(delPost(post.id));
-  // };
+  const del = () => {
+    dispatch(delPost(post.id));
+  };
   return (
     <Grid
       container
@@ -69,11 +69,11 @@ function PostMin({ post }) {
       <Grid item xs={2}>
         <Box sx={{ alignItems: 'center', display: 'flex' }}>
           {user?.steamId === post.authorId ? (
-            // <IconButton onClick={del}>
-            //   <ClearIcon color="primary" />
-            // </IconButton>
-            ''
+            <IconButton onClick={del}>
+              <ClearIcon color="primary" />
+            </IconButton>
           ) : (
+            // ''
             <IconButton onClick={connect}>
               <MailOutlineIcon color="primary" />
             </IconButton>

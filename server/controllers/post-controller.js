@@ -77,9 +77,14 @@ class PostController {
   }
 
   async delPost(req, res, next) {
-    if (req.body.id) {
-      console.log(req.body.id);
-    }
+    if (req.params.id) {
+      await UserCreatePost.destroy({
+        where: {
+          id: req.params.id,
+        },
+      });
+      res.status(200).json({ id: req.params.id });
+    } else res.status(404).send('error');
   }
 }
 

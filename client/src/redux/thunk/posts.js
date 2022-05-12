@@ -1,4 +1,4 @@
-import { getAllPostsAC, addNewPostAC } from '../reducers/postsReducer';
+import { getAllPostsAC, addNewPostAC, delPostAC } from '../reducers/postsReducer';
 
 export const getFetchPostsList = () => {
   return (dispatch) => {
@@ -11,7 +11,6 @@ export const getFetchPostsList = () => {
 
 export const addNewPostFetch = (post) => {
   return (dispatch) => {
-    console.log(post);
     fetch('http://localhost:4000/api/addPost', {
       method: 'POST',
       headers: {
@@ -24,19 +23,16 @@ export const addNewPostFetch = (post) => {
       .catch((err) => console.log(err));
   };
 };
-// export const delPost = (id) => {
-//   console.log(id);
-//   return (dispatch) => {
-//     // console.log(id);
-//     fetch('http://localhost:4000/api/delPost', {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json',
-//       },
-//       body: JSON.stringify(id),
-//     })
-//       .then((response) => response.json())
-//       .then((data) => dispatch(getAllPostsAC(data)))
-//       .catch((err) => console.log(err));
-//   };
-// };
+export const delPost = (id) => {
+  return (dispatch) => {
+    fetch(`http://localhost:4000/api/delPost/${id}`)
+      .then((response) => {
+        if (response.status === 200) {
+          return response.json();
+        }
+        throw new Error();
+      })
+      .then((data) => dispatch(delPostAC(data.id)))
+      .catch((err) => console.log(err));
+  };
+};
