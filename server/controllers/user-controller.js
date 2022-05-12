@@ -5,7 +5,7 @@ const {
 } = require('../models/models');
 
 class UserController {
-  async authSuccess(req, res, next) {
+  async authSuccess(req, res) {
     if (req.user) {
       const userDto = await User.findOne({
         where: {
@@ -29,19 +29,19 @@ class UserController {
     }
   }
 
-  async authFailed(req, res, next) {
+  async authFailed(req, res) {
     res.status(401).json({
       success: false,
       message: 'failure',
     });
   }
 
-  async authLogout(req, res, next) {
+  async authLogout(req, res) {
     req.logout();
     res.redirect(process.env.CLIENT_URL);
   }
 
-  async getInfo(req, res, next) {
+  async getInfo(req, res) {
     const { id } = req.body;
     try {
       const response = [];
@@ -81,7 +81,7 @@ class UserController {
     }
   }
 
-  async validateProfile(req, res, next) {
+  async validateProfile(req, res) {
     if (req.body.id) {
       const validate = await Statistic.findAll({
         where: {
@@ -122,7 +122,7 @@ class UserController {
     }
   }
 
-  async userGames(req, res, next) {
+  async userGames(req, res) {
     if (req.body.id) {
       try {
         const games = await Statistic.findAll({
@@ -137,7 +137,7 @@ class UserController {
     }
   }
 
-  async updateDescribe(req, res, next) {
+  async updateDescribe(req, res) {
     const { steamId, description } = req.body;
     try {
       const user = await User.findOne({
@@ -152,7 +152,7 @@ class UserController {
     }
   }
 
-  async updateBg(req, res, next) {
+  async updateBg(req, res) {
     const { id, bgVideoId } = req.body;
     try {
       const user = await User.findOne({
@@ -167,7 +167,7 @@ class UserController {
     }
   }
 
-  async getUsersList(req, res, next) {
+  async getUsersList(req, res) {
     try {
       const users = await User.findAll({ raw: true });
       res.json(users);
@@ -176,7 +176,7 @@ class UserController {
     }
   }
 
-  async updateUserStats(req, res, next) {
+  async updateUserStats(req, res) {
     if (req.body.id) {
       const response = await fetch(
         `http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=DA22CF06CD504ADB087C83908040E3C6&steamid=${req.body.id}&format=json`,
