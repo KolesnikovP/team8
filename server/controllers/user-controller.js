@@ -1,3 +1,7 @@
+/* eslint-disable consistent-return */
+/* eslint-disable array-callback-return */
+/* eslint-disable max-len */
+/* eslint-disable no-shadow */
 /* eslint-disable class-methods-use-this */
 const fetch = require('cross-fetch');
 const e = require('express');
@@ -242,7 +246,6 @@ class UserController {
     const { user } = await (req.body);
     // console.log(user.id, user);
     const userIdToCompare = String(user.id);
-    const allChatsWithLinks = await Chat.findAll();
     const usersFromBD = await User.findAll({ raw: true });
     // console.log(usersFromBD);
     if (user !== {} && user.id !== undefined) {
@@ -252,18 +255,92 @@ class UserController {
 
       const allUsers = usersFromBD.filter((el) => el.id !== Number(userIdToCompare));
 
+      const steamBdIds = allUsers.map((el) => el.steamId);
+      console.log(allUsers);
+
       const chatLinks = [];
+      const steamIdArrTogether = [];
+      const steamIdArr = [];
+
       const prom = await chats.map(async (el) => {
         const link = await Chat.findOne({
           where: {
             id: el.chat_id,
           },
         });
-        // Promise.all(link)
         chatLinks.push(link.chatLink);
+        steamIdArrTogether.push(link.chatLink.slice(27, link.chatLink.length));
+        const allLinks = steamIdArrTogether.map((el) => {
+          steamIdArr.push(el.split('-'));
+        });
       });
 
-      Promise.all(prom).then(() => res.status(200).json({ allUsers, chatLinks }));
+      // [
+      //   [ '76561198098108764', '76561198862129364' ],
+      //   [ '76561198098108764', '76561198862129364' ],
+      //   [ '76561198862129364', '76561198862129399' ]
+      // ]
+
+      const userIdChats = [];
+
+      await Promise.all(prom);
+      steamIdArr.map((el1) => {
+        const curr = el1;
+        steamBdIds.map((el2) => curr.map((el) => {
+          if (el2 === el) {
+            userIdChats.push(el2);
+          }
+        }));
+      });
+
+
+      const resultArrLinks = [];
+      const testArr = [];
+      testArr.push(chatLinks);
+
+      const allLinksResult = testArr.map((el1) => el1);
+      const linksArr = allLinksResult.flat();
+
+      userIdChats.map((el1) => {
+        linksArr.map((el2) => {
+          if (el2.includes(el1)) {
+            resultArrLinks.push(el2);
+          }
+        });
+      });
+
+      const linksArr1 = [];
+
+      resultArrLinks.map((el, i) => {
+        if (resultArrLinks[i] !== resultArrLinks[i + 1]) {
+          linksArr1.push(resultArrLinks[i]);
+        }
+      });
+
+      function deleteDouble(linksArr1) {
+        for (var q = 1, i = 1; q < linksArr1.length; ++q) {
+          if (linksArr1[q] !== linksArr1[q - 1]) {
+            linksArr1[i++] = linksArr1[q];
+          }
+        }
+        linksArr1.length = i;
+        return linksArr1;
+      }
+
+      const sendToClientUsers = []
+
+      allUsers.map((el) => {
+        userIdChats.map((el1) => {
+          if(el.steamId === el1){
+            sendToClientUsers.push(el)
+          }
+        })
+      })
+
+      const sendToClientLinks = deleteDouble(linksArr1);
+
+      console.log(sendToClientLinks);
+      Promise.all(prom).then(() => res.status(200).json({ sendToClientUsers, sendToClientLinks }));
     }
   }
 }

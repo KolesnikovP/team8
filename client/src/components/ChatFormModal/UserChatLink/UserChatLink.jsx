@@ -13,11 +13,10 @@ export default function UserChatLink({ getId }) {
   }, []);
 
   const { chats } = useSelector((state) => state.userChatReducer);
-  // console.log('===>', chats.allUsers);
 
   return (
     <List>
-      {chats.allUsers.map((el) => {
+      {chats.sendToClientUsers.map((el) => {
         return (
           <ListItem button key="RemySharp" onClick={() => getId(el.steamId)}>
             <ListItemIcon>
