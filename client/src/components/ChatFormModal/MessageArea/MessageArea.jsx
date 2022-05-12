@@ -1,10 +1,11 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable react/prop-types */
-import { List, Fab, TextField, Grid, Divider, Typography } from '@mui/material';
+import { List, Fab, TextField, Grid, Typography, Box } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import SendIcon from '@mui/icons-material/Send';
 // import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
+import ScrollToBottom, { useScrollToBottom } from 'react-scroll-to-bottom';
 import Message from '../Message/Message';
 import { getNews } from '../../../redux/thunk/chat';
 import classes from '../ChatFormModal.module.css';
@@ -14,6 +15,7 @@ function MessageArea({ user, chatLink, socket, messages, setMessages }) {
   const [value, setValue] = useState('');
 
   const [history, setHistory] = useState('');
+
   useEffect(() => {
     getNews(chatId, setHistory);
     socket.current = new WebSocket('ws://localhost:4000');
@@ -39,7 +41,7 @@ function MessageArea({ user, chatLink, socket, messages, setMessages }) {
     socket.current.onerror = () => {
       console.log('Socket произошла ошибка');
     };
-  }, [user?.length]);
+  }, [user?.length, chatLink]);
 
   const sendMessage = async () => {
     const uniqId = uuidv4().split('-');
@@ -54,29 +56,34 @@ function MessageArea({ user, chatLink, socket, messages, setMessages }) {
       idUser: user.id,
       createdAt: Date.now(),
       messageText: value,
+      userName: user.steamNickname,
     };
     socket.current.send(JSON.stringify(message));
     setValue('');
   };
 
+  const scrollToBottom = useScrollToBottom();
+
   return (
     <>
-      {/* <Fab color="primary" aria-label="add" onClick={closeChat}>
-        <CloseOutlinedIcon />
-      </Fab> */}
       <List className={classes.messageArea} sx={{ flexDirection: 'column-reverse' }}>
-        {history?.length ? (
-          history?.map((msg) => {
-            return <Message key={msg.id} mess={msg} user={user} />;
-          })
-        ) : (
-          <Typography sx={{ textAlign: 'center' }}>История сообщений пуста</Typography>
-        )}
-        {messages.map((mess) =>
-          mess.event === 'connection' ? [] : <Message key={mess.id} mess={mess} user={user} />
-        )}
+        <ScrollToBottom className={classes.messageArea}>
+          <Box sx={{ display: 'flex', flexDirection: 'column-reverse' }}>
+            {history?.length ? (
+              history?.map((msg) => {
+                return <Message key={msg.id} mess={msg} user={user} />;
+              })
+            ) : (
+              <Typography sx={{ textAlign: 'center' }}>История сообщений пуста</Typography>
+            )}
+          </Box>
+          <Box sx={{ display: 'flex', flexDirection: 'column-reverse' }}>
+            {messages.map((mess) =>
+              mess.event === 'connection' ? [] : <Message key={mess.id} mess={mess} user={user} />
+            )}
+          </Box>
+        </ScrollToBottom>
       </List>
-      <Divider />
       <Grid container style={{ padding: '1rem' }}>
         <Grid item xs={11}>
           <TextField
@@ -88,7 +95,15 @@ function MessageArea({ user, chatLink, socket, messages, setMessages }) {
           />
         </Grid>
         <Grid item xs={1} align="right">
-          <Fab color="primary" aria-label="add" onClick={sendMessage}>
+          <Fab
+            color="primary"
+            aria-label="add"
+            onClick={() => {
+              sendMessage();
+              scrollToBottom();
+            }}
+            size="small"
+          >
             <SendIcon />
           </Fab>
         </Grid>

@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable prefer-const */
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -17,7 +18,7 @@ import { getFetchGamesList } from '../../redux/thunk/getGame';
 import { getFetchPostsList } from '../../redux/thunk/posts';
 import PostMin from '../PostMin/PostMin';
 
-function PostList() {
+function PostList({ handleClickOpenChat, getId }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -138,10 +139,17 @@ function PostList() {
       </Grid>
       <Box sx={{ marginBottom: '2rem' }} />
       {sortedPosts?.length ? (
-        sortedPosts?.map((post) => <PostMin key={post.id} post={post} />)
+        sortedPosts?.map((post) => (
+          <PostMin
+            getId={getId}
+            key={post.id}
+            post={post}
+            handleClickOpenChat={handleClickOpenChat}
+          />
+        ))
       ) : (
         <Typography sx={{ textAlign: 'center', marginBottom: '2rem' }} variant="h5">
-          В данный момент никто не ищет тиммейтов :(
+          В данный момент никто не ищет тиммейтов
         </Typography>
       )}
     </Container>

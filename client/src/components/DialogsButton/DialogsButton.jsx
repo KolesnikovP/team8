@@ -20,7 +20,7 @@ export default function DialogsButton({ handleClickOpenChat }) {
   const { chats } = useSelector((state) => state.userChatReducer);
   return (
     <div>
-      {chats?.chatLinks !== undefined ? (
+      {chats?.sendToClientLinks !== undefined ? (
         <SpeedDial
           ariaLabel="SpeedDial basic example"
           sx={{ position: 'fixed', bottom: 16, right: 16 }}

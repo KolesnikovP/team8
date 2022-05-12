@@ -5,7 +5,6 @@ import { Avatar, Grid, IconButton, Typography } from '@mui/material';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import ClearIcon from '@mui/icons-material/Clear';
 import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
-import PersonAddIcon from '@mui/icons-material/PersonAdd';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Box } from '@mui/system';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -15,7 +14,7 @@ import { delPost } from '../../redux/thunk/posts';
 
 const { v1: uuidv1 } = require('uuid');
 
-function PostMin({ post, local, profile }) {
+function PostMin({ post, handleClickOpenChat, getId, local, profile }) {
   const params = useParams();
   const { user } = useSelector((state) => state.userReducer);
   const [messages, setMessages] = useState([]);
@@ -93,11 +92,26 @@ function PostMin({ post, local, profile }) {
             <IconButton onClick={() => navigate(`/profile/${post.authorId}`)}>
               <AssignmentIndIcon color="primary" />
             </IconButton>
-            <IconButton>
-              <PersonAddIcon color="primary" />
+//             <IconButton>
+//               <PersonAddIcon color="primary" />
+//             </IconButton>
+//           </Box>
+//         )}
+          ) : (
+            <IconButton
+              onClick={() => {
+                handleClickOpenChat();
+                getId(post.authorId);
+              }}
+            >
+              <MailOutlineIcon color="primary" />
             </IconButton>
-          </Box>
-        )}
+          )}
+
+          <IconButton onClick={() => navigate(`/profile/${post.authorId}`)}>
+            <AssignmentIndIcon color="primary" />
+          </IconButton>
+        </Box>
       </Grid>
       <Grid item xs={1}>
         <Typography>{post.createdAt.slice(0, post.createdAt.length - 14)}</Typography>
