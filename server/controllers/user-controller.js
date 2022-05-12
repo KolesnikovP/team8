@@ -18,12 +18,14 @@ class UserController {
           steamId: req.user.id,
         },
       });
-      const bg = await BgVideo.findOne({
-        where: {
-          id: userDto.bgVideoId,
-        },
-      });
-      userDto.bgVideoId = bg.link;
+      if (userDto) {
+        const bg = await BgVideo.findOne({
+          where: {
+            id: userDto.bgVideoId,
+          },
+        });
+        userDto.bgVideoId = bg.link;
+      }
       res.status(200).json({
         success: true,
         message: 'successfull',
@@ -33,19 +35,19 @@ class UserController {
     }
   }
 
-  async authFailed(req, res, next) {
+  async authFailed(req, res) {
     res.status(401).json({
       success: false,
       message: 'failure',
     });
   }
 
-  async authLogout(req, res, next) {
+  async authLogout(req, res) {
     req.logout();
     res.redirect(process.env.CLIENT_URL);
   }
 
-  async getInfo(req, res, next) {
+  async getInfo(req, res) {
     const { id } = req.body;
     try {
       const response = [];
@@ -54,7 +56,6 @@ class UserController {
           steamId: id,
         },
       });
-      // console.log(userInfo)
       const bg = await BgVideo.findOne({
         where: {
           id: userInfo.bgVideoId,
@@ -71,6 +72,14 @@ class UserController {
           userId: userInfo.id,
         },
       });
+      userPosts.map(async (post) => {
+        const gameName = await Game.findOne({
+          where: {
+            id: post.gameId,
+          },
+        });
+        post.gameName = gameName.gameSteamName;
+      });
       response.push(userInfo, userStats, userPosts);
       res.status(200).json({ response });
     } catch (e) {
@@ -78,7 +87,7 @@ class UserController {
     }
   }
 
-  async validateProfile(req, res, next) {
+  async validateProfile(req, res) {
     if (req.body.id) {
       const validate = await Statistic.findAll({
         where: {
@@ -119,7 +128,7 @@ class UserController {
     }
   }
 
-  async userGames(req, res, next) {
+  async userGames(req, res) {
     if (req.body.id) {
       try {
         const games = await Statistic.findAll({
@@ -134,7 +143,7 @@ class UserController {
     }
   }
 
-  async updateDescribe(req, res, next) {
+  async updateDescribe(req, res) {
     const { steamId, description } = req.body;
     try {
       const user = await User.findOne({
@@ -149,7 +158,7 @@ class UserController {
     }
   }
 
-  async updateBg(req, res, next) {
+  async updateBg(req, res) {
     const { id, bgVideoId } = req.body;
     try {
       const user = await User.findOne({
@@ -164,7 +173,7 @@ class UserController {
     }
   }
 
-  async getUsersList(req, res, next) {
+  async getUsersList(req, res) {
     try {
       const users = await User.findAll({ raw: true });
       res.json(users);
@@ -173,7 +182,7 @@ class UserController {
     }
   }
 
-  async updateUserStats(req, res, next) {
+  async updateUserStats(req, res) {
     if (req.body.id) {
       const response = await fetch(
         `http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=DA22CF06CD504ADB087C83908040E3C6&steamid=${req.body.id}&format=json`,

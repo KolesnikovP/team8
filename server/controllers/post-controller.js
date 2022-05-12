@@ -41,13 +41,11 @@ class PostController {
     }
   }
 
-  async addPost(req, res, next) {
+  async addPost(req, res) {
     try {
       const {
         description, gameSteamId, steamId, userId, userSteamAvatar,
       } = req.body;
-      // console.log(req.body)
-      // console.log(req.body);
       const statistic = await Statistic.findOne({
         where: {
           gameSteamId,
@@ -76,6 +74,17 @@ class PostController {
     } catch (error) {
       console.error('Message: ', error);
     }
+  }
+
+  async delPost(req, res) {
+    if (req.params.id) {
+      await UserCreatePost.destroy({
+        where: {
+          id: req.params.id,
+        },
+      });
+      res.status(200).json({ id: req.params.id });
+    } else res.status(404).send('error');
   }
 }
 

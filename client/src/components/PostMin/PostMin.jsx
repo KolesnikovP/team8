@@ -3,17 +3,17 @@
 /* eslint-disable react/prop-types */
 import { Avatar, Grid, IconButton, Typography } from '@mui/material';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
+import ClearIcon from '@mui/icons-material/Clear';
 import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Box } from '@mui/system';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import React, { useEffect, useRef, useState } from 'react';
+import { delPost } from '../../redux/thunk/posts';
 
 const { v1: uuidv1 } = require('uuid');
-// import { useSelector } from 'react-redux';
-// import style from './PostMin.module.css';
 
 function PostMin({ post }) {
   const params = useParams();
@@ -22,6 +22,7 @@ function PostMin({ post }) {
   const socket = useRef();
   const [connected, setConnected] = useState(false);
   const [username, setUsername] = useState('');
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setUsername(user?.steamNickname);
@@ -35,6 +36,9 @@ function PostMin({ post }) {
   function connect() {
     navigate(`/chat/${user.steamId}-${post.authorId}`);
   }
+  const del = () => {
+    dispatch(delPost(post.id));
+  };
   return (
     <Grid
       container
@@ -58,9 +62,6 @@ function PostMin({ post }) {
           alt={`appIcon_${post.gameName}`}
           width="100px"
         />
-        {/* <Typography color="#b8860b" sx={{ textAlign: 'center' }}> */}
-        {/* {post.gameName}
-        </Typography> */}
       </Grid>
       <Grid item xs={2}>
         <Typography>{post.userHours}</Typography>
@@ -68,8 +69,11 @@ function PostMin({ post }) {
       <Grid item xs={2}>
         <Box sx={{ alignItems: 'center', display: 'flex' }}>
           {user?.steamId === post.authorId ? (
-            ''
+            <IconButton onClick={del}>
+              <ClearIcon color="primary" />
+            </IconButton>
           ) : (
+            // ''
             <IconButton onClick={connect}>
               <MailOutlineIcon color="primary" />
             </IconButton>
