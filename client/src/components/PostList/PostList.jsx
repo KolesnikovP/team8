@@ -26,7 +26,7 @@ function PostList({ handleClickOpenChat }) {
     dispatch(getFetchGamesList());
   }, [dispatch]);
 
-  const [sortedPosts, setSortedPosts] = useState('');
+  const [sortedPosts, setSortedPosts] = useState(null);
   const { posts } = useSelector((state) => state.postsReducer);
   useEffect(() => {
     setSortedPosts(posts);
@@ -137,12 +137,14 @@ function PostList({ handleClickOpenChat }) {
           </ToggleButtonGroup>
         </Grid>
       </Grid>
-      <Box sx={{ marginBottom: '2rem' }}>
-        {sortedPosts?.length &&
-          sortedPosts?.map((post) => (
-            <PostMin key={post.id} post={post} handleClickOpenChat={handleClickOpenChat} />
-          ))}
-      </Box>
+      <Box sx={{ marginBottom: '2rem' }} />
+      {sortedPosts?.length ? (
+        sortedPosts?.map((post) => <PostMin key={post.id} post={post} handleClickOpenChat={handleClickOpenChat} />)
+      ) : (
+        <Typography sx={{ textAlign: 'center', marginBottom: '2rem' }} variant="h5">
+          В данный момент никто не ищет тиммейтов :(
+        </Typography>
+      )}
     </Container>
   );
 }

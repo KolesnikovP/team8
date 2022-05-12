@@ -12,7 +12,7 @@ function ListGameRadio({ game, setHelperText }) {
 
   return (
     // eslint-disable-next-line jsx-a11y/label-has-associated-control
-    <Box component="label" className="radio-control">
+    <Box component="label" className="radio-control" sx={{ margin: '5px' }}>
       <FormControl
         component="input"
         type="radio"

@@ -1,4 +1,6 @@
 /* eslint-disable react/prop-types */
+/* eslint-disable jsx-a11y/iframe-has-title */
+
 import React, { useCallback, useEffect, useState } from 'react';
 // import styled from '@emotion/styled';
 import { Container, List, Box } from '@mui/material';
@@ -45,6 +47,12 @@ function MainAuth(props) {
   return (
     <>
       <Container>
+        {/* <embed
+          src="https://www.theloadout.com/wp-content/uploads/2022/05/apex-legends-season-13-start-time-900x506.jpg"
+          width="100"
+          height="100"
+          // onError="alert('Неверный URL');"
+        /> */}
         <Box
           sx={{
             display: 'flex',
