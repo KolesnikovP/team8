@@ -12,6 +12,7 @@ class SteamGamesController {
   }
 
   async getNewsGames(req, res, next) {
+    // console.log(req.body.id);
     if (req.body.id) {
       const { id } = req.body;
       const rnd = Math.floor(Math.random() * 10);

@@ -8,14 +8,24 @@ import { fetchUserGames } from '../../redux/thunk/user';
 import { setUserDescribe, updateUserStats } from '../../redux/thunk/userProfile';
 import VideoBg from '../VideoBg/VideoBg';
 import ProfileModalBg from '../ProfileModalBg/ProfileModalBg';
+import { getFetchPostsList } from '../../redux/thunk/posts';
+import PostMin from '../PostMin/PostMin';
 
 function Profile() {
   const { user } = useSelector((state) => state.userReducer);
   const { profGames } = useSelector((state) => state.profileReducer);
+  const { posts } = useSelector((state) => state.postsReducer);
+
   const dispatch = useDispatch();
   const [hidden, setHidden] = useState(true);
   const [bg, setBg] = useState(null);
   const [open, setOpen] = useState(false);
+  const profile = true
+  const local = true
+
+  useEffect(() => {
+    dispatch(getFetchPostsList());
+  }, [dispatch]);
   useEffect(() => {
     dispatch(fetchUserGames(user?.steamId));
     setBg(user?.bgVideoId);
@@ -33,11 +43,11 @@ function Profile() {
   }
   return (
     <Box>
-      {bg && <VideoBg bg={bg} />}
+      {bg && <VideoBg bg={bg}/>}
       <Container>
         <Box>
           <Typography variant="h3" color="primary" sx={{ textAlign: 'center' }}>{user.steamNickname}</Typography>
-          <Box sx={{ display: 'flex', justifyContent: 'space-around', marginTop: '2rem', border: '1px solid #90caf9', padding: '2rem', borderRadius: '1rem' }}>
+          <Box sx={{ display: 'flex', justifyContent: 'space-around', marginTop: '2rem', border: '1px solid #90caf9', padding: '2rem', borderRadius: '0.3rem' }}>
             <Avatar
               src={user.steamAvatar}
               sx={{ width: 220, height: 220, border: '1px solid #90caf9' }}
@@ -46,7 +56,7 @@ function Profile() {
               {hidden ?
                 <Typography
                   sx={{ maxWidth: '400px' }}
-                >{user.description}</Typography>
+                >{user.description ? user.description : 'Добавте описание профиля'}</Typography>
                 :
                 <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                   <TextareaAutosize
@@ -109,6 +119,16 @@ function Profile() {
               <Typography>Количество часов: {game.userGameHours}</Typography>
             </Box>
           ))}
+          <Box>
+            {posts.length? 
+            posts.map(post => {
+              if(post.authorId === user.steamId) {
+                return <PostMin post={post} profile={profile} local={local}/>
+              }
+              return ''
+            })
+            : ''}
+          </Box>
           <Box>
             <Typography variant="h3">Comments block soon...</Typography>
           </Box>

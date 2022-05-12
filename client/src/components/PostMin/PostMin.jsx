@@ -14,7 +14,7 @@ import { delPost } from '../../redux/thunk/posts';
 
 const { v1: uuidv1 } = require('uuid');
 
-function PostMin({ post, handleClickOpenChat, getId }) {
+function PostMin({ post, handleClickOpenChat, getId, local, profile }) {
   const params = useParams();
   const { user } = useSelector((state) => state.userReducer);
   const [messages, setMessages] = useState([]);
@@ -38,6 +38,7 @@ function PostMin({ post, handleClickOpenChat, getId }) {
   const del = () => {
     dispatch(delPost(post.id));
   };
+  console.log(local);
   return (
     <Grid
       container
@@ -66,11 +67,36 @@ function PostMin({ post, handleClickOpenChat, getId }) {
         <Typography>{post.userHours}</Typography>
       </Grid>
       <Grid item xs={2}>
-        <Box sx={{ alignItems: 'center', display: 'flex' }}>
-          {user?.steamId === post.authorId ? (
-            <IconButton onClick={del}>
-              <ClearIcon color="primary" />
+        {profile && user?.steamId === post.authorId ? (
+          <IconButton onClick={del}>
+            <ClearIcon color="primary" />
+          </IconButton>
+        ) : (
+          ''
+        )}
+        {local ? (
+          ''
+        ) : (
+          <Box sx={{ alignItems: 'center', display: 'flex' }}>
+            {user?.steamId === post.authorId ? (
+              <IconButton onClick={del}>
+                <ClearIcon color="primary" />
+              </IconButton>
+            ) : (
+              // ''
+              <IconButton onClick={connect}>
+                <MailOutlineIcon color="primary" />
+              </IconButton>
+            )}
+
+            <IconButton onClick={() => navigate(`/profile/${post.authorId}`)}>
+              <AssignmentIndIcon color="primary" />
             </IconButton>
+//             <IconButton>
+//               <PersonAddIcon color="primary" />
+//             </IconButton>
+//           </Box>
+//         )}
           ) : (
             <IconButton
               onClick={() => {

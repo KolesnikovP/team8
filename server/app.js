@@ -30,7 +30,7 @@ app.use(express.json());
 app.use(
   cors({
     origin: process.env.CLIENT_URL,
-    // methods: 'GET,POST,PUT,DELETE',
+    methods: 'GET,POST,PUT,DELETE',
     optionsSuccessStatus: 200,
     credentials: true,
   }),
@@ -69,7 +69,6 @@ const start = async () => {
 start();
 
 const connectionHandler = async (ws, message) => {
-  console.log(message);
   ws.chatId = message.chatId;
   try {
     const findChat = await Chat.findAll({ where: { chatLink: message.chatId } });

@@ -20,7 +20,7 @@ export default function Footer() {
         // color="white"
       >
         <Container maxWidth="lg">
-          <Grid container spacing={5}>
+          {/* <Grid container spacing={5}>
             <Grid item xs={12} sm={4}>
               <Box textAlign="center" borderBottom={1}>
                 Fullstack js developer Alexey (TeamLead)
@@ -69,7 +69,7 @@ export default function Footer() {
                 </LinkMui>
               </Box>
             </Grid>
-          </Grid>
+          </Grid> */}
           <Box textAlign="center" pt={{ xs: 5, sm: 10 }} pb={{ xs: 5, sm: 0 }}>
             Team8 &reg; {new Date().getFullYear()}
           </Box>

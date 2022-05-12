@@ -31,6 +31,7 @@ function ChatFormModal({
   setIsParams,
 }) {
   // const [isClose, setClose] = useState(false);
+
   const socket = useRef();
   const [messages, setMessages] = useState([]);
 
@@ -42,7 +43,6 @@ function ChatFormModal({
           event: 'close',
           data: messages,
         };
-        // console.log('Zaktit');
         socket.current.send(JSON.stringify(msgData));
         socket.current.close();
         handleCloseChat();

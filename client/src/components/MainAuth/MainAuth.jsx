@@ -12,6 +12,7 @@ import UserCardModal from '../UserCardModal/UserCardModal';
 import Loader from '../Loader/Loader';
 import './Main.module.css';
 import { getNews } from '../../redux/thunk/getNews';
+import { getFetchGamesList } from '../../redux/thunk/getGame';
 
 function MainAuth(props) {
   const { handleClickOpenChat, user, getId } = props;
@@ -19,15 +20,20 @@ function MainAuth(props) {
 
   useEffect(() => {
     dispatch(getfetchUsersList());
+    dispatch(getFetchGamesList());
   }, [dispatch]);
 
   const { usersList } = useSelector((state) => state.usersListReducer);
   const { profGames } = useSelector((state) => state.profileReducer);
+  const { games } = useSelector((state) => state.gamesListReducer);
   const [news, setNews] = useState(null);
   useEffect(() => {
     const rnd = Math.floor(Math.random() * profGames.length);
     if (profGames[rnd]?.gameSteamId) {
       getNews(profGames[rnd].gameSteamId, setNews);
+    }
+    if (games[rnd]?.gameSteamId) {
+      getNews(games[rnd]?.gameSteamId, setNews);
     }
   }, [profGames]);
   const [openModal, setOpenModal] = useState(false);
@@ -47,12 +53,6 @@ function MainAuth(props) {
   return (
     <>
       <Container>
-        {/* <embed
-          src="https://www.theloadout.com/wp-content/uploads/2022/05/apex-legends-season-13-start-time-900x506.jpg"
-          width="100"
-          height="100"
-          // onError="alert('Неверный URL');"
-        /> */}
         <Box
           sx={{
             display: 'flex',

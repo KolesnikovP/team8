@@ -67,19 +67,52 @@ class UserController {
           steamId: id,
         },
       });
-      const userPosts = await UserCreatePost.findAll({
+      // const userPosts = await UserCreatePost.findAll({
+      //   where: {
+      //     userId: userInfo.id,
+      //   },
+      // });
+      // const promise = await userPosts.map(async (post, index) => {
+      //   const gameName = await Game.findOne({
+      //     where: {
+      //       id: post.gameId,
+      //     },
+      //     raw: true,
+      //   });
+      //   userPosts[index].dataValues.gameName = gameName.gameSteamName;
+      //   userPosts[index].dataValues.gameAppId = gameName.gameSteamId;
+      //   userPosts[index].dataValues.authorId = userInfo.steamId;
+      // });
+      // await Promise.all(promise);
+      const userPost1 = await UserCreatePost.findAll({
         where: {
           userId: userInfo.id,
         },
+        raw: true,
       });
-      userPosts.map(async (post) => {
-        const gameName = await Game.findOne({
+      const userPosts = [];
+      const promise = userPost1.map(async (post) => {
+        const author = userInfo.steamNickname;
+        const game = await Game.findOne({
           where: {
             id: post.gameId,
           },
         });
-        post.gameName = gameName.gameSteamName;
+        const gameName = game.gameSteamName;
+        const obj = {
+          id: post.id,
+          gameName,
+          author,
+          authorId: userInfo.steamId,
+          gameAppId: game.gameSteamId,
+          userHours: post.userHours,
+          description: post.description,
+          userSteamAvatar: post.userSteamAvatar,
+          createdAt: post.createdAt,
+        };
+        userPosts.push(obj);
       });
+      await Promise.all(promise);
       response.push(userInfo, userStats, userPosts);
       res.status(200).json({ response });
     } catch (e) {
@@ -104,25 +137,30 @@ class UserController {
         const userGames = await response.json();
         const gamesFromDb = await Game.findAll();
         const resArray = [];
-        gamesFromDb.map((el) => {
-          userGames.response.games.map((game) => {
-            if (el.gameSteamId === game.appid) {
-              const statUser = new Statistic({
-                userGameHours: Math.ceil(game.playtime_forever / 60),
-                userRank: 0,
-                steamId: req.body.id,
-                gameSteamId: game.appid,
-                gameName: el.gameSteamName,
-              });
-              statUser.save();
-              resArray.push(statUser);
-            }
-          });
-        });
-        if (resArray.length === 0) {
-          res.status(404).json({ message: 'Games not found' });
+        if (userGames.response.game_count === undefined) {
+          // console.log('tyt');
+          res.status(405).json({ message: 'Стим не может найти игры у вас на аккаунте' });
         } else {
-          res.status(200).json(resArray);
+          gamesFromDb.map((el) => {
+            userGames.response.games.map((game) => {
+              if (el.gameSteamId === game.appid) {
+                const statUser = new Statistic({
+                  userGameHours: Math.ceil(game.playtime_forever / 60),
+                  userRank: 0,
+                  steamId: req.body.id,
+                  gameSteamId: game.appid,
+                  gameName: el.gameSteamName,
+                });
+                statUser.save();
+                resArray.push(statUser);
+              }
+            });
+          });
+          if (resArray.length === 0) {
+            res.status(404).json({ message: 'Games not found' });
+          } else {
+            res.status(200).json(resArray);
+          }
         }
       }
     }
