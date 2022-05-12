@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Button from '@mui/material/Button';
-import { Avatar, Box, Container, TextareaAutosize, Typography } from '@mui/material';
+import { Avatar, Box, Container, Rating, TextareaAutosize, Typography, } from '@mui/material';
 import { fetchUserGames } from '../../redux/thunk/user';
 import { setUserDescribe, updateUserStats } from '../../redux/thunk/userProfile';
 import VideoBg from '../VideoBg/VideoBg';
@@ -93,7 +93,7 @@ function Profile() {
               >
                 Выбрать фон профиля
               </Button>
-
+              <Rating name="read-only" value={0} readOnly />
             </Box>
           </Box>
           {profGames.map((game, i) => (

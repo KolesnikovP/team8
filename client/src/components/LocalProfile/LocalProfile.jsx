@@ -1,7 +1,7 @@
 /* eslint-disable prefer-destructuring */
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Avatar, Box, Container, Typography, Button } from '@mui/material';
+import { Avatar, Box, Container, Typography, Button, Rating } from '@mui/material';
 import { getAllUserInfo } from '../../redux/thunk/getAllUserInfo';
 import VideoBg from '../VideoBg/VideoBg';
 
@@ -12,6 +12,7 @@ function LocalProfile() {
   const [games, setGames] = useState(null);
   const [posts, setPosts] = useState(null);
   const [bg, setBg] = useState(null);
+  const [value, setValue] = useState(null);
   // const bgDef =
   //   'https://cdn.akamai.steamstatic.com/steamcommunity/public/images/items/730/28280d425d20a4d8cd9cfeff3389c234968ca301.webm';
   useEffect(() => {
@@ -57,6 +58,13 @@ function LocalProfile() {
               <Button type="Button" onClick={() => openSteam()} variant="outlined">
                 Открыть профиль в стиме
               </Button>
+              <Rating
+                name="simple-controlled"
+                value={value}
+                onChange={(event, newValue) => {
+                  setValue(newValue);
+                }}
+              />
             </Box>
           </Box>
           {games?.map((game, i) => (
