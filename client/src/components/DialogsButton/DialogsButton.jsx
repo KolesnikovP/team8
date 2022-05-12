@@ -39,7 +39,7 @@ export default function DialogsButton({ handleClickOpenChat }) {
 
   return (
     <div>
-      {chats?.chatLinks !== undefined ? (
+      {chats?.sendToClientLinks !== undefined ? (
         <SpeedDial
           ariaLabel="SpeedDial basic example"
           sx={{ position: 'fixed', bottom: 16, right: 16 }}
