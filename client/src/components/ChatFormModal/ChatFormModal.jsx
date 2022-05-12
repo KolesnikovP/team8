@@ -43,8 +43,8 @@ function ChatFormModal({
           event: 'close',
           data: messages,
         };
-        socket.current.send(JSON.stringify(msgData));
-        socket.current.close();
+        socket.current?.send(JSON.stringify(msgData));
+        socket.current?.close();
         handleCloseChat();
         setMessages([]);
         setIsParams(false);

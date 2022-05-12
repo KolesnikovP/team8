@@ -15,8 +15,6 @@ function MessageArea({ user, chatLink, socket, messages, setMessages }) {
   const [value, setValue] = useState('');
 
   const [history, setHistory] = useState('');
-  // useEffect(() => {
-  // }, [value]);
   useEffect(() => {
     getNews(chatId, setHistory);
     socket.current = new WebSocket('ws://localhost:4000');
@@ -55,7 +53,7 @@ function MessageArea({ user, chatLink, socket, messages, setMessages }) {
       event: 'message',
       created: Date.now(),
       idUser: user.id,
-      createdAt: Date.now(),
+      // createdAt: Date.now(),
       messageText: value,
       userName: user.steamNickname,
     };
