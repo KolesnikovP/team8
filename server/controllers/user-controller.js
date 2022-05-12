@@ -338,16 +338,8 @@ class UserController {
       const alreadyRecieved = await Rating.findOne({ where: { userGivingRatingId: user.id, userRecievingRatingId: user1.id } });
       if (alreadyRecieved === null) {
         const thisUser = await User.findOne({ where: { id: user1.id }, raw: true });
+        const userStat = await User.findOne({ where: { id: user.id }, raw: true });
         const createRating = await Rating.create({ userGivingRatingId: user.id, userRecievingRatingId: user1.id, rating: value });
-        const thisUserRate = await Rating.findAll({ where: { userRecievingRatingId: user1.id }, raw: true });
-        const ratings = [];
-        thisUserRate.map((el) => {
-          ratings.push(el.rating);
-        });
-        const userStats = user1;
-        res.status(200).json({ userRating, thisUser });
-      } else {
-        const thisUser = await User.findOne({ where: { id: user1.id }, raw: true });
         const thisUserRate = await Rating.findAll({ where: { userRecievingRatingId: user1.id }, raw: true });
         const ratings = [];
         thisUserRate.map((el) => {
@@ -363,7 +355,26 @@ class UserController {
         const summ = arraySum(ratings);
         const userRating = Math.ceil(summ / ratings.length);
         const userStats = user1;
-        res.status(200).json({ userRating, thisUser });
+        res.status(200).json({ userRating, thisUser, userStat });
+      } else {
+        const thisUser = await User.findOne({ where: { id: user1.id }, raw: true });
+        const userStat = await User.findOne({ where: { id: user.id }, raw: true });
+        const thisUserRate = await Rating.findAll({ where: { userRecievingRatingId: user1.id }, raw: true });
+        const ratings = [];
+        thisUserRate.map((el) => {
+          ratings.push(el.rating);
+        });
+        function arraySum(ratings) {
+          let sum = 0;
+          for (let i = 0; i < ratings.length; i++) {
+            sum += ratings[i];
+          }
+          return (sum);
+        }
+        const summ = arraySum(ratings);
+        const userRating = Math.ceil(summ / ratings.length);
+        const userStats = user1;
+        res.status(200).json({ userRating, thisUser, userStat });
       }
     } catch (e) {
       console.log(e);

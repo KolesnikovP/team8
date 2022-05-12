@@ -29,6 +29,7 @@ function LocalProfile() {
     setPosts(userInfo?.response[2]);
     setBg(userInfo?.response[0].bgVideoId);
   }, [userInfo]);
+
   function openSteam() {
     window.open(`${user?.steamProfileLink}`);
   }
@@ -37,8 +38,8 @@ function LocalProfile() {
     dispatch(getFetchAllUserRating(user, user1, value));
   }, [value]);
 
-  const { rating, thisUser } = useSelector((state) => state.ratingReducer);
-  console.log({ thisUser });
+  const { rating } = useSelector((state) => state.ratingReducer);
+  console.log(rating.length);
   return (
     <Box>
       {bg && <VideoBg bg={bg} />}
