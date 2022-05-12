@@ -69,7 +69,6 @@ const start = async () => {
 start();
 
 const connectionHandler = async (ws, message) => {
-  console.log(message);
   ws.chatId = message.chatId;
   try {
     const findChat = await Chat.findAll({ where: { chatLink: message.chatId } });

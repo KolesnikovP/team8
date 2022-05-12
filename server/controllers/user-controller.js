@@ -133,7 +133,8 @@ class UserController {
         const userGames = await response.json();
         const gamesFromDb = await Game.findAll();
         const resArray = [];
-        if (userGames.response.length === undefined) {
+        if (userGames.response.game_count === undefined) {
+          // console.log('tyt');
           res.status(405).json({ message: 'Стим не может найти игры у вас на аккаунте' });
         } else {
           gamesFromDb.map((el) => {

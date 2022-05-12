@@ -42,7 +42,7 @@ function Profile() {
   }
   return (
     <Box>
-      {bg && <VideoBg bg={bg} />}
+      {bg && <VideoBg bg={bg}/>}
       <Container>
         <Box>
           <Typography variant="h3" color="primary" sx={{ textAlign: 'center' }}>{user.steamNickname}</Typography>
