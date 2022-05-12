@@ -11,7 +11,7 @@ export default function UserChatLink({ getId }) {
 
   useEffect(() => {
     dispatch(getFecthUserChats(user));
-  }, [user]);
+  }, []);
 
   return (
     <List>
