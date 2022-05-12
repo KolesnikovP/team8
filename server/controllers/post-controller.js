@@ -14,7 +14,6 @@ class PostController {
             id: post.userId,
           },
         });
-        console.log(user);
         const author = user.steamNickname;
         const game = await Game.findOne({
           where: {

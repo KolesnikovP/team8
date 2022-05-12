@@ -15,7 +15,7 @@ import { delPost } from '../../redux/thunk/posts';
 
 const { v1: uuidv1 } = require('uuid');
 
-function PostMin({ post }) {
+function PostMin({ post, local }) {
   const params = useParams();
   const { user } = useSelector((state) => state.userReducer);
   const [messages, setMessages] = useState([]);
@@ -39,6 +39,7 @@ function PostMin({ post }) {
   const del = () => {
     dispatch(delPost(post.id));
   };
+  console.log(local);
   return (
     <Grid
       container
@@ -67,25 +68,29 @@ function PostMin({ post }) {
         <Typography>{post.userHours}</Typography>
       </Grid>
       <Grid item xs={2}>
-        <Box sx={{ alignItems: 'center', display: 'flex' }}>
-          {user?.steamId === post.authorId ? (
-            <IconButton onClick={del}>
-              <ClearIcon color="primary" />
-            </IconButton>
-          ) : (
-            // ''
-            <IconButton onClick={connect}>
-              <MailOutlineIcon color="primary" />
-            </IconButton>
-          )}
+        {local ? (
+          ''
+        ) : (
+          <Box sx={{ alignItems: 'center', display: 'flex' }}>
+            {user?.steamId === post.authorId ? (
+              <IconButton onClick={del}>
+                <ClearIcon color="primary" />
+              </IconButton>
+            ) : (
+              // ''
+              <IconButton onClick={connect}>
+                <MailOutlineIcon color="primary" />
+              </IconButton>
+            )}
 
-          <IconButton onClick={() => navigate(`/profile/${post.authorId}`)}>
-            <AssignmentIndIcon color="primary" />
-          </IconButton>
-          <IconButton>
-            <PersonAddIcon color="primary" />
-          </IconButton>
-        </Box>
+            <IconButton onClick={() => navigate(`/profile/${post.authorId}`)}>
+              <AssignmentIndIcon color="primary" />
+            </IconButton>
+            <IconButton>
+              <PersonAddIcon color="primary" />
+            </IconButton>
+          </Box>
+        )}
       </Grid>
       <Grid item xs={1}>
         <Typography>{post.createdAt.slice(0, post.createdAt.length - 14)}</Typography>

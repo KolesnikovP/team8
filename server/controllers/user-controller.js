@@ -63,19 +63,52 @@ class UserController {
           steamId: id,
         },
       });
-      const userPosts = await UserCreatePost.findAll({
+      // const userPosts = await UserCreatePost.findAll({
+      //   where: {
+      //     userId: userInfo.id,
+      //   },
+      // });
+      // const promise = await userPosts.map(async (post, index) => {
+      //   const gameName = await Game.findOne({
+      //     where: {
+      //       id: post.gameId,
+      //     },
+      //     raw: true,
+      //   });
+      //   userPosts[index].dataValues.gameName = gameName.gameSteamName;
+      //   userPosts[index].dataValues.gameAppId = gameName.gameSteamId;
+      //   userPosts[index].dataValues.authorId = userInfo.steamId;
+      // });
+      // await Promise.all(promise);
+      const userPost1 = await UserCreatePost.findAll({
         where: {
           userId: userInfo.id,
         },
+        raw: true,
       });
-      userPosts.map(async (post) => {
-        const gameName = await Game.findOne({
+      const userPosts = [];
+      const promise = userPost1.map(async (post) => {
+        const author = userInfo.steamNickname;
+        const game = await Game.findOne({
           where: {
             id: post.gameId,
           },
         });
-        post.gameName = gameName.gameSteamName;
+        const gameName = game.gameSteamName;
+        const obj = {
+          id: post.id,
+          gameName,
+          author,
+          authorId: userInfo.steamId,
+          gameAppId: game.gameSteamId,
+          userHours: post.userHours,
+          description: post.description,
+          userSteamAvatar: post.userSteamAvatar,
+          createdAt: post.createdAt,
+        };
+        userPosts.push(obj);
       });
+      await Promise.all(promise);
       response.push(userInfo, userStats, userPosts);
       res.status(200).json({ response });
     } catch (e) {

@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { Avatar, Box, Container, Typography, Button } from '@mui/material';
 import { getAllUserInfo } from '../../redux/thunk/getAllUserInfo';
 import VideoBg from '../VideoBg/VideoBg';
+import PostMin from '../PostMin/PostMin';
 
 function LocalProfile() {
   const params = useParams();
@@ -12,8 +13,7 @@ function LocalProfile() {
   const [games, setGames] = useState(null);
   const [posts, setPosts] = useState(null);
   const [bg, setBg] = useState(null);
-  // const bgDef =
-  //   'https://cdn.akamai.steamstatic.com/steamcommunity/public/images/items/730/28280d425d20a4d8cd9cfeff3389c234968ca301.webm';
+  const local = true;
   useEffect(() => {
     if (!userInfo) {
       getAllUserInfo(params.id, setUserInfo);
@@ -41,7 +41,7 @@ function LocalProfile() {
               marginTop: '2rem',
               border: '1px solid #90caf9',
               padding: '2rem',
-              borderRadius: '1rem',
+              borderRadius: '0.3rem',
             }}
           >
             <Avatar
@@ -78,16 +78,21 @@ function LocalProfile() {
               <Typography>Количество часов: {game?.userGameHours}</Typography>
             </Box>
           ))}
-          <Box>
-            {posts?.map((post) => {
-              console.log(post);
-              return (
-                <Box key={post?.id}>
-                  <Typography>{post?.game}</Typography>
-                  <Typography>{post?.description}</Typography>
-                </Box>
-              );
-            })}
+          <Box sx={{ marginTop: '2rem' }}>
+            {posts?.length ? (
+              <Typography variant="h5" sx={{ textAlign: 'center' }}>
+                Ищет напарников
+              </Typography>
+            ) : (
+              ''
+            )}
+            <Box>
+              {posts?.length
+                ? posts.map((post) => {
+                    return <PostMin post={post} key={post.id} local={local} />;
+                  })
+                : ''}
+            </Box>
           </Box>
           <Box>
             <Typography variant="h3">Comments block soon...</Typography>

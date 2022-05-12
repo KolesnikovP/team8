@@ -37,7 +37,7 @@ function Profile() {
       <Container>
         <Box>
           <Typography variant="h3" color="primary" sx={{ textAlign: 'center' }}>{user.steamNickname}</Typography>
-          <Box sx={{ display: 'flex', justifyContent: 'space-around', marginTop: '2rem', border: '1px solid #90caf9', padding: '2rem', borderRadius: '1rem' }}>
+          <Box sx={{ display: 'flex', justifyContent: 'space-around', marginTop: '2rem', border: '1px solid #90caf9', padding: '2rem', borderRadius: '0.3rem' }}>
             <Avatar
               src={user.steamAvatar}
               sx={{ width: 220, height: 220, border: '1px solid #90caf9' }}
