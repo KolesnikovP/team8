@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable prefer-const */
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -17,7 +18,7 @@ import { getFetchGamesList } from '../../redux/thunk/getGame';
 import { getFetchPostsList } from '../../redux/thunk/posts';
 import PostMin from '../PostMin/PostMin';
 
-function PostList() {
+function PostList({ handleClickOpenChat }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -137,7 +138,10 @@ function PostList() {
         </Grid>
       </Grid>
       <Box sx={{ marginBottom: '2rem' }}>
-        {sortedPosts?.length && sortedPosts?.map((post) => <PostMin key={post.id} post={post} />)}
+        {sortedPosts?.length &&
+          sortedPosts?.map((post) => (
+            <PostMin key={post.id} post={post} handleClickOpenChat={handleClickOpenChat} />
+          ))}
       </Box>
     </Container>
   );

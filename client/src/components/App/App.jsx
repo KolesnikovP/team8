@@ -92,9 +92,23 @@ function App() {
               }}
             >
               <Routes>
-                <Route path="/" element={user?.id ? <MainAuth /> : <MainPage />} />
+                <Route
+                  path="/"
+                  element={
+                    user?.id ? (
+                      <MainAuth handleClickOpenChat={handleClickOpenChat} user={user} />
+                    ) : (
+                      <MainPage />
+                    )
+                  }
+                />
                 <Route path="/login" element={<Login />} />
-                <Route path="/postList" element={user?.id ? <PostList /> : <Loader />} />
+                <Route
+                  path="/postList"
+                  element={
+                    user?.id ? <PostList handleClickOpenChat={handleClickOpenChat} /> : <Loader />
+                  }
+                />
                 <Route path="/accessForm" element={user?.id ? <AccessForm /> : <Loader />} />
                 <Route exact path="/profile" element={user?.id ? <Profile /> : <Loader />} />
                 <Route

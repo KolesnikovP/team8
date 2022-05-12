@@ -2,18 +2,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
-import {
-  Fab,
-  ListItemText,
-  ListItem,
-  List,
-  Grid,
-  Paper,
-  Divider,
-  Dialog,
-  ListItemButton,
-  Box,
-} from '@mui/material';
+import { Grid, Paper, Divider, Dialog, Box } from '@mui/material';
 import classes from './ChatFormModal.module.css';
 
 import MessageArea from './MessageArea/MessageArea';

@@ -14,6 +14,7 @@ class UserController {
           steamId: req.user.id,
         },
       });
+      // console.log(userDto);
       const bg = await BgVideo.findOne({
         where: {
           id: userDto.bgVideoId,
@@ -235,7 +236,7 @@ class UserController {
     const userIdToCompare = String(user.id);
     const allChatsWithLinks = await Chat.findAll();
     const usersFromBD = await User.findAll({ raw: true });
-    // console.log(usersFromBD);
+    console.log(usersFromBD);
     if (user !== {} && user.id !== undefined) {
       const usersChats = await UserChat.findAll({ raw: true });
 

@@ -1,9 +1,10 @@
 /* eslint-disable react/prop-types */
-import { List, Fab, TextField, Grid, Divider } from '@mui/material';
+import { List, Fab, TextField, Grid, Divider, Box } from '@mui/material';
 import React, { useEffect, useRef, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import SendIcon from '@mui/icons-material/Send';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
+import ScrollToBottom, { useScrollToBottom } from 'react-scroll-to-bottom';
 import Message from '../Message/Message';
 import { getNews } from '../../../redux/thunk/chat';
 import classes from '../ChatFormModal.module.css';
@@ -63,34 +64,36 @@ function MessageArea({ user, chatLink }) {
       idUser: user.id,
       createdAt: Date.now(),
       messageText: value,
+      userName: user.steamNickname,
     };
     // console.log(message)
     socket.current.send(JSON.stringify(message));
     setValue('');
   };
 
+  const scrollToBottom = useScrollToBottom();
+
   return (
     <>
       <Fab color="primary" aria-label="add" onClick={closeChat}>
         <CloseOutlinedIcon />
       </Fab>
-      <List className={classes.messageArea} sx={{ flexDirection: 'column-reverse' }}>
-        {history?.length &&
-          history?.map((msg) => {
-            return <Message mess={msg} user={user} />;
-          })}
-        {messages.map((mess) => (
-          <div key={mess.id}>
-            {mess.event === 'connection' ? (
-              []
-            ) : (
-              // <div className="connection_message">Пользователь {mess.username} подключился</div>
-              <Message mess={mess} user={user} />
+      <List className={classes.messageArea}>
+        <ScrollToBottom className={classes.messageArea}>
+          <Box sx={{ display: 'flex', flexDirection: 'column-reverse' }}>
+            {history?.length &&
+              history?.map((msg) => {
+                return <Message key={msg.id} mess={msg} user={user} />;
+              })}
+          </Box>
+          <Divider />
+          <Box sx={{ display: 'flex', flexDirection: 'column-reverse' }}>
+            {messages.map((mess) =>
+              mess.event === 'connection' ? [] : <Message key={mess.id} mess={mess} user={user} />
             )}
-          </div>
-        ))}
+          </Box>
+        </ScrollToBottom>
       </List>
-      <Divider />
       <Grid container style={{ padding: '1rem' }}>
         <Grid item xs={11}>
           <TextField
@@ -101,8 +104,16 @@ function MessageArea({ user, chatLink }) {
             onChange={(e) => setValue(e.target.value)}
           />
         </Grid>
-        <Grid xs={1} align="right">
-          <Fab color="primary" aria-label="add" onClick={sendMessage}>
+        <Grid item xs={1} align="right">
+          <Fab
+            color="primary"
+            aria-label="add"
+            onClick={() => {
+              sendMessage();
+              scrollToBottom();
+            }}
+            size="small"
+          >
             <SendIcon />
           </Fab>
         </Grid>

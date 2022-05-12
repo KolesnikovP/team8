@@ -4,7 +4,6 @@
 import { Avatar, Grid, IconButton, Typography } from '@mui/material';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
-import PersonAddIcon from '@mui/icons-material/PersonAdd';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Box } from '@mui/system';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -15,7 +14,7 @@ const { v1: uuidv1 } = require('uuid');
 // import { useSelector } from 'react-redux';
 // import style from './PostMin.module.css';
 
-function PostMin({ post }) {
+function PostMin({ post, handleClickOpenChat }) {
   const params = useParams();
   const { user } = useSelector((state) => state.userReducer);
   const [messages, setMessages] = useState([]);
@@ -70,16 +69,17 @@ function PostMin({ post }) {
           {user?.steamId === post.authorId ? (
             ''
           ) : (
-            <IconButton onClick={connect}>
+            <IconButton
+              onClick={() => {
+                handleClickOpenChat();
+              }}
+            >
               <MailOutlineIcon color="primary" />
             </IconButton>
           )}
 
           <IconButton onClick={() => navigate(`/profile/${post.authorId}`)}>
             <AssignmentIndIcon color="primary" />
-          </IconButton>
-          <IconButton>
-            <PersonAddIcon color="primary" />
           </IconButton>
         </Box>
       </Grid>
