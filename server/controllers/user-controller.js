@@ -247,7 +247,6 @@ class UserController {
     // console.log(user.id, user);
     const userIdToCompare = String(user.id);
     const usersFromBD = await User.findAll({ raw: true });
-    console.log(usersFromBD);
     if (user !== {} && user.id !== undefined) {
       const usersChats = await UserChat.findAll({ raw: true });
 

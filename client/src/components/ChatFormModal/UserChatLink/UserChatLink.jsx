@@ -16,8 +16,8 @@ export default function UserChatLink({ getId }) {
 
   return (
     <List>
-      {chats.sendToClientUsers.length > 0 &&
-        chats.sendToClientUsers.map((el) => {
+      {chats.usersWithChat.length > 0 &&
+        chats.usersWithChat.map((el) => {
           return (
             <ListItem
               button

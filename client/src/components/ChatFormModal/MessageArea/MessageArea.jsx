@@ -41,7 +41,7 @@ function MessageArea({ user, chatLink, socket, messages, setMessages }) {
     socket.current.onerror = () => {
       console.log('Socket произошла ошибка');
     };
-  }, [user?.length]);
+  }, [user?.length, chatLink]);
 
   // const closeChat = async () => {
   // const msgData = {

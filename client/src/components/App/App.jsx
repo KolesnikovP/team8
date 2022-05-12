@@ -59,7 +59,6 @@ function App() {
   const [isParams, setIsParams] = useState(false);
 
   function getId(id) {
-    console.log(id, 'sdfghjkldfghjkgh');
     if (Number(user.steamId) > Number(id)) {
       setChatLink(`${id}-${user.steamId}`);
     } else {
