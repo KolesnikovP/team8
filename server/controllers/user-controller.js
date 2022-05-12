@@ -256,7 +256,6 @@ class UserController {
       const allUsers = usersFromBD.filter((el) => el.id !== Number(userIdToCompare));
 
       const steamBdIds = allUsers.map((el) => el.steamId);
-      console.log(allUsers);
 
       const chatLinks = [];
       const steamIdArrTogether = [];
@@ -286,7 +285,6 @@ class UserController {
           }
         }));
       });
-
 
       const resultArrLinks = [];
       const testArr = [];
@@ -321,20 +319,33 @@ class UserController {
         return linksArr1;
       }
 
-      const sendToClientUsers = []
+      const sendToClientUsers = [];
 
-      allUsers.map((el) => {
+      await allUsers.map((el) => {
+        const curr = el;
         userIdChats.map((el1) => {
-          if(el.steamId === el1){
-            sendToClientUsers.push(el)
+          if (curr.steamId === el1) {
+            sendToClientUsers.push(curr);
           }
-        })
-      })
+        });
+      });
+
+      const sortedArr = sendToClientUsers.sort((a, b) => a.id - b.id);
+
+      const sendUser = [];
+
+      sortedArr.map((el, index) => {
+        if (el === sortedArr[index + 1]) {
+          const x = sortedArr.splice(index + 1, 1);
+          sendUser.push(sortedArr.flat());
+        }
+      });
+
+      const usersWithChat = sendUser.flat()
 
       const sendToClientLinks = deleteDouble(linksArr1);
 
-      console.log(sendToClientLinks);
-      Promise.all(prom).then(() => res.status(200).json({ sendToClientUsers, sendToClientLinks }));
+      Promise.all(prom).then(() => res.status(200).json({ usersWithChat, sendToClientLinks }));
     }
   }
 }
