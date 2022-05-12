@@ -7,12 +7,11 @@ import { getFecthUserChats } from '../../../redux/thunk/user';
 export default function UserChatLink({ getId }) {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.userReducer);
+  const { chats } = useSelector((state) => state.userChatReducer);
 
   useEffect(() => {
     dispatch(getFecthUserChats(user));
-  }, []);
-
-  const { chats } = useSelector((state) => state.userChatReducer);
+  }, [user]);
 
   return (
     <List>
