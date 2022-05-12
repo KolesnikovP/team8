@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import SwipeableViews from 'react-swipeable-views';
 import { autoPlay } from 'react-swipeable-views-utils';
-import { Button, Typography } from '@mui/material';
+import { Button, Container, Typography } from '@mui/material';
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 const images = [
@@ -77,6 +77,88 @@ function MainPage() {
           </Button>
         </Box>
       </Box>
+      <Container>
+        <Box sx={{ marginTop: '2rem' }}>
+          <Typography variant="h5" sx={{ textAlign: 'center' }}>
+            Вам стало скучно играть одному или просто хотите найти новых друзей?
+          </Typography>
+          <Typography variant="h6" sx={{ textAlign: 'center' }}>
+            У нас вы сможете:
+          </Typography>
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'space-around',
+              alignItems: 'center',
+              marginTop: '2rem',
+            }}
+          >
+            <img
+              src="./img/demos/demo2.png"
+              alt="demo1"
+              width="400px"
+              sx={{ border: '1px solid black', borderRadius: '2000px' }}
+            />
+            <Typography sx={{ maxWidth: '400px' }}>
+              Найти себе напарника в самых популярных играх
+            </Typography>
+          </Box>
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'space-around',
+              alignItems: 'center',
+              marginTop: '2rem',
+            }}
+          >
+            <Typography sx={{ maxWidth: '400px' }}>
+              Вас смогут найти и взять к себе в команду
+            </Typography>
+            <img
+              src="./img/demos/demo1.png"
+              alt="demo1"
+              width="400px"
+              sx={{ border: '1px solid black', borderRadius: '2000px' }}
+            />
+          </Box>
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'space-around',
+              alignItems: 'center',
+              marginTop: '2rem',
+            }}
+          >
+            <img
+              src="./img/demos/demo3.png"
+              alt="demo1"
+              width="400px"
+              sx={{ border: '1px solid black', borderRadius: '2000px' }}
+            />
+            <Typography sx={{ maxWidth: '400px' }}>
+              Следить за новостями игр в которые вы играете
+            </Typography>
+          </Box>
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'space-around',
+              alignItems: 'center',
+              marginTop: '2rem',
+            }}
+          >
+            <Typography sx={{ maxWidth: '400px' }}>
+              Найти себе сильного напарника у которого много опыта
+            </Typography>
+            <img
+              src="./img/demos/demo4.png"
+              alt="demo1"
+              width="400px"
+              sx={{ border: '1px solid black', borderRadius: '2000px' }}
+            />
+          </Box>
+        </Box>
+      </Container>
     </>
   );
 }

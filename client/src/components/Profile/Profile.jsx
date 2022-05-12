@@ -21,6 +21,7 @@ function Profile() {
   const [bg, setBg] = useState(null);
   const [open, setOpen] = useState(false);
   const profile = true
+  const local = true
 
   useEffect(() => {
     dispatch(getFetchPostsList());
@@ -122,7 +123,7 @@ function Profile() {
             {posts.length? 
             posts.map(post => {
               if(post.authorId === user.steamId) {
-                return <PostMin post={post} profile={profile}/>
+                return <PostMin post={post} profile={profile} local={local}/>
               }
               return ''
             })

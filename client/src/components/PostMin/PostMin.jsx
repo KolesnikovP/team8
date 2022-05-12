@@ -15,7 +15,7 @@ import { delPost } from '../../redux/thunk/posts';
 
 const { v1: uuidv1 } = require('uuid');
 
-function PostMin({ post, local }) {
+function PostMin({ post, local, profile }) {
   const params = useParams();
   const { user } = useSelector((state) => state.userReducer);
   const [messages, setMessages] = useState([]);
@@ -68,6 +68,13 @@ function PostMin({ post, local }) {
         <Typography>{post.userHours}</Typography>
       </Grid>
       <Grid item xs={2}>
+        {profile && user?.steamId === post.authorId ? (
+          <IconButton onClick={del}>
+            <ClearIcon color="primary" />
+          </IconButton>
+        ) : (
+          ''
+        )}
         {local ? (
           ''
         ) : (
