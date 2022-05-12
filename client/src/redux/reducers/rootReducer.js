@@ -5,6 +5,7 @@ import { profileReducer } from './profileReducer';
 import { postsReducer } from './postsReducer';
 import { usersListReducer } from './usersListReducer';
 import { userChatReducer } from './userChatReducer';
+import { ratingReducer } from './ratingReducer';
 
 export const rootReducer = combineReducers({
   userReducer,
@@ -13,4 +14,5 @@ export const rootReducer = combineReducers({
   postsReducer,
   usersListReducer,
   userChatReducer,
+  ratingReducer,
 });

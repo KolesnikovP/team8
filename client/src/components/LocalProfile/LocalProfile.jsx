@@ -18,8 +18,6 @@ function LocalProfile() {
   const [bg, setBg] = useState(null);
   const [value, setValue] = useState(null);
   const { user } = useSelector((state) => state.userReducer);
-  console.log(user1);
-  console.log(user);
   // const bgDef =
   //   'https://cdn.akamai.steamstatic.com/steamcommunity/public/images/items/730/28280d425d20a4d8cd9cfeff3389c234968ca301.webm';
   useEffect(() => {
@@ -38,6 +36,9 @@ function LocalProfile() {
   useEffect(() => {
     dispatch(getFetchAllUserRating(user, user1, value));
   }, [value]);
+
+  const { rating } = useSelector((state) => state.ratingReducer);
+  console.log(rating);
 
   return (
     <Box>
@@ -68,13 +69,17 @@ function LocalProfile() {
               <Button type="Button" onClick={() => openSteam()} variant="outlined">
                 Открыть профиль в стиме
               </Button>
-              <Rating
-                name="simple-controlled"
-                value={value}
-                onChange={(event, newValue) => {
-                  setValue(newValue);
-                }}
-              />
+              {rating.length === 0 ? (
+                <Rating
+                  name="simple-controlled"
+                  value={value}
+                  onChange={(event, newValue) => {
+                    setValue(newValue);
+                  }}
+                />
+              ) : (
+                <Rating name="read-only" value={rating.userRating} readOnly />
+              )}
             </Box>
           </Box>
           {games?.map((game, i) => (

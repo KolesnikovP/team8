@@ -343,18 +343,27 @@ class UserController {
         const createRating = await Rating.create({ userGivingRatingId: user.id, userRecievingRatingId: user1.id, rating: value });
         const thisUserRate = await Rating.findAll({ where: { userRecievingRatingId: user1.id }, raw: true });
         const ratings = [];
-        const overallRate = thisUserRate.map((el) => {
+        thisUserRate.map((el) => {
           ratings.push(el.rating);
         });
-        let userGaveRate;
         res.json({ ratings, userGaveRate });
       } else {
         const thisUserRate = await Rating.findAll({ where: { userRecievingRatingId: user1.id }, raw: true });
         const ratings = [];
-        const overallRate = thisUserRate.map((el) => {
+        thisUserRate.map((el) => {
           ratings.push(el.rating);
         });
-        console.log(ratings);
+        function arraySum(ratings) {
+          let sum = 0;
+          for (let i = 0; i < ratings.length; i++) {
+            sum += ratings[i];
+          }
+          return (sum);
+        }
+        const summ = arraySum(ratings);
+        const userRating = Math.ceil(summ / 2);
+        let userCantGiveRate;
+        res.json({ userRating, userCantGiveRate });
       }
     } catch (e) {
       console.log(e);
