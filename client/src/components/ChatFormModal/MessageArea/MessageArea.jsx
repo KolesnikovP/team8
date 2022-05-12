@@ -41,15 +41,6 @@ function MessageArea({ user, chatLink, socket, messages, setMessages }) {
     };
   }, [user?.length]);
 
-  // const closeChat = async () => {
-  // const msgData = {
-  //   event: 'close',
-  //   data: messages,
-  // };
-  // socket.current.send(JSON.stringify(msgData));
-  // socket.current.close();
-  // };
-
   const sendMessage = async () => {
     const uniqId = uuidv4().split('-');
     const message = {

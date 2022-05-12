@@ -24,6 +24,7 @@ import ChatFormModal from '../ChatFormModal/ChatFormModal';
 import WebSock from '../WebSock/WebSock';
 import CommentsList from '../CommentsList/Comments';
 import { getCommentList } from '../../redux/thunk/comments';
+import Main from '../MainPage/Main';
 
 function App() {
   const dispatch = useDispatch();
@@ -71,7 +72,7 @@ function App() {
               }}
             >
               <Routes>
-                <Route path="/" element={user?.id ? <MainAuth /> : <MainPage />} />
+                <Route path="/" element={user?.id ? <MainAuth /> : <Main />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/postList" element={user?.id ? <PostList /> : <Loader />} />
                 <Route path="/accessForm" element={user?.id ? <AccessForm /> : <Loader />} />

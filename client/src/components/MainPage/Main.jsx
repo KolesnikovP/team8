@@ -1,32 +1,33 @@
-import * as React from 'react';
-import { useTheme } from '@mui/material/styles';
-import { useNavigate } from 'react-router-dom';
-import Box from '@mui/material/Box';
-// import { useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
 import SwipeableViews from 'react-swipeable-views';
 import { autoPlay } from 'react-swipeable-views-utils';
-import { Button, Container, Typography } from '@mui/material';
+import { Box, Button, Container, Typography } from '@mui/material';
 // import Comment from '../CommentsList/Comment/Comment';
+import { useNavigate } from 'react-router-dom';
+import { useTheme } from '@emotion/react';
+import { useSelector } from 'react-redux';
+import Comment from '../CommentsList/Comment/Comment';
 
-const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
-const images = [
-  {
-    imgPath: './img/backgroundPng/cs1.png',
-  },
-  {
-    imgPath: './img/backgroundPng/dota1.png',
-  },
-  {
-    imgPath: './img/backgroundPng/pubg.png',
-  },
-];
-// const { comments } = useSelector((state) => state.commentReducer);
-// const [comSort, setComSort] = React.useState('');
-// useEffect(() => {
-//   const filtered = comments.sort((a, b) => b.createdAt - a.createdAt);
-//   setComSort(filtered);
-// }, [comments]);
-function MainPage() {
+function Main() {
+  const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
+  const images = [
+    {
+      imgPath: './img/backgroundPng/cs1.png',
+    },
+    {
+      imgPath: './img/backgroundPng/dota1.png',
+    },
+    {
+      imgPath: './img/backgroundPng/pubg.png',
+    },
+  ];
+  const { comments } = useSelector((state) => state.commentReducer);
+  const [comSort, setComSort] = useState('');
+  useEffect(() => {
+    const filtered = comments.sort((a, b) => b.createdAt - a.createdAt);
+    const shortAr = filtered.slice(0, 11);
+    setComSort(shortAr);
+  }, [comments]);
   const navigate = useNavigate();
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
@@ -34,7 +35,6 @@ function MainPage() {
   const handleStepChange = (step) => {
     setActiveStep(step);
   };
-
   return (
     <>
       <AutoPlaySwipeableViews
@@ -106,7 +106,7 @@ function MainPage() {
               width="400px"
               sx={{ border: '1px solid black', borderRadius: '2000px' }}
             />
-            <Typography sx={{ maxWidth: '400px' }}>
+            <Typography variant="h5" sx={{ maxWidth: '400px' }}>
               Найти себе напарника в самых популярных играх
             </Typography>
           </Box>
@@ -118,7 +118,7 @@ function MainPage() {
               marginTop: '2rem',
             }}
           >
-            <Typography sx={{ maxWidth: '400px' }}>
+            <Typography variant="h5" sx={{ maxWidth: '400px' }}>
               Вас смогут найти и взять к себе в команду
             </Typography>
             <img
@@ -142,7 +142,7 @@ function MainPage() {
               width="400px"
               sx={{ border: '1px solid black', borderRadius: '2000px' }}
             />
-            <Typography sx={{ maxWidth: '400px' }}>
+            <Typography variant="h5" sx={{ maxWidth: '400px' }}>
               Следить за новостями игр в которые вы играете
             </Typography>
           </Box>
@@ -154,7 +154,7 @@ function MainPage() {
               marginTop: '2rem',
             }}
           >
-            <Typography sx={{ maxWidth: '400px' }}>
+            <Typography variant="h5" sx={{ maxWidth: '400px' }}>
               Найти себе сильного напарника у которого много опыта
             </Typography>
             <img
@@ -165,7 +165,7 @@ function MainPage() {
             />
           </Box>
         </Box>
-        {/* <Box>
+        <Box>
           <Typography variant="h4" sx={{ marginTop: '4rem', textAlign: 'center' }}>
             Отзывы наших пользователей
           </Typography>
@@ -185,10 +185,10 @@ function MainPage() {
                 : ''}
             </Box>
           </Box>
-        </Box> */}
+        </Box>
       </Container>
     </>
   );
 }
 
-export default MainPage;
+export default Main;

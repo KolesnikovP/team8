@@ -23,7 +23,6 @@ import UserChatLink from './UserChatLink/UserChatLink';
 function ChatFormModal({ user, handleCloseChat, openChat }) {
   const [chatLink, setChatLink] = useState('');
   const [isParams, setIsParams] = useState(false);
-  // const [isClose, setClose] = useState(false);
   const socket = useRef();
   const [messages, setMessages] = useState([]);
   function getId(id) {
@@ -42,7 +41,6 @@ function ChatFormModal({ user, handleCloseChat, openChat }) {
           event: 'close',
           data: messages,
         };
-        // console.log('Zaktit');
         socket.current.send(JSON.stringify(msgData));
         socket.current.close();
         handleCloseChat();

@@ -12,6 +12,7 @@ function Comment({ comment }) {
         width: '700px',
         alignItems: 'center',
         border: '1px solid #90caf9',
+        borderRadius: '10px',
         marginTop: '1rem',
         padding: '1rem',
       }}
