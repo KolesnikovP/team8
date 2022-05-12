@@ -17,7 +17,7 @@ export default function UserChatLink({ getId }) {
 
   return (
     <List>
-      {chats.sendToClientUsers.map((el) => {
+      {chats.usersWithChat.map((el) => {
         return (
           <ListItem button key="RemySharp" onClick={() => getId(el.steamId)}>
             <ListItemIcon>
