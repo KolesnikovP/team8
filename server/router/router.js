@@ -15,13 +15,14 @@ Router.post('/validateProfile', userController.validateProfile);
 Router.post('/userGames', userController.userGames);
 Router.post('/updateUserStats', userController.updateUserStats);
 Router.put('/updateDescribe', userController.updateDescribe);
-Router.post('/allUserChats', userController.getUserChats)
+Router.post('/allUserChats', userController.getUserChats);
 Router.put('/updateBg', userController.updateBg);
+Router.post('/allUserRatings', userController.userRating);
 
 Router.get('/initGames', SteamGamesController.getListGames);
 Router.post('/getNewsGames', SteamGamesController.getNewsGames);
 
 Router.get('/initBgs', bgVideoController.getListBg);
-Router.post('/getHistory', chatController.getChatHistory)
+Router.post('/getHistory', chatController.getChatHistory);
 
 module.exports = Router;

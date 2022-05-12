@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable consistent-return */
 /* eslint-disable array-callback-return */
 /* eslint-disable max-len */
@@ -6,7 +7,7 @@
 const fetch = require('cross-fetch');
 const e = require('express');
 const {
-  Game, Statistic, User, UserCreatePost, UserChat, Chat, BgVideo,
+  Game, Statistic, User, UserCreatePost, UserChat, Chat, BgVideo, Rating,
 } = require('../models/models');
 const sequelize = require('../db');
 
@@ -284,7 +285,6 @@ class UserController {
         }));
       });
 
-
       const resultArrLinks = [];
       const testArr = [];
       testArr.push(chatLinks);
@@ -318,20 +318,46 @@ class UserController {
         return linksArr1;
       }
 
-      const sendToClientUsers = []
+      const sendToClientUsers = [];
 
       allUsers.map((el) => {
         userIdChats.map((el1) => {
-          if(el.steamId === el1){
-            sendToClientUsers.push(el)
+          if (el.steamId === el1) {
+            sendToClientUsers.push(el);
           }
-        })
-      })
+        });
+      });
 
       const sendToClientLinks = deleteDouble(linksArr1);
+      console.log('===>', allUsers);
 
-      console.log(sendToClientLinks);
       Promise.all(prom).then(() => res.status(200).json({ sendToClientUsers, sendToClientLinks }));
+    }
+  }
+
+  async userRating(req, res, next) {
+    const { user, user1, value } = req.body;
+    try {
+      const alreadyRecieved = await Rating.findOne({ where: { userGivingRatingId: user.id, userRecievingRatingId: user1.id } });
+      if (alreadyRecieved === null) {
+        const createRating = await Rating.create({ userGivingRatingId: user.id, userRecievingRatingId: user1.id, rating: value });
+        const thisUserRate = await Rating.findAll({ where: { userRecievingRatingId: user1.id }, raw: true });
+        const ratings = [];
+        const overallRate = thisUserRate.map((el) => {
+          ratings.push(el.rating);
+        });
+        let userGaveRate;
+        res.json({ ratings, userGaveRate });
+      } else {
+        const thisUserRate = await Rating.findAll({ where: { userRecievingRatingId: user1.id }, raw: true });
+        const ratings = [];
+        const overallRate = thisUserRate.map((el) => {
+          ratings.push(el.rating);
+        });
+        console.log(ratings);
+      }
+    } catch (e) {
+      console.log(e);
     }
   }
 }

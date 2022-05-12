@@ -11,6 +11,8 @@ import ProfileModalBg from '../ProfileModalBg/ProfileModalBg';
 
 function Profile() {
   const { user } = useSelector((state) => state.userReducer);
+  console.log('======>', user);
+
   const { profGames } = useSelector((state) => state.profileReducer);
   const dispatch = useDispatch();
   const [hidden, setHidden] = useState(true);

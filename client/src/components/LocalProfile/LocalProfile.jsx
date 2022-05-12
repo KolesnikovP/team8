@@ -1,18 +1,25 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable prefer-destructuring */
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Avatar, Box, Container, Typography, Button, Rating } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
 import { getAllUserInfo } from '../../redux/thunk/getAllUserInfo';
 import VideoBg from '../VideoBg/VideoBg';
+import { getFetchAllUserRating } from '../../redux/thunk/rating';
 
 function LocalProfile() {
+  const dispatch = useDispatch();
   const params = useParams();
   const [userInfo, setUserInfo] = useState(null);
-  const [user, setUser] = useState(null);
+  const [user1, setUser] = useState(null);
   const [games, setGames] = useState(null);
   const [posts, setPosts] = useState(null);
   const [bg, setBg] = useState(null);
   const [value, setValue] = useState(null);
+  const { user } = useSelector((state) => state.userReducer);
+  console.log(user1);
+  console.log(user);
   // const bgDef =
   //   'https://cdn.akamai.steamstatic.com/steamcommunity/public/images/items/730/28280d425d20a4d8cd9cfeff3389c234968ca301.webm';
   useEffect(() => {
@@ -24,18 +31,21 @@ function LocalProfile() {
     setPosts(userInfo?.response[2]);
     setBg(userInfo?.response[0].bgVideoId);
   }, [userInfo]);
-  console.log(userInfo?.response[0].bgVideoId);
   function openSteam() {
     window.open(`${user?.steamProfileLink}`);
   }
-  console.log(bg);
+
+  useEffect(() => {
+    dispatch(getFetchAllUserRating(user, user1, value));
+  }, [value]);
+
   return (
     <Box>
       {bg && <VideoBg bg={bg} />}
       <Container>
         <Box>
           <Typography variant="h3" color="primary" sx={{ textAlign: 'center', paddingTop: '2rem' }}>
-            {user?.steamNickname}
+            {user1?.steamNickname}
           </Typography>
           <Box
             sx={{
@@ -48,11 +58,11 @@ function LocalProfile() {
             }}
           >
             <Avatar
-              src={user?.steamAvatar}
+              src={user1?.steamAvatar}
               sx={{ width: 220, height: 220, border: '1px solid #90caf9' }}
             />
             <Box>
-              <Typography sx={{ maxWidth: '400px' }}>{user?.description}</Typography>
+              <Typography sx={{ maxWidth: '400px' }}>{user1?.description}</Typography>
             </Box>
             <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-around' }}>
               <Button type="Button" onClick={() => openSteam()} variant="outlined">

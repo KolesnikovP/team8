@@ -18,24 +18,6 @@ export default function DialogsButton({ handleClickOpenChat }) {
   }, [user]);
 
   const { chats } = useSelector((state) => state.userChatReducer);
-  console.log(chats);
-  const actions = [
-    {
-      icon: (
-        <IconButton
-          size="large"
-          aria-label="account of current user"
-          aria-controls="menu-appbar"
-          aria-haspopup="true"
-          onClick={() => navigate('/')}
-          color="inherit"
-        >
-          <Avatar alt="Remy Sharp" src={user.steamAvatar} />
-        </IconButton>
-      ),
-      name: 'Copy',
-    },
-  ];
 
   return (
     <div>
