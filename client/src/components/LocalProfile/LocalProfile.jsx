@@ -37,9 +37,8 @@ function LocalProfile() {
     dispatch(getFetchAllUserRating(user, user1, value));
   }, [value]);
 
-  const { rating } = useSelector((state) => state.ratingReducer);
-  console.log(rating);
-
+  const { rating, thisUser } = useSelector((state) => state.ratingReducer);
+  console.log({ thisUser });
   return (
     <Box>
       {bg && <VideoBg bg={bg} />}

@@ -1,3 +1,5 @@
+/* eslint-disable no-plusplus */
+/* eslint-disable no-inner-declarations */
 /* eslint-disable no-unused-vars */
 /* eslint-disable consistent-return */
 /* eslint-disable array-callback-return */
@@ -55,7 +57,6 @@ class UserController {
           steamId: id,
         },
       });
-      // console.log(userInfo)
       const bg = await BgVideo.findOne({
         where: {
           id: userInfo.bgVideoId,
@@ -236,10 +237,8 @@ class UserController {
 
   async getUserChats(req, res) {
     const { user } = await (req.body);
-    // console.log(user.id, user);
     const userIdToCompare = String(user.id);
     const usersFromBD = await User.findAll({ raw: true });
-    // console.log(usersFromBD);
     if (user !== {} && user.id !== undefined) {
       const usersChats = await UserChat.findAll({ raw: true });
 
@@ -248,7 +247,6 @@ class UserController {
       const allUsers = usersFromBD.filter((el) => el.id !== Number(userIdToCompare));
 
       const steamBdIds = allUsers.map((el) => el.steamId);
-      console.log(allUsers);
 
       const chatLinks = [];
       const steamIdArrTogether = [];
@@ -329,7 +327,6 @@ class UserController {
       });
 
       const sendToClientLinks = deleteDouble(linksArr1);
-      console.log('===>', allUsers);
 
       Promise.all(prom).then(() => res.status(200).json({ sendToClientUsers, sendToClientLinks }));
     }
@@ -340,14 +337,17 @@ class UserController {
     try {
       const alreadyRecieved = await Rating.findOne({ where: { userGivingRatingId: user.id, userRecievingRatingId: user1.id } });
       if (alreadyRecieved === null) {
+        const thisUser = await User.findOne({ where: { id: user1.id }, raw: true });
         const createRating = await Rating.create({ userGivingRatingId: user.id, userRecievingRatingId: user1.id, rating: value });
         const thisUserRate = await Rating.findAll({ where: { userRecievingRatingId: user1.id }, raw: true });
         const ratings = [];
         thisUserRate.map((el) => {
           ratings.push(el.rating);
         });
-        res.json({ ratings, userGaveRate });
+        const userStats = user1;
+        res.status(200).json({ userRating, thisUser });
       } else {
+        const thisUser = await User.findOne({ where: { id: user1.id }, raw: true });
         const thisUserRate = await Rating.findAll({ where: { userRecievingRatingId: user1.id }, raw: true });
         const ratings = [];
         thisUserRate.map((el) => {
@@ -361,9 +361,9 @@ class UserController {
           return (sum);
         }
         const summ = arraySum(ratings);
-        const userRating = Math.ceil(summ / 2);
-        let userCantGiveRate;
-        res.json({ userRating, userCantGiveRate });
+        const userRating = Math.ceil(summ / ratings.length);
+        const userStats = user1;
+        res.status(200).json({ userRating, thisUser });
       }
     } catch (e) {
       console.log(e);
