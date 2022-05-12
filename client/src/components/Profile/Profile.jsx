@@ -8,14 +8,23 @@ import { fetchUserGames } from '../../redux/thunk/user';
 import { setUserDescribe, updateUserStats } from '../../redux/thunk/userProfile';
 import VideoBg from '../VideoBg/VideoBg';
 import ProfileModalBg from '../ProfileModalBg/ProfileModalBg';
+import { getFetchPostsList } from '../../redux/thunk/posts';
+import PostMin from '../PostMin/PostMin';
 
 function Profile() {
   const { user } = useSelector((state) => state.userReducer);
   const { profGames } = useSelector((state) => state.profileReducer);
+  const { posts } = useSelector((state) => state.postsReducer);
+
   const dispatch = useDispatch();
   const [hidden, setHidden] = useState(true);
   const [bg, setBg] = useState(null);
   const [open, setOpen] = useState(false);
+  const profile = true
+
+  useEffect(() => {
+    dispatch(getFetchPostsList());
+  }, [dispatch]);
   useEffect(() => {
     dispatch(fetchUserGames(user?.steamId));
     setBg(user?.bgVideoId);
@@ -109,6 +118,17 @@ function Profile() {
               <Typography>Количество часов: {game.userGameHours}</Typography>
             </Box>
           ))}
+          <Box>
+          {posts.length ? <Typography variant="h5" sx={{textAlign: 'center', marginTop:'2rem'}}>Ваши заявки</Typography> : ''}
+            {posts.length? 
+            posts.map(post => {
+              if(post.authorId === user.steamId) {
+                return <PostMin post={post} profile={profile}/>
+              }
+              return ''
+            })
+            : ''}
+          </Box>
           <Box>
             <Typography variant="h3">Comments block soon...</Typography>
           </Box>

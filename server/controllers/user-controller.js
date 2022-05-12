@@ -133,25 +133,29 @@ class UserController {
         const userGames = await response.json();
         const gamesFromDb = await Game.findAll();
         const resArray = [];
-        gamesFromDb.map((el) => {
-          userGames.response.games.map((game) => {
-            if (el.gameSteamId === game.appid) {
-              const statUser = new Statistic({
-                userGameHours: Math.ceil(game.playtime_forever / 60),
-                userRank: 0,
-                steamId: req.body.id,
-                gameSteamId: game.appid,
-                gameName: el.gameSteamName,
-              });
-              statUser.save();
-              resArray.push(statUser);
-            }
-          });
-        });
-        if (resArray.length === 0) {
-          res.status(404).json({ message: 'Games not found' });
+        if (userGames.response.length === undefined) {
+          res.status(405).json({ message: 'Стим не может найти игры у вас на аккаунте' });
         } else {
-          res.status(200).json(resArray);
+          gamesFromDb.map((el) => {
+            userGames.response.games.map((game) => {
+              if (el.gameSteamId === game.appid) {
+                const statUser = new Statistic({
+                  userGameHours: Math.ceil(game.playtime_forever / 60),
+                  userRank: 0,
+                  steamId: req.body.id,
+                  gameSteamId: game.appid,
+                  gameName: el.gameSteamName,
+                });
+                statUser.save();
+                resArray.push(statUser);
+              }
+            });
+          });
+          if (resArray.length === 0) {
+            res.status(404).json({ message: 'Games not found' });
+          } else {
+            res.status(200).json(resArray);
+          }
         }
       }
     }

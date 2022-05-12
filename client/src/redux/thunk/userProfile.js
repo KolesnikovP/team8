@@ -25,6 +25,10 @@ export const setUserGames = (id, func, func1) => {
       func();
       func1();
     }
+    if (response.status === 405) {
+      func();
+      func1();
+    }
   };
 };
 
