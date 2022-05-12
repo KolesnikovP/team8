@@ -23,11 +23,9 @@ function LocalProfile() {
     setPosts(userInfo?.response[2]);
     setBg(userInfo?.response[0].bgVideoId);
   }, [userInfo]);
-  console.log(userInfo?.response[0].bgVideoId);
   function openSteam() {
     window.open(`${user?.steamProfileLink}`);
   }
-  console.log(bg);
   return (
     <Box>
       {bg && <VideoBg bg={bg} />}
@@ -80,9 +78,17 @@ function LocalProfile() {
               <Typography>Количество часов: {game?.userGameHours}</Typography>
             </Box>
           ))}
-          {posts?.map((post) => (
-            <Typography key={post?.id}>{post?.description}</Typography>
-          ))}
+          <Box>
+            {posts?.map((post) => {
+              console.log(post);
+              return (
+                <Box key={post?.id}>
+                  <Typography>{post?.game}</Typography>
+                  <Typography>{post?.description}</Typography>
+                </Box>
+              );
+            })}
+          </Box>
           <Box>
             <Typography variant="h3">Comments block soon...</Typography>
           </Box>
