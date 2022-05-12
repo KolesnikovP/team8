@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-no-bind */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   Fab,
   ListItemText,
@@ -23,6 +23,9 @@ import UserChatLink from './UserChatLink/UserChatLink';
 function ChatFormModal({ user, handleCloseChat, openChat }) {
   const [chatLink, setChatLink] = useState('');
   const [isParams, setIsParams] = useState(false);
+  // const [isClose, setClose] = useState(false);
+  const socket = useRef();
+  const [messages, setMessages] = useState([]);
   function getId(id) {
     if (Number(user.steamId) > Number(id)) {
       setChatLink(`${id}-${user.steamId}`);
@@ -35,6 +38,13 @@ function ChatFormModal({ user, handleCloseChat, openChat }) {
     <Dialog
       open={openChat}
       onClose={() => {
+        const msgData = {
+          event: 'close',
+          data: messages,
+        };
+        // console.log('Zaktit');
+        socket.current.send(JSON.stringify(msgData));
+        socket.current.close();
         handleCloseChat();
       }}
       fullWidth
@@ -48,7 +58,17 @@ function ChatFormModal({ user, handleCloseChat, openChat }) {
             <UserChatLink getId={getId} />
           </Grid>
           <Grid item xs={9}>
-            {isParams ? <MessageArea user={user} chatLink={chatLink} /> : <FakeMessageArea />}
+            {isParams ? (
+              <MessageArea
+                user={user}
+                chatLink={chatLink}
+                socket={socket}
+                messages={messages}
+                setMessages={setMessages}
+              />
+            ) : (
+              <FakeMessageArea />
+            )}
           </Grid>
         </Grid>
       </Box>

@@ -5,7 +5,7 @@ import { Grid, ListItem, ListItemText } from '@mui/material';
 function Message({ mess, user }) {
   const [align, setAlign] = useState('');
   useEffect(() => {
-    console.log(mess);
+    // console.log(mess);
     if (Number(user.id) === Number(mess.idUser)) {
       setAlign('right');
     } else {

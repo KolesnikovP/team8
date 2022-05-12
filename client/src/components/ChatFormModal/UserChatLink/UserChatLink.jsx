@@ -13,7 +13,7 @@ export default function UserChatLink({ getId }) {
   }, []);
 
   const { chats } = useSelector((state) => state.userChatReducer);
-  console.log('===>', chats.allUsers);
+  // console.log('===>', chats.allUsers);
 
   return (
     <List>
