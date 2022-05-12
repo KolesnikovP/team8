@@ -22,12 +22,15 @@ import Loader from '../Loader/Loader';
 import DialogsButton from '../DialogsButton/DialogsButton';
 import ChatFormModal from '../ChatFormModal/ChatFormModal';
 import WebSock from '../WebSock/WebSock';
+import CommentsList from '../CommentsList/Comments';
+import { getCommentList } from '../../redux/thunk/comments';
 
 function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchUser());
+    dispatch(getCommentList());
   }, [dispatch]);
   const { user } = useSelector((state) => state.userReducer);
 
@@ -72,7 +75,8 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/postList" element={user?.id ? <PostList /> : <Loader />} />
                 <Route path="/accessForm" element={user?.id ? <AccessForm /> : <Loader />} />
-                <Route exact path="/profile" element={user?.id ? <Profile /> : <Loader />} />
+                <Route path="/profile" element={user?.id ? <Profile /> : <Loader />} />
+                <Route path="/comments" element={user?.id ? <CommentsList /> : <Loader />} />
                 <Route
                   exact
                   path="/profile/:id"

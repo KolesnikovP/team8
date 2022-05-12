@@ -64,19 +64,27 @@ const Chat = sequelize.define('chat', {
 
 const UserChat = sequelize.define('userChat', {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-  chat_id: {type: DataTypes.TEXT},
-  user_id: {type: DataTypes.TEXT}
-})
+  chat_id: { type: DataTypes.TEXT },
+  user_id: { type: DataTypes.TEXT },
+});
 
 const ChatMessage = sequelize.define('chatMessage', {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-  idUser: { type: DataTypes.TEXT},
-  idSms: { type: DataTypes.TEXT},
-  userName: { type: DataTypes.TEXT},
-  idChat: { type: DataTypes.INTEGER},
+  idUser: { type: DataTypes.TEXT },
+  idSms: { type: DataTypes.TEXT },
+  userName: { type: DataTypes.TEXT },
+  idChat: { type: DataTypes.INTEGER },
   // status: { type: DataTypes.TEXT},
-  messageText: {type: DataTypes.TEXT}
-})
+  messageText: { type: DataTypes.TEXT },
+});
+
+const Comment = sequelize.define('Comment', {
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  userName: { type: DataTypes.TEXT },
+  userId: { type: DataTypes.TEXT },
+  userAvatar: { type: DataTypes.TEXT },
+  messageText: { type: DataTypes.TEXT },
+});
 
 // const UserChat = sequelize.define('userChat', {
 //   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
@@ -127,4 +135,5 @@ module.exports = {
   Chat,
   ChatMessage,
   UserChat,
+  Comment,
 };

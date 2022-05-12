@@ -53,6 +53,14 @@ export default function Navbar({ handelClickOpen }) {
             >
               посмотреть заявки
             </MenuItem>
+            <MenuItem
+              variant="h6"
+              component="div"
+              sx={{ flexGrow: 0 }}
+              onClick={() => navigate('/comments')}
+            >
+              Оставить отзыв
+            </MenuItem>
           </>
         ) : (
           <MenuItem variant="h6" component="div" onClick={steam}>
