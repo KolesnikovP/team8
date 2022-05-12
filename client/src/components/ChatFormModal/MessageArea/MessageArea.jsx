@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable react/prop-types */
-import { List, Fab, TextField, Grid, Divider, Box, Typography } from '@mui/material';
-import React, { useEffect, useRef, useState } from 'react';
+import { List, Fab, TextField, Grid, Typography, Box } from '@mui/material';
+import React, { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import SendIcon from '@mui/icons-material/Send';
 // import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
@@ -75,16 +75,22 @@ function MessageArea({ user, chatLink, socket, messages, setMessages }) {
   return (
     <>
       <List className={classes.messageArea} sx={{ flexDirection: 'column-reverse' }}>
-        {history?.length ? (
-          history?.map((msg) => {
-            return <Message key={msg.id} mess={msg} user={user} />;
-          })
-        ) : (
-          <Typography sx={{ textAlign: 'center' }}>История сообщений пуста</Typography>
-        )}
-        {messages.map((mess) =>
-          mess.event === 'connection' ? [] : <Message key={mess.id} mess={mess} user={user} />
-        )}
+        <ScrollToBottom className={classes.messageArea}>
+          <Box sx={{ display: 'flex', flexDirection: 'column-reverse' }}>
+            {history?.length ? (
+              history?.map((msg) => {
+                return <Message key={msg.id} mess={msg} user={user} />;
+              })
+            ) : (
+              <Typography sx={{ textAlign: 'center' }}>История сообщений пуста</Typography>
+            )}
+          </Box>
+          <Box sx={{ display: 'flex', flexDirection: 'column-reverse' }}>
+            {messages.map((mess) =>
+              mess.event === 'connection' ? [] : <Message key={mess.id} mess={mess} user={user} />
+            )}
+          </Box>
+        </ScrollToBottom>
       </List>
       <Grid container style={{ padding: '1rem' }}>
         <Grid item xs={11}>

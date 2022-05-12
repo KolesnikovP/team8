@@ -139,10 +139,12 @@ function PostList({ handleClickOpenChat }) {
       </Grid>
       <Box sx={{ marginBottom: '2rem' }} />
       {sortedPosts?.length ? (
-        sortedPosts?.map((post) => <PostMin key={post.id} post={post} handleClickOpenChat={handleClickOpenChat} />)
+        sortedPosts?.map((post) => (
+          <PostMin key={post.id} post={post} handleClickOpenChat={handleClickOpenChat} />
+        ))
       ) : (
         <Typography sx={{ textAlign: 'center', marginBottom: '2rem' }} variant="h5">
-          В данный момент никто не ищет тиммейтов :(
+          В данный момент никто не ищет тиммейтов
         </Typography>
       )}
     </Container>
