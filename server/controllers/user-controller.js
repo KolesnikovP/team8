@@ -247,7 +247,7 @@ class UserController {
     // console.log(user.id, user);
     const userIdToCompare = String(user.id);
     const usersFromBD = await User.findAll({ raw: true });
-    // console.log(usersFromBD);
+    console.log(usersFromBD);
     if (user !== {} && user.id !== undefined) {
       const usersChats = await UserChat.findAll({ raw: true });
 
@@ -274,12 +274,6 @@ class UserController {
           steamIdArr.push(el.split('-'));
         });
       });
-
-      // [
-      //   [ '76561198098108764', '76561198862129364' ],
-      //   [ '76561198098108764', '76561198862129364' ],
-      //   [ '76561198862129364', '76561198862129399' ]
-      // ]
 
       const userIdChats = [];
 

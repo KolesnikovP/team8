@@ -1,10 +1,11 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable react/prop-types */
-import { List, Fab, TextField, Grid, Divider, Typography } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import { List, Fab, TextField, Grid, Divider, Box, Typography } from '@mui/material';
+import React, { useEffect, useRef, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import SendIcon from '@mui/icons-material/Send';
 // import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
+import ScrollToBottom, { useScrollToBottom } from 'react-scroll-to-bottom';
 import Message from '../Message/Message';
 import { getNews } from '../../../redux/thunk/chat';
 import classes from '../ChatFormModal.module.css';
@@ -63,16 +64,16 @@ function MessageArea({ user, chatLink, socket, messages, setMessages }) {
       idUser: user.id,
       createdAt: Date.now(),
       messageText: value,
+      userName: user.steamNickname,
     };
     socket.current.send(JSON.stringify(message));
     setValue('');
   };
 
+  const scrollToBottom = useScrollToBottom();
+
   return (
     <>
-      {/* <Fab color="primary" aria-label="add" onClick={closeChat}>
-        <CloseOutlinedIcon />
-      </Fab> */}
       <List className={classes.messageArea} sx={{ flexDirection: 'column-reverse' }}>
         {history?.length ? (
           history?.map((msg) => {
@@ -85,7 +86,6 @@ function MessageArea({ user, chatLink, socket, messages, setMessages }) {
           mess.event === 'connection' ? [] : <Message key={mess.id} mess={mess} user={user} />
         )}
       </List>
-      <Divider />
       <Grid container style={{ padding: '1rem' }}>
         <Grid item xs={11}>
           <TextField
@@ -97,7 +97,15 @@ function MessageArea({ user, chatLink, socket, messages, setMessages }) {
           />
         </Grid>
         <Grid item xs={1} align="right">
-          <Fab color="primary" aria-label="add" onClick={sendMessage}>
+          <Fab
+            color="primary"
+            aria-label="add"
+            onClick={() => {
+              sendMessage();
+              scrollToBottom();
+            }}
+            size="small"
+          >
             <SendIcon />
           </Fab>
         </Grid>

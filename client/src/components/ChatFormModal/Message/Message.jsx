@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
-import { Grid, ListItem, ListItemText } from '@mui/material';
+import { Grid, ListItem, ListItemText, Divider } from '@mui/material';
 
 function Message({ mess, user }) {
   const [align, setAlign] = useState('');
@@ -14,13 +14,22 @@ function Message({ mess, user }) {
   }, [mess, user]);
 
   return (
-    <ListItem>
+    <ListItem on>
       <Grid container>
+        <Grid item xs={12}>
+          <Divider textAlign={align} />
+        </Grid>
+        <Grid item xs={12}>
+          <ListItemText align={align} secondary={mess.userName} />
+        </Grid>
         <Grid item xs={12}>
           <ListItemText align={align} primary={mess.messageText} />
         </Grid>
         <Grid item xs={12}>
           <ListItemText align={align} secondary={mess.createdAt} />
+        </Grid>
+        <Grid item xs={12}>
+          <Divider textAlign={align} />
         </Grid>
       </Grid>
     </ListItem>

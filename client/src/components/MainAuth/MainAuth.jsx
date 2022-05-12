@@ -1,4 +1,6 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable jsx-a11y/iframe-has-title */
+
 import React, { useCallback, useEffect, useState } from 'react';
 // import styled from '@emotion/styled';
 import { Container, List, Box } from '@mui/material';
@@ -11,7 +13,8 @@ import Loader from '../Loader/Loader';
 import './Main.module.css';
 import { getNews } from '../../redux/thunk/getNews';
 
-function MainAuth() {
+function MainAuth(props) {
+  const { handleClickOpenChat, user } = props;
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -60,14 +63,17 @@ function MainAuth() {
           {news ? <Box sx={{ textAlign: 'center' }}>{Parser(`${news}`)}</Box> : <Loader />}
           <Box sx={{ width: '30%', marginLeft: '1rem' }}>
             <List>
-              {usersList.map((user) => (
-                <UsersListItem
-                  key={user.id}
-                  user={user}
-                  handleOpen={handleOpen}
-                  setUserState={setUserState}
-                />
-              ))}
+              {usersList
+                .filter((otherUser) => otherUser.id !== user.id)
+                .map((otherUser) => (
+                  <UsersListItem
+                    key={otherUser.id}
+                    user={otherUser}
+                    handleOpen={handleOpen}
+                    setUserState={setUserState}
+                    handleClickOpenChat={handleClickOpenChat}
+                  />
+                ))}
             </List>
           </Box>
         </Box>

@@ -11,10 +11,10 @@ import {
   Tooltip,
   ListItemButton,
 } from '@mui/material';
-import GroupAddOutlinedIcon from '@mui/icons-material/GroupAddOutlined';
+import MailOutlineIcon from '@mui/icons-material/MailOutline';
 
 export default function UsersListItem(props) {
-  const { user, handleOpen, setUserState } = props;
+  const { user, handleOpen, setUserState, handleClickOpenChat } = props;
   const [randomRank, setRandomRank] = useState(1);
   const [rankColor, setRankColor] = useState('default');
 
@@ -44,8 +44,8 @@ export default function UsersListItem(props) {
           disableInteractive
           placement="right-start"
         >
-          <IconButton edge="end" aria-label="delete">
-            <GroupAddOutlinedIcon />
+          <IconButton edge="end" aria-label="delete" onClick={handleClickOpenChat}>
+            <MailOutlineIcon />
           </IconButton>
         </Tooltip>
       }
