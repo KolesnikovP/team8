@@ -3,7 +3,7 @@ const {
 } = require('../models/models');
 
 class PostController {
-  async getPostsList(req, res, next) {
+  async getPostsList(req, res) {
     try {
       const postsList = await UserCreatePost.findAll({ raw: true });
       const response = [];
@@ -39,13 +39,11 @@ class PostController {
     }
   }
 
-  async addPost(req, res, next) {
+  async addPost(req, res) {
     try {
       const {
         description, gameSteamId, steamId, userId, userSteamAvatar,
       } = req.body;
-      // console.log(req.body)
-      // console.log(req.body);
       const statistic = await Statistic.findOne({
         where: {
           gameSteamId,
@@ -76,7 +74,7 @@ class PostController {
     }
   }
 
-  async delPost(req, res, next) {
+  async delPost(req, res) {
     if (req.params.id) {
       await UserCreatePost.destroy({
         where: {
