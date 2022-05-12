@@ -55,7 +55,7 @@ function Profile() {
               {hidden ?
                 <Typography
                   sx={{ maxWidth: '400px' }}
-                >{user.description}</Typography>
+                >{user.description ? user.description : 'Добавте описание профиля'}</Typography>
                 :
                 <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                   <TextareaAutosize
@@ -119,7 +119,6 @@ function Profile() {
             </Box>
           ))}
           <Box>
-          {posts.length ? <Typography variant="h5" sx={{textAlign: 'center', marginTop:'2rem'}}>Ваши заявки</Typography> : ''}
             {posts.length? 
             posts.map(post => {
               if(post.authorId === user.steamId) {
