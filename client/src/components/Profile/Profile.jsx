@@ -43,7 +43,7 @@ function Profile() {
   }
   return (
     <Box>
-      {bg && <VideoBg bg={bg}/>}
+      {bg && <VideoBg bg={bg} />}
       <Container>
         <Box>
           <Typography variant="h3" color="primary" sx={{ textAlign: 'center' }}>{user.steamNickname}</Typography>
@@ -120,14 +120,14 @@ function Profile() {
             </Box>
           ))}
           <Box>
-            {posts.length? 
-            posts.map(post => {
-              if(post.authorId === user.steamId) {
-                return <PostMin post={post} profile={profile} local={local}/>
-              }
-              return ''
-            })
-            : ''}
+            {posts.length ?
+              posts.map(post => {
+                if (post.authorId === user.steamId) {
+                  return <PostMin post={post} profile={profile} local={local} />
+                }
+                return ''
+              })
+              : ''}
           </Box>
           <Box>
             <Typography variant="h3">Comments block soon...</Typography>

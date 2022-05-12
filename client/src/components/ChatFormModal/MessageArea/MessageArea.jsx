@@ -15,7 +15,8 @@ function MessageArea({ user, chatLink, socket, messages, setMessages }) {
   const [value, setValue] = useState('');
 
   const [history, setHistory] = useState('');
-
+  // useEffect(() => {
+  // }, [value]);
   useEffect(() => {
     getNews(chatId, setHistory);
     socket.current = new WebSocket('ws://localhost:4000');
@@ -68,7 +69,7 @@ function MessageArea({ user, chatLink, socket, messages, setMessages }) {
     <>
       <List className={classes.messageArea} sx={{ flexDirection: 'column-reverse' }}>
         <ScrollToBottom className={classes.messageArea}>
-          <Box sx={{ display: 'flex', flexDirection: 'column-reverse' }}>
+          <Box>
             {history?.length ? (
               history?.map((msg) => {
                 return <Message key={msg.id} mess={msg} user={user} />;

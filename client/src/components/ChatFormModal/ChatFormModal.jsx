@@ -46,6 +46,8 @@ function ChatFormModal({
         socket.current.send(JSON.stringify(msgData));
         socket.current.close();
         handleCloseChat();
+        setMessages([]);
+        setIsParams(false);
       }}
       fullWidth
       maxWidth="lg"

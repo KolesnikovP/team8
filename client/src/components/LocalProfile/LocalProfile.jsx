@@ -88,14 +88,9 @@ function LocalProfile() {
             )}
             <Box>
               {posts?.length
-                ? posts.map((post) => {
-                    return <PostMin post={post} key={post.id} local={local} />;
-                  })
+                ? posts.map((post) => <PostMin post={post} key={post.id} local={local} />)
                 : ''}
             </Box>
-          </Box>
-          <Box>
-            <Typography variant="h3">Comments block soon...</Typography>
           </Box>
         </Box>
       </Container>

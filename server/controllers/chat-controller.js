@@ -15,9 +15,9 @@ class ChatController {
         where: {
           idChat: chat.id,
         },
-        order: [
-          ['createdAt', 'ASC'],
-        ],
+        // order: [
+        //   ['createdAt', 'ASC'],
+        // ],
       });
       res.json(chatHistory);
     } catch (error) {
