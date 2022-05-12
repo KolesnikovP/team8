@@ -14,7 +14,7 @@ import { delPost } from '../../redux/thunk/posts';
 
 const { v1: uuidv1 } = require('uuid');
 
-function PostMin({ post, handleClickOpenChat }) {
+function PostMin({ post, handleClickOpenChat, getId }) {
   const params = useParams();
   const { user } = useSelector((state) => state.userReducer);
   const [messages, setMessages] = useState([]);
@@ -75,6 +75,7 @@ function PostMin({ post, handleClickOpenChat }) {
             <IconButton
               onClick={() => {
                 handleClickOpenChat();
+                getId(post.authorId);
               }}
             >
               <MailOutlineIcon color="primary" />

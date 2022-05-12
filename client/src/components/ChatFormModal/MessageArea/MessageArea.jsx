@@ -15,6 +15,7 @@ function MessageArea({ user, chatLink, socket, messages, setMessages }) {
   const [value, setValue] = useState('');
 
   const [history, setHistory] = useState('');
+
   useEffect(() => {
     getNews(chatId, setHistory);
     socket.current = new WebSocket('ws://localhost:4000');
@@ -40,7 +41,7 @@ function MessageArea({ user, chatLink, socket, messages, setMessages }) {
     socket.current.onerror = () => {
       console.log('Socket произошла ошибка');
     };
-  }, [user?.length]);
+  }, [user?.length, chatLink]);
 
   // const closeChat = async () => {
   // const msgData = {
