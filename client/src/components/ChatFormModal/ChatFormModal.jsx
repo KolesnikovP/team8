@@ -21,20 +21,19 @@ import MessageArea from './MessageArea/MessageArea';
 import FakeMessageArea from './MessageArea/FakeMessageArea';
 import UserChatLink from './UserChatLink/UserChatLink';
 
-function ChatFormModal({ user, handleCloseChat, openChat }) {
-  const [chatLink, setChatLink] = useState('');
-  const [isParams, setIsParams] = useState(false);
+function ChatFormModal({
+  user,
+  handleCloseChat,
+  openChat,
+  isParams,
+  chatLink,
+  getId,
+  setIsParams,
+}) {
   // const [isClose, setClose] = useState(false);
   const socket = useRef();
   const [messages, setMessages] = useState([]);
-  function getId(id) {
-    if (Number(user.steamId) > Number(id)) {
-      setChatLink(`${id}-${user.steamId}`);
-    } else {
-      setChatLink(`${user.steamId}-${id}`);
-    }
-    setIsParams(true);
-  }
+
   return (
     <Dialog
       open={openChat}

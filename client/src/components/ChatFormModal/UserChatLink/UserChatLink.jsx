@@ -13,20 +13,26 @@ export default function UserChatLink({ getId }) {
   }, []);
 
   const { chats } = useSelector((state) => state.userChatReducer);
-  console.log(chats);
 
   return (
     <List>
-      {chats.sendToClientUsers.map((el) => {
-        return (
-          <ListItem button key="RemySharp" onClick={() => getId(el.steamId)}>
-            <ListItemIcon>
-              <Avatar alt="userAvatar" src={el.steamAvatar} />
-            </ListItemIcon>
-            <ListItemText primary={el.steamNickname}>{el.steamNickname}</ListItemText>
-          </ListItem>
-        );
-      })}
+      {chats.sendToClientUsers.length > 0 &&
+        chats.sendToClientUsers.map((el) => {
+          return (
+            <ListItem
+              button
+              key={el.id + Math.random()}
+              onClick={() => {
+                getId(el.steamId);
+              }}
+            >
+              <ListItemIcon>
+                <Avatar alt="userAvatar" src={el.steamAvatar} />
+              </ListItemIcon>
+              <ListItemText primary={el.steamNickname}>{el.steamNickname}</ListItemText>
+            </ListItem>
+          );
+        })}
     </List>
   );
 }

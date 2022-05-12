@@ -14,7 +14,7 @@ import './Main.module.css';
 import { getNews } from '../../redux/thunk/getNews';
 
 function MainAuth(props) {
-  const { handleClickOpenChat, user } = props;
+  const { handleClickOpenChat, user, getId } = props;
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -72,6 +72,7 @@ function MainAuth(props) {
                     handleOpen={handleOpen}
                     setUserState={setUserState}
                     handleClickOpenChat={handleClickOpenChat}
+                    getId={getId}
                   />
                 ))}
             </List>

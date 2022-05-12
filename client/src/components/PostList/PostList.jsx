@@ -18,7 +18,7 @@ import { getFetchGamesList } from '../../redux/thunk/getGame';
 import { getFetchPostsList } from '../../redux/thunk/posts';
 import PostMin from '../PostMin/PostMin';
 
-function PostList({ handleClickOpenChat }) {
+function PostList({ handleClickOpenChat, getId }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -140,7 +140,12 @@ function PostList({ handleClickOpenChat }) {
       <Box sx={{ marginBottom: '2rem' }} />
       {sortedPosts?.length ? (
         sortedPosts?.map((post) => (
-          <PostMin key={post.id} post={post} handleClickOpenChat={handleClickOpenChat} />
+          <PostMin
+            getId={getId}
+            key={post.id}
+            post={post}
+            handleClickOpenChat={handleClickOpenChat}
+          />
         ))
       ) : (
         <Typography sx={{ textAlign: 'center', marginBottom: '2rem' }} variant="h5">

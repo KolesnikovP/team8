@@ -15,6 +15,7 @@ function MessageArea({ user, chatLink, socket, messages, setMessages }) {
   const [value, setValue] = useState('');
 
   const [history, setHistory] = useState('');
+
   useEffect(() => {
     getNews(chatId, setHistory);
     socket.current = new WebSocket('ws://localhost:4000');
