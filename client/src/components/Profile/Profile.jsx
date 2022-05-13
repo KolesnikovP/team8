@@ -115,8 +115,10 @@ function Profile() {
                 alt={`appIcon_${game.gameSteamId}`}
                 width="200px"
                 key={Date.now()}
-              />
+                />
+              <Box sx={{width: '300px', textAlign:'center'}}>
               <Typography>Количество часов: {game.userGameHours}</Typography>
+                </Box>
             </Box>
           ))}
           <Box>
@@ -129,9 +131,9 @@ function Profile() {
               })
               : ''}
           </Box>
-          <Box>
+          {/* <Box>
             <Typography variant="h3">Comments block soon...</Typography>
-          </Box>
+          </Box> */}
         </Box>
       </Container>
       <ProfileModalBg open={open} setOpen={setOpen} userId={user.id} />

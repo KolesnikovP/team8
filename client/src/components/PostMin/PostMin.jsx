@@ -31,9 +31,11 @@ function PostMin({ post, local, profile, handleClickOpenChat, getId }) {
         </Box>
       </Grid>
       <Grid item xs={3}>
-        <Typography sx={{ wordWrap: 'break-word', paddingLeft: '2rem' }}>
-          {post.description}
-        </Typography>
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <Typography sx={{ wordWrap: 'break-word', paddingLeft: '2rem' }}>
+            {post.description}
+          </Typography>
+        </Box>
       </Grid>
       <Grid item xs={2}>
         <img
@@ -79,7 +81,9 @@ function PostMin({ post, local, profile, handleClickOpenChat, getId }) {
         )}
       </Grid>
       <Grid item xs={1}>
-        <Typography>{post.createdAt.slice(0, post.createdAt.length - 14)}</Typography>
+        <Box sx={{ width: '300px' }}>
+          <Typography>{post.createdAt.slice(0, post.createdAt.length - 14)}</Typography>
+        </Box>
       </Grid>
     </Grid>
   );

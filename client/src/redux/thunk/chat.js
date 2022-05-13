@@ -1,3 +1,16 @@
+/* eslint-disable no-restricted-syntax */
+function filterByProp(arr1, prop) {
+  const seen = {};
+  const result = arr1.filter((item) => {
+    if (seen[item[prop]]) {
+      return false;
+    }
+    seen[item[prop]] = true;
+    return true;
+  });
+  return result;
+}
+
 export const getNews = (id, func) => {
   fetch(`http://localhost:4000/api/getHistory`, {
     method: 'POST',
@@ -8,7 +21,6 @@ export const getNews = (id, func) => {
   })
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
-      func(data);
+      func(filterByProp(data, 'idSms'));
     });
 };
