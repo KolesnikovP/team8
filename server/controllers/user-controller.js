@@ -228,55 +228,59 @@ class UserController {
       const userGames = await response.json();
       const gamesFromDb = await Game.findAll({ raw: true });
       const resArray = [];
-      const promis1 = await gamesFromDb.map(async (el) => {
-        const promis = await userGames.response.games.map(async (game) => {
-          if (el.gameSteamId === game.appid) {
-            try {
-              let userGamesFromStatDb = await Statistic.findOne({
-                where: {
-                  gameSteamId: game.appid.toString(),
-                  steamId: req.body.id,
-                },
-                raw: true,
-              });
-              if (userGamesFromStatDb) {
-                await Statistic.update(
-                  { userGameHours: Math.ceil(game.playtime_forever / 60) },
-                  {
-                    where: {
-                      gameSteamId: game.appid.toString(),
-                      steamId: req.body.id,
-                    },
-                  },
-                );
-                userGamesFromStatDb = await Statistic.findOne({
+      if (userGames.response.game_count === undefined) {
+        console.log('error steam');
+      } else {
+        const promis1 = await gamesFromDb.map(async (el) => {
+          const promis = await userGames.response.games.map(async (game) => {
+            if (el.gameSteamId === game.appid) {
+              try {
+                let userGamesFromStatDb = await Statistic.findOne({
                   where: {
                     gameSteamId: game.appid.toString(),
                     steamId: req.body.id,
                   },
                   raw: true,
                 });
-                resArray.push(userGamesFromStatDb);
-              } else {
-                const statUser = new Statistic({
-                  userGameHours: Math.ceil(game.playtime_forever / 60),
-                  userRank: 0,
-                  steamId: req.body.id,
-                  gameSteamId: game.appid,
-                  gameName: el.gameSteamName,
-                });
-                statUser.save();
-                resArray.push(statUser);
+                if (userGamesFromStatDb) {
+                  await Statistic.update(
+                    { userGameHours: Math.ceil(game.playtime_forever / 60) },
+                    {
+                      where: {
+                        gameSteamId: game.appid.toString(),
+                        steamId: req.body.id,
+                      },
+                    },
+                  );
+                  userGamesFromStatDb = await Statistic.findOne({
+                    where: {
+                      gameSteamId: game.appid.toString(),
+                      steamId: req.body.id,
+                    },
+                    raw: true,
+                  });
+                  resArray.push(userGamesFromStatDb);
+                } else {
+                  const statUser = new Statistic({
+                    userGameHours: Math.ceil(game.playtime_forever / 60),
+                    userRank: 0,
+                    steamId: req.body.id,
+                    gameSteamId: game.appid,
+                    gameName: el.gameSteamName,
+                  });
+                  statUser.save();
+                  resArray.push(statUser);
+                }
+              } catch (e) {
+                console.log(e);
               }
-            } catch (e) {
-              console.log(e);
             }
-          }
+          });
+          await Promise.all(promis);
         });
-        await Promise.all(promis);
-      });
-      await Promise.all(promis1);
-      res.json(resArray);
+        await Promise.all(promis1);
+        res.json(resArray);
+      }
     }
   }
 

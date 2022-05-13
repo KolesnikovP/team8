@@ -24,7 +24,7 @@ function PostMin({ post, local, profile, handleClickOpenChat, getId }) {
       spacing={2}
       sx={{ marginTop: '2rem', border: '1px solid #90caf9', padding: '1rem' }}
     >
-      <Grid item xs={1}>
+      <Grid item xs={2}>
         <Box sx={{ alignItems: 'center', display: 'flex' }}>
           <Avatar src={post.userSteamAvatar} alt="userAvatar" sx={{ marginRight: '1rem' }} />
           {post.author}
