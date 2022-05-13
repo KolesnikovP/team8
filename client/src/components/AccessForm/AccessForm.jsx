@@ -2,9 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
-import { Container, Typography } from '@mui/material';
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { Box } from '@mui/system';
+import { Box, Container, Typography } from '@mui/material';
 import style from './AccessForm.module.css';
 import { setUserGames } from '../../redux/thunk/userProfile';
 
