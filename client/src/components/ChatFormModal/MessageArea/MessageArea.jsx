@@ -1,3 +1,5 @@
+/* eslint-disable array-callback-return */
+/* eslint-disable consistent-return */
 /* eslint-disable no-param-reassign */
 /* eslint-disable react/prop-types */
 import { List, Fab, TextField, Grid, Typography, Box } from '@mui/material';
@@ -19,7 +21,8 @@ function MessageArea({ user, chatLink, socket, messages, setMessages }) {
     getNews(chatId, setHistory);
     socket.current = new WebSocket('ws://localhost:4000');
     const splittedParams = chatLink.split('-')[1];
-
+    // console.log(messages);
+    // console.log(chatLink);
     socket.current.onopen = () => {
       const message = {
         event: 'connection',
@@ -77,9 +80,15 @@ function MessageArea({ user, chatLink, socket, messages, setMessages }) {
             )}
           </Box>
           <Box sx={{ display: 'flex', flexDirection: 'column-reverse' }}>
-            {messages.map((mess) =>
-              mess.event === 'connection' ? [] : <Message key={mess.id} mess={mess} user={user} />
-            )}
+            {messages.map((mess, index) => {
+              // mess.event === 'connection' ? [] : <Message key={mess.id} mess={mess} user={user} />
+              if (mess.event === 'message') {
+                if (mess.id !== messages[index + 1].id && mess.chatId === chatLink) {
+                  // console.log(mess);
+                  return <Message key={mess.id} mess={mess} user={user} />;
+                }
+              }
+            })}
           </Box>
         </ScrollToBottom>
       </List>

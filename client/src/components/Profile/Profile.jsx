@@ -129,9 +129,9 @@ function Profile() {
               })
               : ''}
           </Box>
-          <Box>
+          {/* <Box>
             <Typography variant="h3">Comments block soon...</Typography>
-          </Box>
+          </Box> */}
         </Box>
       </Container>
       <ProfileModalBg open={open} setOpen={setOpen} userId={user.id} />

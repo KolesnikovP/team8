@@ -96,27 +96,29 @@ const broadcastConnection = (ws, message) => {
 
 const closeHandler = (ws, message) => {
   message.data.map(async (sms) => {
-    // console.log(sms)
     try {
-      const findMsg = await ChatMessage.findOne({
-        where: {
-          idSms: sms.id,
-        },
-      });
-      if (!findMsg) {
-        const chatId = await Chat.findOne({ where: { chatLink: `${process.env.CLIENT_URL}/chat/${sms.chatId}` } });
-        const userId = await User.findOne({ where: { steamId: sms.userId } });
-        await ChatMessage.create({
-          idSms: sms.id,
-          idChat: chatId.id,
-          idUser: userId.id,
-          userName: userId.steamNickname,
-          messageText: sms.message,
-          createdAt: sms.created,
+      if (sms.id !== undefined) {
+        const findMsg = await ChatMessage.findOne({
+          where: {
+            idSms: sms.id,
+          },
+          raw: true,
         });
+        if (!findMsg || sms.id !== undefined) {
+          const chatId = await Chat.findOne({ where: { chatLink: `${process.env.CLIENT_URL}/chat/${sms.chatId}` } });
+          const userId = await User.findOne({ where: { steamId: sms.userId } });
+          await ChatMessage.create({
+            idSms: sms.id,
+            idChat: chatId.id,
+            idUser: userId.id,
+            userName: userId.steamNickname,
+            messageText: sms.message,
+            createdAt: sms.created,
+          });
+        }
       }
     } catch (e) {
-      console.log('er');
+      console.log(e);
     }
   });
 };
