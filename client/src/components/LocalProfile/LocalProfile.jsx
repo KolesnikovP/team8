@@ -68,20 +68,24 @@ function LocalProfile() {
               key={game?.gameSteamId}
             >
               <Typography>{i + 1}</Typography>
-              <Typography variant="h4">{game?.gameName}</Typography>
+              <Box sx={{ width: '300px', textAlign: 'center' }}>
+                <Typography variant="h4">{game?.gameName}</Typography>
+              </Box>
               <img
                 src={`https://cdn.cloudflare.steamstatic.com/steam/apps/${game?.gameSteamId}/header.jpg?t=1650992920`}
                 alt={`appIcon_${game?.gameSteamId}`}
                 width="200px"
                 key={Date.now()}
               />
-              <Typography>Количество часов: {game?.userGameHours}</Typography>
+              <Box sx={{ width: '300px', textAlign: 'center' }}>
+                <Typography>Количество часов: {game?.userGameHours}</Typography>
+              </Box>
             </Box>
           ))}
           <Box sx={{ marginTop: '2rem' }}>
             {posts?.length ? (
               <Typography variant="h5" sx={{ textAlign: 'center' }}>
-                Ищет напарников
+                Активные заявки
               </Typography>
             ) : (
               ''

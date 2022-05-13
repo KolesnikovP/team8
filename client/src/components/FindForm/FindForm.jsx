@@ -79,11 +79,11 @@ function FindForm(props) {
 
   return (
     <Dialog open={open} onClose={() => { handleClose(); modalClose() }} aria-labelledby="find-teammate-dialog" fullWidth>
-      <DialogTitle id="form-dialog-title">Поиск напарников</DialogTitle>
+      <DialogTitle id="form-dialog-title" sx={{ textAlign: 'center' }}>Поиск напарников</DialogTitle>
       <DialogContent>
-        <Typography>{helperText}</Typography>
+        <Typography sx={{ textAlign: 'center' }}>{helperText}</Typography>
         <Box className="radio-form" component="div">
-          <RadioGroup row value={radioValue} onClick={changeRadioValue}>
+          <RadioGroup row value={radioValue} onClick={changeRadioValue} sx={{ display: 'flex', justifyContent: 'center' }}>
             {profGames.map((profGame) => {
               return <ListGameRadio key={profGame.id} game={profGame} setHelperText={setHelperText} />;
             })}

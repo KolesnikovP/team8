@@ -40,10 +40,17 @@ function ProfileModalBg(props) {
       aria-labelledby="find-teammate-dialog"
       fullWidth
     >
-      <DialogTitle id="form-dialog-title">Поиск напарников</DialogTitle>
+      <DialogTitle id="form-dialog-title" sx={{ textAlign: 'center' }}>
+        Выбор фона профиля
+      </DialogTitle>
       <DialogContent>
         <Box className="radio-form" component="div">
-          <RadioGroup row value={radioValue} onClick={changeRadioValue}>
+          <RadioGroup
+            row
+            value={radioValue}
+            onClick={changeRadioValue}
+            sx={{ display: 'flex', justifyContent: 'center' }}
+          >
             {bgList?.map((bg) => {
               return <ListBgRadio key={bg.id} bg={bg} />;
             })}

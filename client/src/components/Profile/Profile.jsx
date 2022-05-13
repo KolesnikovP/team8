@@ -77,14 +77,7 @@ function Profile() {
               >
                 Открыть профиль в стиме
               </Button>
-              <Button
-                type="Button"
-                onClick={() => updateStats()}
-                variant="outlined"
-                color="success"
-              >
-                Обновить профиль
-              </Button>
+
               {hidden ?
                 <Button
                   type="Button"
@@ -102,6 +95,14 @@ function Profile() {
                 variant="outlined"
               >
                 Выбрать фон профиля
+              </Button>
+              <Button
+                type="Button"
+                onClick={() => updateStats()}
+                variant="outlined"
+                color="success"
+              >
+                Обновить профиль
               </Button>
 
             </Box>

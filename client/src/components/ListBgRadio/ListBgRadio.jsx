@@ -8,7 +8,7 @@ import './style.css';
 function ListBgRadio({ bg }) {
   return (
     // eslint-disable-next-line jsx-a11y/label-has-associated-control
-    <Box component="label" className="radio-control">
+    <Box component="label" className="radio-control" sx={{ margin: '0.4rem' }}>
       <FormControl component="input" type="radio" name="bgVideoId" value={bg.id} />
       <span className="radio-input">
         {bg && (
