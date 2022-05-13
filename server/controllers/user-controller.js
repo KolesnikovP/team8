@@ -366,21 +366,28 @@ class UserController {
           }
         });
       });
-
       const sortedArr = sendToClientUsers.sort((a, b) => a.id - b.id);
 
       const sendUser = [];
 
       sortedArr.map((el, index) => {
-        if (el === sortedArr[index + 1]) {
-          const x = sortedArr.splice(index + 1, 1);
-          sendUser.push(sortedArr.flat());
+        if (sortedArr.length > 1) {
+          if (el === sortedArr[index + 1]) {
+            const x = sortedArr.splice(index + 1, 1);
+            sendUser.push(sortedArr.flat());
+          } else {
+            console.error();
+          }
+        } else {
+          sendUser.push(el);
         }
       });
 
-      const usersWithChat = sendUser.flat()
+      const usersWithChat = sendUser.flat();
 
       const sendToClientLinks = deleteDouble(linksArr1);
+
+      console.log(usersWithChat);
 
       Promise.all(prom).then(() => res.status(200).json({ usersWithChat, sendToClientLinks }));
     }

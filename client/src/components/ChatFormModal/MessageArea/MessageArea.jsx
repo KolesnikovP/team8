@@ -1,5 +1,7 @@
 /* eslint-disable consistent-return */
 /* eslint-disable array-callback-return */
+/* eslint-disable array-callback-return */
+/* eslint-disable consistent-return */
 /* eslint-disable no-param-reassign */
 /* eslint-disable react/prop-types */
 import { List, Fab, TextField, Grid, Typography, Box } from '@mui/material';
@@ -21,7 +23,8 @@ function MessageArea({ user, chatLink, socket, messages, setMessages }) {
     getNews(chatId, setHistory);
     socket.current = new WebSocket('ws://localhost:4000');
     const splittedParams = chatLink.split('-')[1];
-
+    // console.log(messages);
+    // console.log(chatLink);
     socket.current.onopen = () => {
       const message = {
         event: 'connection',
@@ -82,7 +85,6 @@ function MessageArea({ user, chatLink, socket, messages, setMessages }) {
             {messages.map((mess, index) => {
               if (mess.event === 'message') {
                 if (mess.id !== messages[index + 1].id && mess.chatId === chatLink) {
-                  // console.log(mess);
                   return <Message key={mess.id} mess={mess} user={user} />;
                 }
               }
