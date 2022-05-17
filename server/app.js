@@ -4,6 +4,7 @@ const cookieSession = require('cookie-session');
 const cors = require('cors');
 const passport = require('passport');
 require('./services/passport');
+const path = require('path');
 
 const PORT = process.env.PORT || 3000;
 const app = express();
@@ -58,8 +59,6 @@ app.ws('/', (ws, req) => {
 
 const start = async () => {
   try {
-    await sequelize.authenticate();
-    // await sequelize.sync({ force: true });
     app.listen(PORT, () => console.log(`Server start at ${PORT}`));
   } catch (e) {
     console.log(e);
@@ -67,6 +66,10 @@ const start = async () => {
 };
 
 start();
+app.use(express.static(path.join(process.env.PWD, 'build')));
+app.get('*', (req, res) => {
+  res.sendFile(path.join(process.env.PWD, 'build', 'index.html'));
+});
 
 const connectionHandler = async (ws, message) => {
   ws.chatId = message.chatId;

@@ -3,7 +3,7 @@ import { initUserAction } from '../reducers/userReducer';
 /* eslint-disable func-names */
 export const setUserGames = (id, func, func1) => {
   return async function (dispatch) {
-    const response = await fetch('http://localhost:4000/api/validateProfile', {
+    const response = await fetch('https://team8elbrus.herokuapp.com/api/validateProfile', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -34,7 +34,7 @@ export const setUserGames = (id, func, func1) => {
 
 export const setUserDescribe = (steamId, description) => {
   return function (dispatch) {
-    fetch('http://localhost:4000/api/updateDescribe', {
+    fetch('https://team8elbrus.herokuapp.com/api/updateDescribe', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -50,7 +50,7 @@ export const setUserDescribe = (steamId, description) => {
 
 export const updateUserStats = (steamId) => {
   return function (dispatch) {
-    fetch('http://localhost:4000/api/updateUserStats', {
+    fetch('https://team8elbrus.herokuapp.com/api/updateUserStats', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

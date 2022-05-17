@@ -1,14 +1,14 @@
 import { initUserAction } from '../reducers/userReducer';
 
 export const getAllBg = (func) => {
-  fetch('http://localhost:4000/api/initBgs')
+  fetch('https://team8elbrus.herokuapp.com/api/initBgs')
     .then((response) => response.json())
     .then((data) => func(data));
 };
 
 export const updateBgFetch = (userBg) => {
   return (dispatch) => {
-    fetch('http://localhost:4000/api/updateBg', {
+    fetch('https://team8elbrus.herokuapp.com/api/updateBg', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

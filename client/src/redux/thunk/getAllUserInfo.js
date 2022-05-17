@@ -1,5 +1,5 @@
 export const getAllUserInfo = (id, func) => {
-  fetch('http://localhost:4000/api/getInfo', {
+  fetch('https://team8elbrus.herokuapp.com/api/getInfo', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

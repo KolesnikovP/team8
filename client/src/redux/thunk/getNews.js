@@ -1,7 +1,7 @@
 import bbCodeParser from 'js-bbcode-parser';
 
 export const getNews = (id, func) => {
-  fetch(`http://localhost:4000/api/getNewsGames`, {
+  fetch(`https://team8elbrus.herokuapp.com/api/getNewsGames`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

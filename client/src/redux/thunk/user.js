@@ -5,7 +5,7 @@ import { initUserChatAction } from '../reducers/userChatReducer';
 
 export const fetchUser = () => {
   return function (dispatch) {
-    fetch('http://localhost:4000/auth/login/success', {
+    fetch('https://team8elbrus.herokuapp.com/auth/login/success', {
       method: 'GET',
       credentials: 'include',
       headers: {
@@ -29,7 +29,7 @@ export const fetchUser = () => {
 
 export const fetchUserGames = (id) => {
   return function (dispatch) {
-    fetch('http://localhost:4000/api/userGames', {
+    fetch('https://team8elbrus.herokuapp.com/api/userGames', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -45,7 +45,7 @@ export const fetchUserGames = (id) => {
 
 export const getfetchUsersList = () => {
   return (dispatch) => {
-    fetch('http://localhost:4000/api/initUsers')
+    fetch('https://team8elbrus.herokuapp.com/api/initUsers')
       .then((response) => response.json())
       .then((data) => dispatch(getUsersListAC(data)))
       .catch((err) => console.log(err));
@@ -54,7 +54,7 @@ export const getfetchUsersList = () => {
 
 export const getFecthUserChats = (user) => {
   return function (dispatch) {
-    fetch('http://localhost:4000/api/allUserChats', {
+    fetch('https://team8elbrus.herokuapp.com/api/allUserChats', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

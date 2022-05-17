@@ -17,7 +17,7 @@ export default function Navbar({ handelClickOpen }) {
     navigate('/login');
   };
   const logout = () => {
-    window.open('http://localhost:4000/auth/logout', '_self');
+    window.open('https://team8elbrus.herokuapp.com/auth/logout', '_self');
   };
   const [anchorEl, setAnchorEl] = React.useState(null);
 

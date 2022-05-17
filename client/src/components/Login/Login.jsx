@@ -3,7 +3,7 @@ import Loader from '../Loader/Loader';
 
 export default function Login() {
   useEffect(() => {
-    window.open('http://localhost:4000/auth/steam', '_self');
+    window.open('https://team8elbrus.herokuapp.com/auth/steam', '_self');
   }, []);
   return <Loader />;
 }

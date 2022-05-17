@@ -2,7 +2,7 @@ import { getAllPostsAC, addNewPostAC, delPostAC } from '../reducers/postsReducer
 
 export const getFetchPostsList = () => {
   return (dispatch) => {
-    fetch('http://localhost:4000/api/initPosts')
+    fetch('https://team8elbrus.herokuapp.com/api/initPosts')
       .then((response) => response.json())
       .then((data) => dispatch(getAllPostsAC(data)))
       .catch((err) => console.log(err));
@@ -11,7 +11,7 @@ export const getFetchPostsList = () => {
 
 export const addNewPostFetch = (post) => {
   return (dispatch) => {
-    fetch('http://localhost:4000/api/addPost', {
+    fetch('https://team8elbrus.herokuapp.com/api/addPost', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -25,7 +25,7 @@ export const addNewPostFetch = (post) => {
 };
 export const delPost = (id) => {
   return (dispatch) => {
-    fetch(`http://localhost:4000/api/delPost/${id}`)
+    fetch(`https://team8elbrus.herokuapp.com/api/delPost/${id}`)
       .then((response) => {
         if (response.status === 200) {
           return response.json();

@@ -12,7 +12,7 @@ function filterByProp(arr1, prop) {
 }
 
 export const getNews = (id, func) => {
-  fetch(`http://localhost:4000/api/getHistory`, {
+  fetch(`https://team8elbrus.herokuapp.com/api/getHistory`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
