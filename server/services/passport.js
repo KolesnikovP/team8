@@ -1,6 +1,6 @@
 const SteamStrategy = require('passport-steam').Strategy;
 const passport = require('passport');
-const { User, BgVideo } = require('../models/models');
+const { User, BgVideo } = require('../db/models');
 
 passport.use(
   new SteamStrategy(

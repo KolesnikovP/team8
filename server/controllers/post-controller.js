@@ -1,7 +1,7 @@
 /* eslint-disable class-methods-use-this */
 const {
   Game, UserCreatePost, Statistic, User,
-} = require('../models/models');
+} = require('../db/models');
 
 class PostController {
   async getPostsList(req, res) {
@@ -49,7 +49,6 @@ class PostController {
         where: {
           gameSteamId,
           steamId,
-          // steamId: userId,
         },
         raw: true,
       });
