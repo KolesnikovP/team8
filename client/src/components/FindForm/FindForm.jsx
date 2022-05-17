@@ -76,7 +76,6 @@ function FindForm(props) {
     },
     [description, radioValue]
   );
-
   return (
     <Dialog open={open} onClose={() => { handleClose(); modalClose() }} aria-labelledby="find-teammate-dialog" fullWidth>
       <DialogTitle id="form-dialog-title" sx={{ textAlign: 'center' }}>Поиск напарников</DialogTitle>

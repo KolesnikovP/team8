@@ -34,7 +34,9 @@ function ChatFormModal({
 
   const socket = useRef();
   const [messages, setMessages] = useState([]);
-
+  // useEffect(() => {
+  //   return () => console.log('close');
+  // }, []);
   return (
     <Dialog
       open={openChat}

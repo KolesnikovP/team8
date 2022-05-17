@@ -9,7 +9,6 @@ function ListGameRadio({ game, setHelperText }) {
   const radioChecked = useCallback(() => {
     setHelperText(`${game.gameName}`);
   }, []);
-
   return (
     // eslint-disable-next-line jsx-a11y/label-has-associated-control
     <Box component="label" className="radio-control" sx={{ margin: '0.4rem' }}>

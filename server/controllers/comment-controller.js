@@ -1,6 +1,6 @@
 const {
   Comment, User,
-} = require('../models/models');
+} = require('../db/models');
 
 class CommentController {
   async getComment(req, res) {

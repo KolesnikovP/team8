@@ -3,6 +3,17 @@ import { setProfileGames } from '../reducers/profileReducer';
 import { getUsersListAC } from '../reducers/usersListReducer';
 import { initUserChatAction } from '../reducers/userChatReducer';
 
+function filterByProp(arr1, prop) {
+  const seen = {};
+  const result = arr1.filter((item) => {
+    if (seen[item[prop]]) {
+      return false;
+    }
+    seen[item[prop]] = true;
+    return true;
+  });
+  return result;
+}
 export const fetchUser = () => {
   return function (dispatch) {
     fetch('https://team8elbrus.herokuapp.com/auth/login/success', {
@@ -63,6 +74,7 @@ export const getFecthUserChats = (user) => {
     })
       .then((data) => data.json())
       .then((res) => {
+        res.usersWithChat = filterByProp(res.usersWithChat, 'id');
         dispatch(initUserChatAction(res));
       });
   };

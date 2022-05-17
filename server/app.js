@@ -17,7 +17,7 @@ const sequelize = require('./db');
 const aWss = WSServer.getWss();
 const {
   Chat, User, UserChat, ChatMessage,
-} = require('./models/models');
+} = require('./db/models');
 
 app.use(
   cookieSession({ name: 'session', keys: ['lama'], maxAge: 24 * 60 * 60 * 1000 }),
