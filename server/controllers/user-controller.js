@@ -4,11 +4,9 @@
 /* eslint-disable no-shadow */
 /* eslint-disable class-methods-use-this */
 const fetch = require('cross-fetch');
-const e = require('express');
 const {
   Game, Statistic, User, UserCreatePost, UserChat, Chat, BgVideo,
-} = require('../models/models');
-const sequelize = require('../db');
+} = require('../db/models');
 
 class UserController {
   async authSuccess(req, res) {

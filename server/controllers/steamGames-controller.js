@@ -1,8 +1,8 @@
 const fetch = require('cross-fetch');
-const { Game } = require('../models/models');
+const { Game } = require('../db/models');
 
 class SteamGamesController {
-  async getListGames(req, res, next) {
+  async getListGames(req, res) {
     try {
       const gamesList = await Game.findAll({ raw: true });
       res.json(gamesList);
@@ -11,8 +11,7 @@ class SteamGamesController {
     }
   }
 
-  async getNewsGames(req, res, next) {
-    // console.log(req.body.id);
+  async getNewsGames(req, res) {
     if (req.body.id) {
       const { id } = req.body;
       const rnd = Math.floor(Math.random() * 10);

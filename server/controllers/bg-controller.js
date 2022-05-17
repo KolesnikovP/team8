@@ -1,7 +1,7 @@
-const { BgVideo } = require('../models/models');
+const { BgVideo } = require('../db/models');
 
 class BgVideoController {
-  async getListBg(req, res, next) {
+  async getListBg(req, res) {
     try {
       const gamesList = await BgVideo.findAll({ raw: true });
       res.json(gamesList);
