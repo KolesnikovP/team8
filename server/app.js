@@ -12,7 +12,6 @@ const WSServer = require('express-ws')(app);
 const ws = require('ws');
 const Router = require('./router/router');
 const authRoute = require('./router/auth');
-const sequelize = require('./db');
 
 const aWss = WSServer.getWss();
 const {
